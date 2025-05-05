@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import PropertyGuruVN from '@/assets/propertyguruvn.png';
@@ -8,37 +7,37 @@ const testimonials = [
     image: PropertyGuruVN,
     comment: 'This is an amazing product! Highly recommend it.',
     stars: 5,
-    date: '2023-10-01',
+    date: '2024-10-01',
   },
   {
     image: PropertyGuruVN,
     comment: 'Great experience overall, but there is room for improvement.',
     stars: 4,
-    date: '2023-09-15',
+    date: '2024-09-15',
   },
   {
     image: PropertyGuruVN,
     comment: 'Absolutely loved it! Will use it again.',
     stars: 5,
-    date: '2023-08-20',
+    date: '2025-01-20',
   },
   {
     image: PropertyGuruVN,
     comment: 'Good product, worth the price.',
     stars: 4,
-    date: '2023-07-10',
+    date: '2024-09-10',
   },
   {
     image: PropertyGuruVN,
     comment: 'Fantastic! Exceeded my expectations.',
     stars: 5,
-    date: '2023-06-05',
+    date: '2024-09-05',
   },
   {
     image: PropertyGuruVN,
     comment: 'It was okay, but I expected more.',
     stars: 3,
-    date: '2023-05-25',
+    date: '2025-02-25',
   },
 ];
 
@@ -48,7 +47,7 @@ const Testimonial = () => {
   return (
     <section id="testimonials" className="p-8 overflow-hidden">
       <h3 className="text-2xl font-extrabold text-blue-200 text-center mb-6">
-        Testimonials
+        Feedback from My Clients and Team
       </h3>
       <div className="relative w-full">
         <motion.div

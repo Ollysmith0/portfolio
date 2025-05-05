@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, Code, Briefcase, MessageCircle } from 'lucide-react';
-import Skill from '@/components/Skill';
-import Hero from '@/components/Hero';
-import Work from '@/components/Work';
-import Footer from '@/components/Footer';
-import Testimonial from '@/components/Testimonial';
+import Skill from './components/Skill';
+import Hero from './components/Hero';
+import Work from './components/Work';
+import Footer from './components/Footer';
+import Testimonial from './components/Testimonial';
 import helloWorldImg from '@/assets/hello-world.jpg';
 import codeIsFunImg from '@/assets/code-is-fun.jpg';
 import testimonialImg from '@/assets/testimonial.jpg';
@@ -100,10 +100,14 @@ export default function Portfolio() {
       </div>
 
       {/* Section wrapper with framer animation */}
-      {sections.map(({ id, label, bgImg }, i) => (
+      {sections.map(({ id }, i) => (
         <motion.section
           key={id}
-          ref={(el) => (sectionRefs.current[id] = el)}
+          ref={(el) => {
+            if (el) {
+              sectionRefs.current[id] = el;
+            }
+          }}
           id={id}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
