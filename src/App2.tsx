@@ -28,7 +28,7 @@ export default function App2() {
             My recent projects
           </Link>
           <a
-            className="hover:text-teal-400 transition-colors duration-200"
+            className="hover:text-teal-400 transition-colors duration-200 cursor-pointer"
             onClick={() =>
               (window.location.href =
                 'mailto:ollysmith0@gmail.com?subject=Schedule%20a%20Call&body=Hi,%20I%20would%20like%20to%20schedule%20a%20call.')
@@ -38,7 +38,7 @@ export default function App2() {
           </a>
         </nav>
         <a
-          className="bg-white text-black font-semibold px-4 py-2 rounded hover:bg-teal-400 hover:text-white transition-colors duration-200"
+          className="bg-white text-black font-semibold px-4 py-2 rounded hover:bg-teal-400 hover:text-white transition-colors duration-200 cursor-pointer"
           onClick={() =>
             (window.location.href =
               'mailto:ollysmith0@gmail.com?subject=Schedule%20a%20Call&body=Hi,%20I%20would%20like%20to%20schedule%20a%20call.')

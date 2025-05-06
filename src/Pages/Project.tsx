@@ -26,14 +26,17 @@ export default function SkillPage() {
             My recent projects
           </Link>
           <a
-            href="/contact"
-            className="hover:text-teal-400 transition-colors duration-200"
+            onClick={() =>
+              (window.location.href =
+                'mailto:ollysmith0@gmail.com?subject=Schedule%20a%20Call&body=Hi,%20I%20would%20like%20to%20schedule%20a%20call.')
+            }
+            className="hover:text-teal-400 transition-colors duration-200 cursor-pointer"
           >
             Contact me
           </a>
         </nav>
         <a
-          className="bg-white text-black font-semibold px-4 py-2 rounded hover:bg-teal-400 hover:text-white transition-colors duration-200"
+          className="bg-white text-black font-semibold px-4 py-2 rounded hover:bg-teal-400 hover:text-white transition-colors duration-200 cursor-pointer"
           onClick={() =>
             (window.location.href =
               'mailto:ollysmith0@gmail.com?subject=Schedule%20a%20Call&body=Hi,%20I%20would%20like%20to%20schedule%20a%20call.')
