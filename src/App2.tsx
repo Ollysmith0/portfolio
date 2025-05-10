@@ -12,7 +12,7 @@ export default function App2() {
       <header className="flex justify-between items-center px-8 py-6 border-b border-gray-800">
         <Link to="/portfolio" className="text-2xl font-bold">
           <span className="text-white">Olly</span>
-          <span className="text-gray-400">smith</span>
+          <span className="text-teal-400">smith</span>
         </Link>
         <nav className="space-x-6 hidden md:block">
           <Link
