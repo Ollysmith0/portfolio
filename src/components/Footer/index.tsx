@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="p-6 flex justify-between items-center">
       <h1 className="font-bold text-xl">
-        <span className="text-white">Olly</span>
+        <span className="text-white mr-1">Olly</span>
         <span className="text-gray-400">smith</span>
       </h1>
       <div className="flex space-x-4">

@@ -11,7 +11,7 @@ export default function App2() {
     <div className="min-h-screen bg-black text-white font-sans">
       <header className="flex justify-between items-center px-8 py-6 border-b border-gray-800">
         <Link to="/portfolio" className="text-2xl font-bold">
-          <span className="text-white">Olly</span>
+          <span className="text-white mr-1">Olly</span>
           <span className="text-teal-400">smith</span>
         </Link>
         <nav className="space-x-6 hidden md:block">
@@ -73,7 +73,7 @@ export default function App2() {
             Welcome, it’s a pleasure to connect with you. My name is
           </p>
           <h1 className="text-5xl font-extrabold text-teal-400 my-4">
-            <span>Olly</span>
+            <span className="mr-1">Olly</span>
             <span className="text-gray-400">smith</span>
           </h1>
           <h4 className="text-3xl font-bold text-white mb-4">{textElement}</h4>
