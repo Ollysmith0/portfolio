@@ -224,6 +224,7 @@ const Project = () => {
                     height="250"
                     image={project.image}
                     alt={`${project.title} preview`}
+                    loading="lazy"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sx={{
                       height: '100%',

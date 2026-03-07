@@ -8,9 +8,9 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio">
       <Routes>
-        <Route path="/portfolio" element={<App2 />} />
+        <Route path="/" element={<App2 />} />
         <Route path="/skill" element={<SkillPage />} />
         <Route path="/projects" element={<ProjectPage />} />
       </Routes>
