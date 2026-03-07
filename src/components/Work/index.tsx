@@ -112,13 +112,6 @@ const figmaProjects = [
     title: 'Web Finance Course',
     description:
       'This is a web financial course design that provides a user-friendly interface for course, learner.',
-    image: FigFinanceMobile,
-    link: 'https://www.figma.com/design/7t7T2OqCpetLdhX8mAJrzb/stock?node-id=148-3&t=D2HP22jP0YV0vsJz-1',
-  },
-  {
-    title: 'Web Finance Course',
-    description:
-      'This is a web financial course design that provides a user-friendly interface for course, learner.',
     image: FigFinanceCourse,
     link: 'https://www.figma.com/design/7t7T2OqCpetLdhX8mAJrzb/stock?node-id=148-3&t=D2HP22jP0YV0vsJz-1',
   },
