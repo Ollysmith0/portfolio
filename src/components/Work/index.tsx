@@ -6,6 +6,9 @@ import MoneyForwardVN from '@/assets/cloudfixedasset.png';
 import PlanetTota from '@/assets/planettota.png';
 import PatientPop from '@/assets/patientpop.png';
 import FigEcommerceMobile from '@/assets/e-commerce-mobile.png';
+import FigFinanceMobile from '@/assets/finance-app.png';
+import FigFinanceCourse from '@/assets/web-finance.png';
+
 
 const projects = [
   {
@@ -97,6 +100,27 @@ const figmaProjects = [
       'This is a mobile e-commerce app design that provides a user-friendly interface for shopping.',
     image: FigEcommerceMobile,
     link: 'https://www.figma.com/design/ftc3dHBiZHX8w66p2Eix5h/Katus?node-id=0-1&p=f&t=B1kfyX6BvRITD7zQ-0',
+  },
+  {
+    title: 'Mobile Financial Management App',
+    description:
+      'This is a mobile financial management app design that provides a user-friendly interface for financial management.',
+    image: FigFinanceMobile,
+    link: 'https://www.figma.com/design/7t7T2OqCpetLdhX8mAJrzb/stock?node-id=0-1&t=D2HP22jP0YV0vsJz-1',
+  },
+  {
+    title: 'Web Finance Course',
+    description:
+      'This is a web financial course design that provides a user-friendly interface for course, learner.',
+    image: FigFinanceMobile,
+    link: 'https://www.figma.com/design/7t7T2OqCpetLdhX8mAJrzb/stock?node-id=148-3&t=D2HP22jP0YV0vsJz-1',
+  },
+  {
+    title: 'Web Finance Course',
+    description:
+      'This is a web financial course design that provides a user-friendly interface for course, learner.',
+    image: FigFinanceCourse,
+    link: 'https://www.figma.com/design/7t7T2OqCpetLdhX8mAJrzb/stock?node-id=148-3&t=D2HP22jP0YV0vsJz-1',
   },
 ];
 
