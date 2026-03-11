@@ -117,6 +117,57 @@ const figmaProjects = [
   },
 ];
 
+const templateProjects = [
+  {
+    title: 'Velocity SaaS Landing',
+    description:
+      'Animated dark-mode SaaS landing page with hero section, feature grid, pricing cards, and scroll-triggered animations.',
+    gradient: 'linear-gradient(135deg, #1a0533 0%, #4c1d95 50%, #0ea5e9 100%)',
+    tools: ['React', 'Vite', 'TypeScript', 'Framer Motion', 'Tailwind CSS'],
+    link: 'https://1-saas-landing.vercel.app',
+  },
+  {
+    title: 'Alex Morrow – Dev Portfolio',
+    description:
+      'Minimal dark developer portfolio template with typewriter effect, project showcase, skills grid, and contact form.',
+    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #0e7490 100%)',
+    tools: ['React', 'Vite', 'TypeScript', 'Framer Motion', 'Tailwind CSS'],
+    link: 'https://saas-portfolio-2.vercel.app',
+  },
+  {
+    title: 'Aurora – Editorial Blog',
+    description:
+      'Warm editorial blog theme with serif typography, dark mode toggle, post grid, sidebar widgets, and newsletter signup.',
+    gradient: 'linear-gradient(135deg, #fef3c7 0%, #dc2626 60%, #991b1b 100%)',
+    tools: ['WordPress', 'PHP', 'SCSS', 'Gutenberg', 'Custom Theme'],
+    link: 'https://aurora-blog-teal.vercel.app',
+  },
+  {
+    title: 'Nexus – Corporate SaaS',
+    description:
+      'Professional dark-navy corporate landing page with animated stat counters, feature highlights, and team section.',
+    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #3b82f6 100%)',
+    tools: ['WordPress', 'PHP', 'SCSS', 'Elementor', 'Custom Theme'],
+    link: 'https://nexus-corporate-one.vercel.app',
+  },
+  {
+    title: 'Noir – Luxury Fashion Store',
+    description:
+      'High-fashion Shopify theme in black and gold with full-screen hero, editorial product grid, and slide-out cart drawer.',
+    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #3d2b00 50%, #d4af37 100%)',
+    tools: ['Shopify', 'Liquid', 'SCSS', 'JavaScript', 'Custom Theme'],
+    link: 'https://noir-fashion-tan.vercel.app',
+  },
+  {
+    title: 'Bloom – Beauty & Skincare Store',
+    description:
+      'Pastel-rose beauty store theme with animated blob hero, product collections, and free-shipping progress bar in cart.',
+    gradient: 'linear-gradient(135deg, #fdf2f8 0%, #f9a8d4 50%, #be185d 100%)',
+    tools: ['Shopify', 'Liquid', 'SCSS', 'JavaScript', 'Custom Theme'],
+    link: 'https://bloom-beauty-sand.vercel.app',
+  },
+];
+
 const Project = () => {
   return (
     <div className="grid grid-cols-1 gap-6 mt-6">
@@ -241,6 +292,65 @@ const Project = () => {
                     </Typography>
                     <Typography variant="body2" className="text-gray-300">
                       {project.description}
+                    </Typography>
+                  </div>
+                </Card>
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+      <section id="template-projects" className="mt-16">
+        <h3 className="text-2xl font-extrabold text-emerald-200">
+          My Template Projects
+        </h3>
+        <hr className="border-emerald-200 my-2" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          {templateProjects.map((project, i) => (
+            <motion.div
+              key={i}
+              className="relative group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.2 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <Card
+                  className="bg-gray-800 text-white overflow-hidden"
+                  style={{ height: '250px' }}
+                >
+                  <Box
+                    sx={{
+                      background: project.gradient,
+                      height: '100%',
+                      width: '100%',
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center p-4">
+                    <Typography
+                      variant="h6"
+                      className="font-bold text-white mb-2"
+                    >
+                      {project.title}
+                    </Typography>
+                    <Typography variant="body2" className="text-gray-300 mb-2">
+                      {project.description}
+                    </Typography>
+                    <Box className="flex items-center gap-2 my-1">
+                      <Build fontSize="small" className="text-green-400" />
+                      <Typography
+                        variant="subtitle2"
+                        className="font-semibold text-white"
+                      >
+                        Tools & Languages:
+                      </Typography>
+                    </Box>
+                    <Typography variant="body2" className="text-gray-300">
+                      {project.tools.join(', ')}
                     </Typography>
                   </div>
                 </Card>
