@@ -8,6 +8,12 @@ import PatientPop from '@/assets/patientpop.png';
 import FigEcommerceMobile from '@/assets/e-commerce-mobile.png';
 import FigFinanceMobile from '@/assets/finance-app.png';
 import FigFinanceCourse from '@/assets/web-finance.png';
+import TemplateVelocitySaaS from '@/assets/template-velocity-saas.png';
+import TemplateAlexPortfolio from '@/assets/template-alex-portfolio.png';
+import TemplateAuroraBlog from '@/assets/template-aurora-blog.png';
+import TemplateNexusCorporate from '@/assets/template-nexus-corporate.png';
+import TemplateNoirFashion from '@/assets/template-noir-fashion.png';
+import TemplateBloomBeauty from '@/assets/template-bloom-beauty.png';
 
 
 const projects = [
@@ -122,7 +128,7 @@ const templateProjects = [
     title: 'Velocity SaaS Landing',
     description:
       'Animated dark-mode SaaS landing page with hero section, feature grid, pricing cards, and scroll-triggered animations.',
-    gradient: 'linear-gradient(135deg, #1a0533 0%, #4c1d95 50%, #0ea5e9 100%)',
+    image: TemplateVelocitySaaS,
     tools: ['React', 'Vite', 'TypeScript', 'Framer Motion', 'Tailwind CSS'],
     link: 'https://1-saas-landing.vercel.app',
   },
@@ -130,7 +136,7 @@ const templateProjects = [
     title: 'Alex Morrow – Dev Portfolio',
     description:
       'Minimal dark developer portfolio template with typewriter effect, project showcase, skills grid, and contact form.',
-    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #0e7490 100%)',
+    image: TemplateAlexPortfolio,
     tools: ['React', 'Vite', 'TypeScript', 'Framer Motion', 'Tailwind CSS'],
     link: 'https://saas-portfolio-2.vercel.app',
   },
@@ -138,7 +144,7 @@ const templateProjects = [
     title: 'Aurora – Editorial Blog',
     description:
       'Warm editorial blog theme with serif typography, dark mode toggle, post grid, sidebar widgets, and newsletter signup.',
-    gradient: 'linear-gradient(135deg, #fef3c7 0%, #dc2626 60%, #991b1b 100%)',
+    image: TemplateAuroraBlog,
     tools: ['WordPress', 'PHP', 'SCSS', 'Gutenberg', 'Custom Theme'],
     link: 'https://aurora-blog-teal.vercel.app',
   },
@@ -146,7 +152,7 @@ const templateProjects = [
     title: 'Nexus – Corporate SaaS',
     description:
       'Professional dark-navy corporate landing page with animated stat counters, feature highlights, and team section.',
-    gradient: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #3b82f6 100%)',
+    image: TemplateNexusCorporate,
     tools: ['WordPress', 'PHP', 'SCSS', 'Elementor', 'Custom Theme'],
     link: 'https://nexus-corporate-one.vercel.app',
   },
@@ -154,7 +160,7 @@ const templateProjects = [
     title: 'Noir – Luxury Fashion Store',
     description:
       'High-fashion Shopify theme in black and gold with full-screen hero, editorial product grid, and slide-out cart drawer.',
-    gradient: 'linear-gradient(135deg, #0a0a0a 0%, #3d2b00 50%, #d4af37 100%)',
+    image: TemplateNoirFashion,
     tools: ['Shopify', 'Liquid', 'SCSS', 'JavaScript', 'Custom Theme'],
     link: 'https://noir-fashion-tan.vercel.app',
   },
@@ -162,7 +168,7 @@ const templateProjects = [
     title: 'Bloom – Beauty & Skincare Store',
     description:
       'Pastel-rose beauty store theme with animated blob hero, product collections, and free-shipping progress bar in cart.',
-    gradient: 'linear-gradient(135deg, #fdf2f8 0%, #f9a8d4 50%, #be185d 100%)',
+    image: TemplateBloomBeauty,
     tools: ['Shopify', 'Liquid', 'SCSS', 'JavaScript', 'Custom Theme'],
     link: 'https://bloom-beauty-sand.vercel.app',
   },
@@ -323,11 +329,17 @@ const Project = () => {
                   className="bg-gray-800 text-white overflow-hidden"
                   style={{ height: '250px' }}
                 >
-                  <Box
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    image={project.image}
+                    alt={`${project.title} preview`}
+                    loading="lazy"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sx={{
-                      background: project.gradient,
                       height: '100%',
                       width: '100%',
+                      objectFit: 'cover',
                     }}
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center p-4">
