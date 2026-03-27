@@ -1,95 +1,75 @@
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
-import PropertyGuruVN from '@/assets/propertyguruvn.png';
-import PlanetTota from '@/assets/planettota.png';
-import MoneyForwardVN from '@/assets/cloudfixedasset.png';
+import { TESTIMONIALS } from '@/constants';
 
-const testimonials = [
-  {
-    image: PropertyGuruVN,
-    comment: 'This is an amazing product! Highly recommend it.',
-    stars: 5,
-    date: '2025-02-01',
-  },
-  {
-    image: PropertyGuruVN,
-    comment: 'Great experience overall, but there is room for improvement.',
-    stars: 4,
-    date: '2025-03-15',
-  },
-  {
-    image: PlanetTota,
-    comment: 'Absolutely satisfied! Will use it again.',
-    stars: 5,
-    date: '2023-01-20',
-  },
-  {
-    image: PlanetTota,
-    comment: 'Good teamwork, will tend to work with him next time.',
-    stars: 4,
-    date: '2023-09-10',
-  },
-  {
-    image: MoneyForwardVN,
-    comment: 'Fantastic! Exceeded my expectations.',
-    stars: 5,
-    date: '2021-09-05',
-  },
-  {
-    image: MoneyForwardVN,
-    comment: 'It was okay, but I expected more.',
-    stars: 3,
-    date: '2021-02-25',
-  },
-];
+const DUPLICATED = [...TESTIMONIALS, ...TESTIMONIALS];
 
-const Testimonial = () => {
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
-
+function StarRating({ count }: { count: number }) {
   return (
-    <section id="testimonials" className="p-8 overflow-hidden">
-      <h3 className="text-2xl font-extrabold text-blue-200 mb-6">
-        Feedback from My Clients and Team
-      </h3>
-      <div className="relative w-full">
+    <div className="flex gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          size={14}
+          className={i < count ? 'text-[#FBBF24] fill-[#FBBF24]' : 'text-[#2A2A2A]'}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default function Testimonial() {
+  return (
+    <section className="py-20 px-8 md:px-12 overflow-hidden">
+      <div className="max-w-6xl mx-auto flex flex-col gap-12">
         <motion.div
-          className="flex gap-4"
-          animate={{ x: ['0%', '-100%'] }}
-          transition={{
-            duration: 20,
-            ease: 'linear',
-            repeat: Infinity,
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-3"
         >
-          {duplicatedTestimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="w-1/5 bg-gray-800 text-white p-4 rounded-lg shadow-md flex-shrink-0 flex flex-col"
-            >
-              <div className="flex flex-col items-center">
-                <img
-                  src={testimonial.image}
-                  alt="Reviewer"
-                  className="w-16 h-16 rounded-full mb-4 object-cover"
-                />
-                <p className="text-sm text-gray-300 text-center mb-2">
-                  {testimonial.comment}
-                </p>
-              </div>
-              <div className="mt-auto flex flex-col items-center">
-                <div className="flex mb-2">
-                  {Array.from({ length: testimonial.stars }).map((_, i) => (
-                    <Star key={i} size={16} className="text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-xs text-gray-400">{testimonial.date}</p>
-              </div>
-            </div>
-          ))}
+          <span className="inline-flex items-center gap-2 font-mono text-xs text-[#6EE7B7] uppercase tracking-widest">
+            <span className="w-8 h-px bg-[#6EE7B7]" />
+            Social proof
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+            What clients <span className="text-[#6EE7B7]">say</span>
+          </h2>
         </motion.div>
+
+        <div className="relative overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0F0F0F] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0F0F0F] to-transparent z-10 pointer-events-none" />
+          <motion.div
+            className="flex gap-5"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 40, ease: 'linear', repeat: Infinity }}
+          >
+            {DUPLICATED.map((t, i) => (
+              <div
+                key={i}
+                className="flex-shrink-0 w-72 bg-[#161616] border border-[#2A2A2A] rounded-2xl p-5 flex flex-col gap-4"
+              >
+                <div className="flex items-center gap-3">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="w-10 h-10 rounded-full object-cover border border-[#2A2A2A]"
+                  />
+                  <div>
+                    <p className="text-sm font-semibold text-[#F9FAFB]">{t.name}</p>
+                    <p className="text-xs text-[#6B7280]">{t.role}</p>
+                  </div>
+                </div>
+                <StarRating count={t.rating} />
+                <p className="text-sm text-[#D1D5DB] leading-relaxed line-clamp-3">"{t.text}"</p>
+                <p className="text-xs text-[#6B7280] font-mono mt-auto">{t.date}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default Testimonial;
+}
