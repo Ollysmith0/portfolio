@@ -1,17 +1,14 @@
-import Header from '../components/Header';
+import PageShell from '@/components/PageShell';
 import Skill from '../components/Skill';
 import Testimonial from '../components/Testimonial';
-import Footer from '../components/Footer';
 
 export default function SkillPage() {
   return (
-    <div className="min-h-screen bg-[#0F0F0F] text-[#F9FAFB]">
-      <Header />
-      <main className="pt-16">
+    <PageShell mainClassName="pt-24 md:pt-28">
+      <div className="relative z-10">
         <Skill />
         <Testimonial />
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </PageShell>
   );
 }
