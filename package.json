@@ -1,9 +1,9 @@
 {
-  "name": "portfolio",
+  "name": "ollysmith-store",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
-  "homepage": "https://ollysmith0.github.io/portfolio",
+  "homepage": "https://ollysmith.store",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -24,6 +24,7 @@
     "lucide-react": "^0.507.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-helmet-async": "^3.0.0",
     "tailwindcss": "^4.1.5",
     "three": "^0.183.2"
   },
