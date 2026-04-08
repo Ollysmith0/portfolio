@@ -4,6 +4,7 @@ import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Pricing from './components/Pricing';
 import Testimonial from './components/Testimonial';
+import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { useSEO } from './hooks/useSEO';
@@ -27,6 +28,7 @@ export default function App() {
         <Portfolio />
         <Pricing />
         <Testimonial />
+        <FAQ />
         <Contact />
       </main>
       <Footer />
