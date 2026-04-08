@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Plus, Minus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FAQS = [
   {
@@ -36,26 +37,60 @@ const FAQS = [
   },
 ];
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="border-b border-[var(--color-line)]">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={visible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: 'easeOut' }}
+      className="border-b border-[var(--color-line)]"
+    >
       <button
         onClick={() => setOpen((o) => !o)}
         className="flex w-full items-start justify-between gap-4 py-5 text-left"
         aria-expanded={open}
       >
         <span className="text-base font-medium text-[var(--color-text)]">{q}</span>
-        <span className="mt-0.5 flex-shrink-0 text-[var(--color-accent)]">
+        <motion.span
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="mt-0.5 flex-shrink-0 text-[var(--color-accent)]"
+        >
           {open ? <Minus size={18} /> : <Plus size={18} />}
-        </span>
+        </motion.span>
       </button>
 
-      {open && (
-        <p className="pb-5 text-sm leading-7 text-[var(--color-muted)]">{a}</p>
-      )}
-    </div>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            style={{ overflow: 'hidden' }}
+          >
+            <p className="pb-5 text-sm leading-7 text-[var(--color-muted)]">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -86,7 +121,13 @@ export default function FAQ() {
       />
 
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-4">
+        <motion.div
+          className="flex flex-col gap-4"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
           <span className="section-kicker">FAQ</span>
           <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.04em] text-[var(--color-text)] md:text-6xl">
             Frequently asked
@@ -95,17 +136,17 @@ export default function FAQ() {
           <p className="max-w-xl text-base leading-8 text-[var(--color-muted)]">
             Everything you need to know before starting your project.
           </p>
-        </div>
+        </motion.div>
 
         <div className="mt-12 grid gap-0 md:grid-cols-2 md:gap-x-16">
           <div>
-            {left.map((item) => (
-              <FAQItem key={item.q} q={item.q} a={item.a} />
+            {left.map((item, i) => (
+              <FAQItem key={item.q} q={item.q} a={item.a} index={i} />
             ))}
           </div>
           <div>
-            {right.map((item) => (
-              <FAQItem key={item.q} q={item.q} a={item.a} />
+            {right.map((item, i) => (
+              <FAQItem key={item.q} q={item.q} a={item.a} index={i} />
             ))}
           </div>
         </div>
