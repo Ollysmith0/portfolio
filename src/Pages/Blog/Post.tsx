@@ -7,6 +7,7 @@ import { useSEO } from '@/hooks/useSEO';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { SOCIAL_LINKS } from '@/constants';
+import avatarImg from '@/assets/avatar.jpg';
 
 // ── Reading Progress Bar ────────────────────────────────
 function ReadingProgress() {
@@ -226,9 +227,7 @@ export default function BlogPost() {
             {/* Author strip */}
             <div className="mt-8 flex items-center justify-between border-y border-[var(--color-line)] py-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent)] font-display text-sm font-bold text-white">
-                  O
-                </div>
+                <img src={avatarImg} alt="Olly Smith" className="h-9 w-9 rounded-full object-cover" />
                 <div>
                   <p className="text-sm font-medium text-[var(--color-text)]">Olly Smith</p>
                   <a
@@ -284,9 +283,7 @@ export default function BlogPost() {
             {/* Author CTA card */}
             <div className="mt-14 rounded-3xl border border-[var(--color-line)] bg-[rgba(245,239,230,0.03)] p-6 md:p-8">
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)] font-display text-lg font-bold text-white">
-                  O
-                </div>
+                <img src={avatarImg} alt="Olly Smith" className="h-12 w-12 shrink-0 rounded-full object-cover" />
                 <div>
                   <p className="font-display text-lg tracking-[-0.02em] text-[var(--color-text)]">
                     Olly Smith
