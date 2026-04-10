@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, ChevronDown } from 'lucide-react';
 import { PORTFOLIO_ITEMS } from '@/constants';
 
 const FILTERS = ['all', 'shopify', 'portfolio', 'wordpress', 'framer'] as const;
@@ -7,8 +7,11 @@ type Filter = (typeof FILTERS)[number];
 
 export default function Portfolio() {
   const [filter, setFilter] = useState<Filter>('all');
+  const [showAll, setShowAll] = useState(false);
 
   const filtered = filter === 'all' ? PORTFOLIO_ITEMS : PORTFOLIO_ITEMS.filter((p) => p.category === filter);
+  const INITIAL_COUNT = 3;
+  const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
 
   return (
     <section id="portfolio" className="px-5 py-20 md:px-10 md:py-28">
@@ -39,7 +42,7 @@ export default function Portfolio() {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((item) => (
+          {visible.map((item) => (
             <a
               key={item.title}
               href={item.url}
@@ -78,6 +81,21 @@ export default function Portfolio() {
             </a>
           ))}
         </div>
+
+        {filtered.length > INITIAL_COUNT && (
+          <div className="mt-10 flex justify-center">
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              className="flex items-center gap-2 rounded-full border border-[var(--color-line)] px-7 py-3 text-sm font-medium text-[var(--color-muted)] transition-all hover:border-[var(--color-accent)] hover:text-[var(--color-text)]"
+            >
+              {showAll ? 'Show less' : `View more (${filtered.length - INITIAL_COUNT} more)`}
+              <ChevronDown
+                size={15}
+                className={['transition-transform duration-300', showAll ? 'rotate-180' : ''].join(' ')}
+              />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
