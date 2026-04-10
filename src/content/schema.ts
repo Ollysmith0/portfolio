@@ -1,61 +1,48 @@
-// Content schema definition for blog posts and pages
-// Use this structure when creating new blog posts in /src/content/blog/
+// Content schema for blog posts
+// Each post lives in /src/content/blog/<slug>.ts
 
+// ── Content Blocks ────────────────────────────────────────
+// These are the building blocks for writing a blog post.
+// Mix and match blocks to compose your content.
+
+export type Block =
+  | { type: 'paragraph'; text: string }
+  | { type: 'heading'; level: 2 | 3; text: string }
+  | { type: 'list'; items: string[] }
+  | { type: 'numbered-list'; items: string[] }
+  | { type: 'image'; src: string; alt: string; caption?: string }
+  | { type: 'callout'; text: string }  // highlighted box
+  | { type: 'divider' }
+
+// ── Blog Post ─────────────────────────────────────────────
 export interface BlogPost {
-  /** URL-friendly slug (e.g., "how-to-build-shopify-store") */
+  /** URL slug — must be unique, lowercase, hyphen-separated */
   slug: string;
-  
-  /** Display title */
+
+  /** Page title (also shown as H1) */
   title: string;
-  
-  /** SEO meta description (155-160 chars) */
+
+  /** SEO meta description — keep between 120-155 characters */
   description: string;
-  
-  /** Featured image URL */
+
+  /** Featured image path from /public/blog/ folder */
   image: string;
-  
-  /** Alt text for featured image */
+
+  /** Alt text for featured image (describe what's in the image) */
   imageAlt: string;
-  
-  /** Publication date (ISO format: YYYY-MM-DD) */
+
+  /** Publish date in ISO format: YYYY-MM-DD */
   date: string;
-  
-  /** Author name */
-  author: string;
-  
-  /** Estimated read time in minutes */
+
+  /** Estimated reading time in minutes */
   readTime: number;
-  
-  /** Blog post content (markdown or HTML string) */
-  content: string;
-  
-  /** SEO keywords (comma-separated) */
-  keywords: string;
-  
+
   /** Article category */
   category: 'tutorial' | 'case-study' | 'tips' | 'news';
-  
-  /** Related post slugs for internal linking */
-  relatedPosts?: string[];
-}
 
-/**
- * Example blog post structure:
- * 
- * import { BlogPost } from '@/content/schema';
- * 
- * export const examplePost: BlogPost = {
- *   slug: 'how-to-build-shopify-store',
- *   title: 'How to Build a High-Converting Shopify Store',
- *   description: 'Complete guide to building a Shopify store with custom theme design, product setup, and conversion optimization.',
- *   image: '/blog/shopify-store.png',
- *   imageAlt: 'Screenshot of custom Shopify store dashboard',
- *   date: '2026-04-01',
- *   author: 'Olly Smith',
- *   readTime: 8,
- *   content: '...',
- *   keywords: 'Shopify, e-commerce, web design, custom theme',
- *   category: 'tutorial',
- *   relatedPosts: ['wordpress-vs-shopify', 'ecommerce-seo-tips']
- * }
- */
+  /** Keywords for SEO meta tag (comma-separated) */
+  keywords: string;
+
+  /** Array of content blocks that make up the post */
+  blocks: Block[];
+}

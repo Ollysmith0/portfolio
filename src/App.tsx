@@ -1,3 +1,5 @@
+import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -9,8 +11,10 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { useSEO } from './hooks/useSEO';
 
-export default function App() {
-  // Apply homepage SEO meta tags
+const BlogIndex = lazy(() => import('./Pages/Blog/Index'));
+const BlogPost = lazy(() => import('./Pages/Blog/Post'));
+
+function HomePage() {
   useSEO({
     title: 'Olly Smith Store | Premium Web & E-Commerce Solutions',
     description:
@@ -33,5 +37,17 @@ export default function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Suspense fallback={null}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
+    </Suspense>
   );
 }
