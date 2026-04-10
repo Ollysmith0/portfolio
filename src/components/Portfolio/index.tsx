@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ExternalLink, ChevronDown } from 'lucide-react';
 import { PORTFOLIO_ITEMS } from '@/constants';
 
@@ -41,10 +42,16 @@ export default function Portfolio() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {visible.map((item) => (
-            <a
+        <motion.div layout className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+          {visible.map((item, i) => (
+            <motion.a
               key={item.title}
+              layout
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.97 }}
+              transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -78,9 +85,10 @@ export default function Portfolio() {
                   ))}
                 </div>
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
+          </AnimatePresence>
+        </motion.div>
 
         {filtered.length > INITIAL_COUNT && (
           <div className="mt-10 flex justify-center">
