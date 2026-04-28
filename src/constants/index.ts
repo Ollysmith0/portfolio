@@ -42,6 +42,11 @@ import fmNeonlab from "@/assets/template-fm-neonlab.png";
 import fmGlitch from "@/assets/template-fm-glitch.png";
 // Landing page templates
 import lpLuminary from "@/assets/template-lp-luminary.png";
+import lpNexus from "@/assets/template-lp-nexus.png";
+import lpGrove from "@/assets/template-lp-grove.png";
+import lpHelix from "@/assets/template-lp-helix.png";
+import lpRush from "@/assets/template-lp-rush.png";
+import lpVolta from "@/assets/template-lp-volta.png";
 import lpSolstice from "@/assets/template-lp-solstice.png";
 import lpForge from "@/assets/template-lp-forge.png";
 import lpAura from "@/assets/template-lp-aura.png";
@@ -585,6 +590,46 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     image: lpApex,
     url: "https://ollysmith0.github.io/portfolio/apex/",
     tags: ["Landing Page", "Fintech", "Trading", "Dark UI"],
+    category: "landing",
+  },
+  {
+    title: "Nexus — AI Legal Tech",
+    description: "AI legal intelligence platform landing page with midnight blue theme, IBM Plex Serif typography, document analysis UI mockup, and cyan/indigo gradient accents.",
+    image: lpNexus,
+    url: "https://ollysmith0.github.io/portfolio/nexus/",
+    tags: ["Landing Page", "Legal Tech", "AI", "Enterprise"],
+    category: "landing",
+  },
+  {
+    title: "Grove — Sustainability Platform",
+    description: "Carbon footprint and ESG reporting platform landing page with deep forest green, Libre Baskerville serif, lime green (#A3E635) accents, and live carbon dashboard mockup.",
+    image: lpGrove,
+    url: "https://ollysmith0.github.io/portfolio/grove/",
+    tags: ["Landing Page", "Sustainability", "ESG", "Green"],
+    category: "landing",
+  },
+  {
+    title: "Helix — Biotech Drug Discovery",
+    description: "Computational biology AI platform landing page with deep violet/magenta gradient, Playfair Display serif, 3D molecule visualization, and pharma partner logos.",
+    image: lpHelix,
+    url: "https://ollysmith0.github.io/portfolio/helix/",
+    tags: ["Landing Page", "Biotech", "AI", "Science"],
+    category: "landing",
+  },
+  {
+    title: "Rush — Restaurant Management",
+    description: "All-in-one restaurant OS landing page with high-contrast black/orange (#E8400A), Archivo Black bold typography, live POS mockup, and order feed UI.",
+    image: lpRush,
+    url: "https://ollysmith0.github.io/portfolio/rush/",
+    tags: ["Landing Page", "Restaurant", "SaaS", "Bold"],
+    category: "landing",
+  },
+  {
+    title: "Volta — EV Charging Network",
+    description: "Electric vehicle charging network landing page with pure black and electric yellow (#FFE600), Barlow Condensed ultra-bold condensed typography, and live charging station map.",
+    image: lpVolta,
+    url: "https://ollysmith0.github.io/portfolio/volta/",
+    tags: ["Landing Page", "EV", "Mobility", "Bold Yellow"],
     category: "landing",
   },
 ];

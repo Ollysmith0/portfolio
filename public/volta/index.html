@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volta — Charge Everything. Everywhere.</title>
+  <meta name="description" content="Volta is building the world's most intelligent EV charging network. 50,000+ stations, ultra-fast charging, and a platform that powers fleets, cities, and drivers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #060606;
+      --bg2: #0C0C0C;
+      --bg3: #111111;
+      --yellow: #FFE600;
+      --yellow2: #FFD000;
+      --electric: #C8FF00;
+      --text: #FFFFFF;
+      --muted: rgba(255,255,255,0.45);
+      --muted2: rgba(255,255,255,0.2);
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,230,0,0.2);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.55; }
+
+    /* ─── Scroll animations ─── */
+    [data-a] { opacity: 0; transform: translateY(36px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    [data-a="left"] { transform: translateX(-36px); }
+    [data-a="right"] { transform: translateX(36px); }
+    [data-a="scale"] { transform: scale(0.92); }
+    [data-a="fade"] { transform: none; }
+    [data-a].vis { opacity: 1; transform: none; }
+    [data-d="1"].vis { transition-delay: 0.1s; }
+    [data-d="2"].vis { transition-delay: 0.2s; }
+    [data-d="3"].vis { transition-delay: 0.3s; }
+    [data-d="4"].vis { transition-delay: 0.4s; }
+    [data-d="5"].vis { transition-delay: 0.5s; }
+
+    /* ─── Nav ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(6,6,6,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 48px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 0.02em; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .nav-logo-bolt { color: var(--yellow); font-size: 1.2rem; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; letter-spacing: 0.02em; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--yellow); color: var(--bg); border: none; padding: 10px 22px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--yellow2); }
+
+    /* ─── Hero ─── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; padding: 0; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(255,230,0,0.08) 0%, transparent 60%); }
+    .hero-lines { position: absolute; inset: 0; opacity: 0.06; background-image: repeating-linear-gradient(90deg, rgba(255,230,0,0.4) 0px, transparent 1px, transparent 48px, rgba(255,230,0,0.4) 49px); }
+    .hero-big-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-bg-word { font-family: 'Barlow Condensed', sans-serif; font-size: 40vw; font-weight: 900; color: var(--yellow); opacity: 0.04; letter-spacing: -0.04em; white-space: nowrap; }
+    .hero-content { position: relative; z-index: 1; padding: 0 48px 80px; width: 100%; max-width: 1280px; margin: 0 auto; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border2); padding: 5px 14px; margin-bottom: 24px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); }
+    .hero-tag-pulse { width: 6px; height: 6px; background: var(--yellow); border-radius: 50%; animation: pulse-anim 1.4s ease-in-out infinite; }
+    @keyframes pulse-anim { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+    h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(5rem, 14vw, 13rem); font-weight: 900; line-height: 0.88; letter-spacing: -0.02em; text-transform: uppercase; }
+    h1 .yellow { color: var(--yellow); }
+    .hero-bottom { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: flex-end; margin-top: 32px; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.7; max-width: 520px; font-weight: 300; }
+    .hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    .btn-yellow { background: var(--yellow); color: var(--bg); border: none; padding: 18px 40px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .btn-yellow:hover { background: var(--yellow2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,230,0,0.3); }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 18px 40px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+    .hero-numbers { display: flex; gap: 32px; }
+    .hero-num-item { text-align: right; }
+    .hn-val { font-family: 'Barlow Condensed', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--yellow); line-height: 1; letter-spacing: -0.02em; }
+    .hn-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; font-weight: 400; }
+
+    /* ─── Charging speed bar ─── */
+    .speed-section { background: var(--yellow); padding: 16px 48px; position: relative; z-index: 1; }
+    .speed-inner { max-width: 1280px; margin: 0 auto; display: flex; gap: 40px; align-items: center; flex-wrap: wrap; justify-content: center; }
+    .speed-item { display: flex; align-items: center; gap: 10px; }
+    .speed-icon { font-size: 1.1rem; }
+    .speed-text { font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bg); }
+
+    /* ─── Common ─── */
+    .section { max-width: 1280px; margin: 0 auto; padding: 100px 48px; position: relative; z-index: 1; }
+    .kicker { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.16em; color: var(--yellow); margin-bottom: 10px; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1; text-transform: uppercase; }
+    .section-title .yellow { color: var(--yellow); }
+    .section-sub { font-size: 0.95rem; color: var(--muted); margin-top: 14px; max-width: 500px; font-weight: 300; line-height: 1.7; }
+
+    /* ─── Charging network map mockup ─── */
+    .map-section { padding: 0 48px 80px; max-width: 1280px; margin: 0 auto; }
+    .map-panel { background: var(--bg3); border: 1px solid var(--border); padding: 32px; position: relative; overflow: hidden; }
+    .map-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .map-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+    .map-live { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; color: var(--yellow); }
+    .map-live-dot { width: 6px; height: 6px; background: var(--yellow); border-radius: 50%; animation: pulse-anim 1.4s ease-in-out infinite; }
+    .map-grid { position: relative; height: 220px; background: radial-gradient(ellipse at 50% 50%, rgba(255,230,0,0.04) 0%, transparent 70%); border: 1px solid rgba(255,255,255,0.04); overflow: hidden; }
+    .map-lines-h { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255,255,255,0.03) 30px, rgba(255,255,255,0.03) 31px); }
+    .map-lines-v { position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255,255,255,0.03) 30px, rgba(255,255,255,0.03) 31px); }
+    .map-pin { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 8px rgba(255,230,0,0.5); cursor: pointer; }
+    .map-pin::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(255,230,0,0.3); animation: ping 2s cubic-bezier(0,0,0.2,1) infinite; }
+    @keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
+    .map-pin.busy { background: #EF4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+    .map-pin.busy::after { border-color: rgba(239,68,68,0.3); }
+    .map-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
+    .map-stat { text-align: center; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+    .ms-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--yellow); }
+    .ms-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+
+    /* ─── Features ─── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .feat { background: var(--bg3); border: 1px solid var(--border); padding: 32px; transition: border-color 0.3s; }
+    .feat:hover { border-color: rgba(255,230,0,0.25); }
+    .feat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; color: var(--yellow); opacity: 0.12; line-height: 1; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .feat-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 10px; }
+    .feat-title .y { color: var(--yellow); }
+    .feat-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* ─── Speed comparison ─── */
+    .speeds-section { background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 48px; position: relative; z-index: 1; }
+    .speeds-inner { max-width: 1280px; margin: 0 auto; }
+    .speeds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 48px; }
+    .speed-card { padding: 32px 24px; text-align: center; border: 1px solid var(--border); }
+    .speed-card.highlight { background: linear-gradient(135deg, rgba(255,230,0,0.08) 0%, transparent 100%); border-color: rgba(255,230,0,0.3); }
+    .speed-card-kw { font-family: 'Barlow Condensed', sans-serif; font-size: 3rem; font-weight: 900; letter-spacing: -0.02em; color: var(--muted); line-height: 1; }
+    .speed-card.highlight .speed-card-kw { color: var(--yellow); }
+    .speed-card-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+    .speed-card-time { font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
+    .speed-card.highlight .speed-card-time { color: rgba(255,255,255,0.7); }
+    .speed-bar { height: 4px; background: rgba(255,255,255,0.08); margin: 14px 0 0; overflow: hidden; }
+    .speed-bar-fill { height: 100%; background: var(--yellow); }
+
+    /* ─── Pricing ─── */
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 52px; }
+    .price-card { background: var(--bg3); border: 1px solid var(--border); padding: 40px; transition: border-color 0.3s; }
+    .price-card:hover { border-color: rgba(255,230,0,0.25); }
+    .price-card.featured { border-color: rgba(255,230,0,0.4); background: linear-gradient(135deg, rgba(255,230,0,0.05) 0%, transparent 60%); }
+    .price-tier { font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--yellow); margin-bottom: 12px; }
+    .price-amount { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; letter-spacing: -0.03em; }
+    .price-period { font-family: 'Barlow', sans-serif; font-size: 0.875rem; font-weight: 300; color: var(--muted); }
+    .price-desc { font-size: 0.85rem; color: var(--muted); margin: 12px 0 24px; line-height: 1.6; }
+    .price-hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .price-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--muted); }
+    .price-list li::before { content: '⚡'; font-size: 0.7rem; flex-shrink: 0; margin-top: 2px; }
+    .price-btn { display: block; width: 100%; margin-top: 28px; padding: 14px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; text-decoration: none; border: none; }
+    .price-btn.yellow { background: var(--yellow); color: var(--bg); }
+    .price-btn.yellow:hover { background: var(--yellow2); }
+    .price-btn.outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .price-btn.outline:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    /* ─── CTA ─── */
+    .cta-section { background: var(--yellow); padding: 120px 48px; text-align: center; position: relative; z-index: 1; overflow: hidden; }
+    .cta-bg-word { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 28vw; font-weight: 900; color: rgba(0,0,0,0.06); letter-spacing: -0.04em; pointer-events: none; overflow: hidden; }
+    .cta-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; color: var(--bg); position: relative; z-index: 1; }
+    .cta-sub { font-size: 1rem; color: rgba(0,0,0,0.55); margin-top: 18px; max-width: 500px; margin-left: auto; margin-right: auto; position: relative; z-index: 1; font-weight: 400; }
+    .cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 40px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .btn-black { background: var(--bg); color: var(--yellow); border: none; padding: 18px 44px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .btn-black:hover { background: var(--bg2); }
+    .btn-outline-dark { background: transparent; border: 2px solid rgba(0,0,0,0.25); color: var(--bg); padding: 16px 44px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .btn-outline-dark:hover { background: rgba(0,0,0,0.08); }
+    .cta-note { font-size: 0.8rem; color: rgba(0,0,0,0.45); margin-top: 16px; position: relative; z-index: 1; }
+
+    /* ─── Footer ─── */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 56px 48px 32px; position: relative; z-index: 1; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--yellow); letter-spacing: 0.02em; margin-bottom: 10px; }
+    .footer-bio { font-size: 0.82rem; color: var(--muted); line-height: 1.65; max-width: 220px; font-weight: 300; }
+    .footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--yellow); margin-bottom: 14px; }
+    .footer-col a { display: block; font-size: 0.82rem; color: var(--muted); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 0.78rem; color: var(--muted2); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; } .nav-links { display: none; }
+      .hero { min-height: 80vh; } .hero-content { padding: 0 20px 60px; }
+      h1 { font-size: clamp(4rem, 18vw, 8rem); }
+      .hero-bottom { grid-template-columns: 1fr; gap: 24px; }
+      .hero-right { align-items: flex-start; }
+      .section { padding: 60px 20px; } .map-section { padding: 0 20px 60px; }
+      .features-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .speeds-grid { grid-template-columns: repeat(2, 1fr); }
+      .speeds-section { padding: 60px 20px; }
+      .map-stats { grid-template-columns: repeat(3, 1fr); }
+      footer { padding: 40px 20px; } .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo"><span class="nav-logo-bolt">⚡</span>VOLTA</div>
+    <div class="nav-links">
+      <a href="#network">Network</a>
+      <a href="#features">Platform</a>
+      <a href="#pricing">Business</a>
+      <a href="#">Drivers</a>
+    </div>
+    <button class="nav-cta">Join Network</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-big-text"><div class="hero-bg-word">VOLTA</div></div>
+    <div class="hero-content">
+      <div class="hero-tag" data-a><div class="hero-tag-pulse"></div>50,000+ stations live globally</div>
+      <h1 data-a data-d="1">CHARGE<br /><span class="yellow">EVERY</span><br />THING.</h1>
+      <div class="hero-bottom">
+        <div class="hero-sub" data-a data-d="2">Volta is building the world's most intelligent EV charging network. From home chargers to megawatt fleet depots — we make charging as easy as parking.</div>
+        <div class="hero-right">
+          <div class="hero-numbers" data-a data-d="2">
+            <div class="hero-num-item"><div class="hn-val">50k+</div><div class="hn-label">Stations</div></div>
+            <div class="hero-num-item"><div class="hn-val">140</div><div class="hn-label">Countries</div></div>
+            <div class="hero-num-item"><div class="hn-val">4.8M</div><div class="hn-label">Drivers</div></div>
+          </div>
+          <div style="display:flex;gap:10px" data-a data-d="3">
+            <button class="btn-yellow">Find a Charger</button>
+            <button class="btn-ghost">For Business →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="speed-section">
+    <div class="speed-inner">
+      <div class="speed-item"><span class="speed-icon">⚡</span><span class="speed-text">Up to 350kW DC Fast Charging</span></div>
+      <div class="speed-item"><span class="speed-icon">🔌</span><span class="speed-text">Compatible with all EV makes</span></div>
+      <div class="speed-item"><span class="speed-icon">💳</span><span class="speed-text">Tap-to-charge, no app required</span></div>
+      <div class="speed-item"><span class="speed-icon">🌍</span><span class="speed-text">One network, 140 countries</span></div>
+      <div class="speed-item"><span class="speed-icon">♻️</span><span class="speed-text">100% renewable energy powered</span></div>
+    </div>
+  </div>
+
+  <div id="network" class="map-section">
+    <div class="map-panel" data-a>
+      <div class="map-header">
+        <div class="map-title">⚡ Live Network Status</div>
+        <div class="map-live"><div class="map-live-dot"></div>47,284 stations online</div>
+      </div>
+      <div class="map-grid">
+        <div class="map-lines-h"></div>
+        <div class="map-lines-v"></div>
+        <div class="map-pin" style="top:30%;left:18%"></div>
+        <div class="map-pin" style="top:25%;left:28%"></div>
+        <div class="map-pin busy" style="top:40%;left:38%"></div>
+        <div class="map-pin" style="top:20%;left:48%"></div>
+        <div class="map-pin" style="top:55%;left:55%"></div>
+        <div class="map-pin" style="top:35%;left:65%"></div>
+        <div class="map-pin busy" style="top:45%;left:72%"></div>
+        <div class="map-pin" style="top:28%;left:80%"></div>
+        <div class="map-pin" style="top:60%;left:85%"></div>
+        <div class="map-pin" style="top:50%;left:25%"></div>
+        <div class="map-pin busy" style="top:65%;left:42%"></div>
+        <div class="map-pin" style="top:70%;left:60%"></div>
+      </div>
+      <div class="map-stats">
+        <div class="map-stat"><div class="ms-val">47,284</div><div class="ms-label">Online</div></div>
+        <div class="map-stat"><div class="ms-val">2,716</div><div class="ms-label">Busy</div></div>
+        <div class="map-stat"><div class="ms-val">98.6%</div><div class="ms-label">Uptime</div></div>
+        <div class="map-stat"><div class="ms-val">140</div><div class="ms-label">Countries</div></div>
+        <div class="map-stat"><div class="ms-val">4.8M</div><div class="ms-label">Active users</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="features" class="section">
+    <div class="kicker" data-a>Platform</div>
+    <div class="section-title" data-a data-d="1">Built for drivers.<br /><span class="yellow">Engineered</span> for business.</div>
+    <div class="features-grid">
+      <div class="feat" data-a><div class="feat-num">01</div><div class="feat-title"><span class="y">Ultra</span>-Fast Charging</div><div class="feat-desc">Up to 350kW DC charging adds 200 miles in under 15 minutes. Our smart grid integration ensures stable power delivery during peak demand.</div></div>
+      <div class="feat" data-a data-d="1"><div class="feat-num">02</div><div class="feat-title"><span class="y">Smart</span> Fleet Management</div><div class="feat-desc">Manage your entire EV fleet from one dashboard. Automated charging schedules, real-time energy cost optimization, and per-vehicle reporting.</div></div>
+      <div class="feat" data-a data-d="2"><div class="feat-num">03</div><div class="feat-title"><span class="y">Open</span> Payment Platform</div><div class="feat-desc">Tap-to-charge with any contactless card, or use the Volta app. White-label payment solutions for property owners and fleet operators.</div></div>
+      <div class="feat" data-a data-d="3"><div class="feat-num">04</div><div class="feat-title"><span class="y">Energy</span> Intelligence</div><div class="feat-desc">AI-powered load balancing reduces your energy costs by up to 40%. Integrates with solar, storage, and grid pricing signals automatically.</div></div>
+      <div class="feat" data-a data-d="4"><div class="feat-num">05</div><div class="feat-title"><span class="y">Carbon</span> Reporting</div><div class="feat-desc">Automatic Scope 3 emissions tracking for fleet operators. Generate CDP and GRI-aligned reports and track your fleet's carbon reduction over time.</div></div>
+      <div class="feat" data-a data-d="5"><div class="feat-num">06</div><div class="feat-title"><span class="y">Open</span> OCPP Platform</div><div class="feat-desc">OCPP 2.0.1 compliant. Integrate any third-party charger hardware into the Volta network. Full API access for enterprise and roaming agreements.</div></div>
+    </div>
+  </div>
+
+  <div class="speeds-section">
+    <div class="speeds-inner">
+      <div class="kicker" data-a>Charging Speeds</div>
+      <div class="section-title" data-a data-d="1">Every charge level. Every vehicle.</div>
+      <div class="speeds-grid">
+        <div class="speed-card" data-a><div class="speed-card-kw">7kW</div><div class="speed-card-label">Home AC</div><div class="speed-card-time">Full charge overnight</div><div class="speed-bar"><div class="speed-bar-fill" style="width:15%"></div></div></div>
+        <div class="speed-card" data-a data-d="1"><div class="speed-card-kw">22kW</div><div class="speed-card-label">Workplace AC</div><div class="speed-card-time">~3h for 200 miles</div><div class="speed-bar"><div class="speed-bar-fill" style="width:40%"></div></div></div>
+        <div class="speed-card" data-a data-d="2"><div class="speed-card-kw">150kW</div><div class="speed-card-label">DC Fast</div><div class="speed-card-time">~25 min for 200 miles</div><div class="speed-bar"><div class="speed-bar-fill" style="width:70%"></div></div></div>
+        <div class="speed-card highlight" data-a data-d="3"><div class="speed-card-kw">350kW</div><div class="speed-card-label">Ultra Fast DC</div><div class="speed-card-time">~12 min for 200 miles</div><div class="speed-bar"><div class="speed-bar-fill" style="width:100%"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pricing" class="section">
+    <div class="kicker" data-a>Business Solutions</div>
+    <div class="section-title" data-a data-d="1">Power your fleet.<br /><span class="yellow">Grow</span> your network.</div>
+    <div class="pricing-grid">
+      <div class="price-card" data-a>
+        <div class="price-tier">Fleet Charging</div>
+        <div class="price-amount">$0.32 <span class="price-period">/kWh</span></div>
+        <div class="price-desc">For businesses with 5–500 EVs. Centrally billed, per-vehicle reporting, guaranteed uptime SLA.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>5–500 vehicles</li><li>Fleet dashboard & analytics</li><li>24/7 driver support</li><li>Monthly invoicing</li><li>99.5% uptime SLA</li></ul>
+        <a href="#" class="price-btn outline">Contact Fleet Team</a>
+      </div>
+      <div class="price-card featured" data-a data-d="1">
+        <div class="price-tier">Network Partner</div>
+        <div class="price-amount">Custom</div>
+        <div class="price-desc">For property owners and operators who want to install Volta chargers and earn revenue sharing from public charging.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>Hardware included & installed</li><li>Revenue share on public charging</li><li>White-label experience option</li><li>Remote monitoring & management</li><li>Energy optimisation AI</li><li>Dedicated account manager</li></ul>
+        <a href="#" class="price-btn yellow">Become a Partner</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-bg-word">CHARGE</div>
+    <div class="cta-title" data-a>THE FUTURE<br />IS ELECTRIC.</div>
+    <div class="cta-sub" data-a data-d="1">Find your nearest Volta charger, join 4.8 million drivers, or bring Volta to your property. The energy transition starts here.</div>
+    <div class="cta-actions" data-a data-d="2">
+      <button class="btn-black">Find Nearest Charger</button>
+      <button class="btn-outline-dark">Partner With Us</button>
+    </div>
+    <div class="cta-note" data-a data-d="3">Free to use · No subscription for drivers · 100% renewable energy</div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div><div class="footer-logo">⚡ VOLTA</div><div class="footer-bio">Building the world's most intelligent EV charging network. 50,000+ stations, 140 countries, 100% renewable.</div></div>
+      <div class="footer-col"><div class="footer-col-title">For Drivers</div><a href="#">Find Chargers</a><a href="#">Volta App</a><a href="#">Membership</a><a href="#">Roaming</a></div>
+      <div class="footer-col"><div class="footer-col-title">For Business</div><a href="#">Fleet Solutions</a><a href="#">Network Partners</a><a href="#">API</a><a href="#">White Label</a></div>
+      <div class="footer-col"><div class="footer-col-title">Company</div><a href="#">About</a><a href="#">Press</a><a href="#">Careers</a><a href="#">Investors</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Volta Energy Networks, Inc.</div>
+      <div class="footer-copy">100% renewable energy · Carbon neutral operations</div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-a]').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rush — The OS for Modern Restaurants</title>
+  <meta name="description" content="Rush is the all-in-one restaurant management platform — POS, online ordering, delivery, inventory, and staff scheduling in one beautifully simple system." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FAFAF8;
+      --bg2: #F5F3EF;
+      --dark: #0E0A06;
+      --dark2: #1C1610;
+      --orange: #E8400A;
+      --orange2: #FF5722;
+      --orange-light: #FF7043;
+      --yellow: #FFBA08;
+      --green: #22C55E;
+      --text: #0E0A06;
+      --muted: #6B6560;
+      --muted2: #A09890;
+      --border: #E8E4DE;
+      --border2: #D4CEC8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Archivo', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+
+    /* ─── Scroll animations ─── */
+    [data-a] { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1); }
+    [data-a="left"] { transform: translateX(-28px); }
+    [data-a="right"] { transform: translateX(28px); }
+    [data-a="scale"] { transform: scale(0.94); }
+    [data-a="fade"] { transform: none; }
+    [data-a].vis { opacity: 1; transform: none; }
+    [data-d="1"].vis { transition-delay: 0.1s; }
+    [data-d="2"].vis { transition-delay: 0.2s; }
+    [data-d="3"].vis { transition-delay: 0.3s; }
+    [data-d="4"].vis { transition-delay: 0.4s; }
+    [data-d="5"].vis { transition-delay: 0.5s; }
+
+    /* ─── Nav ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 48px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Archivo Black', sans-serif; font-size: 1.4rem; color: var(--dark); display: flex; align-items: center; gap: 8px; }
+    .nav-logo-mark { width: 28px; height: 28px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; font-weight: 900; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-right { display: flex; gap: 10px; align-items: center; }
+    .nav-login { font-size: 0.85rem; font-weight: 500; color: var(--muted); background: transparent; border: none; cursor: pointer; font-family: 'Archivo', sans-serif; }
+    .nav-cta { background: var(--orange); color: white; border: none; padding: 10px 22px; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: 'Archivo', sans-serif; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); }
+
+    /* ─── Hero ─── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 100px 48px 80px; background: var(--dark); color: white; overflow: hidden; }
+    .hero-pattern { position: absolute; inset: 0; opacity: 0.04; background-image: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(232,64,10,0.5) 40px, rgba(232,64,10,0.5) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(232,64,10,0.5) 40px, rgba(232,64,10,0.5) 41px); }
+    .hero-blob { position: absolute; width: 600px; height: 600px; top: -200px; right: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(232,64,10,0.2) 0%, transparent 70%); }
+    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 55% 45%; gap: 64px; align-items: center; position: relative; z-index: 1; }
+    .hero-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .kicker-badge { background: var(--orange); color: white; font-family: 'Archivo Black', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; }
+    .kicker-text { font-size: 0.78rem; color: rgba(255,255,255,0.45); font-weight: 400; }
+    h1 { font-family: 'Archivo Black', sans-serif; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; letter-spacing: -0.03em; }
+    h1 span { color: var(--orange); }
+    .hero-sub { margin-top: 24px; font-size: 1.05rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 480px; font-weight: 300; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+    .btn-orange { background: var(--orange); color: white; border: none; padding: 16px 32px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: 'Archivo', sans-serif; transition: all 0.2s; }
+    .btn-orange:hover { background: var(--orange2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,64,10,0.35); }
+    .btn-white { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: white; padding: 16px 32px; font-size: 0.95rem; font-weight: 500; cursor: pointer; font-family: 'Archivo', sans-serif; transition: all 0.2s; }
+    .btn-white:hover { border-color: rgba(255,255,255,0.5); }
+    .hero-social-proof { display: flex; align-items: center; gap: 16px; margin-top: 36px; }
+    .hsp-avatars { display: flex; }
+    .hsp-avatars span { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--dark); margin-left: -8px; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: white; }
+    .hsp-text { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .hsp-text strong { color: white; }
+
+    /* ─── POS mockup ─── */
+    .pos-mockup { position: relative; }
+    .pos-screen { background: #1A1410; border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 4px; }
+    .pos-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .pos-table-badge { background: var(--orange); color: white; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; }
+    .pos-time { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+    .pos-items { border: 1px solid rgba(255,255,255,0.08); margin-bottom: 14px; }
+    .pos-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .pos-item:last-child { border-bottom: none; }
+    .pos-item-name { font-size: 0.8rem; color: rgba(255,255,255,0.85); }
+    .pos-item-qty { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+    .pos-item-price { font-size: 0.85rem; font-weight: 700; color: white; }
+    .pos-total { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+    .pos-total-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; }
+    .pos-total-val { font-family: 'Archivo Black', sans-serif; font-size: 1.4rem; color: white; }
+    .pos-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .pos-btn { padding: 12px; text-align: center; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: none; font-family: 'Archivo', sans-serif; }
+    .pos-btn.cash { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+    .pos-btn.card { background: var(--orange); color: white; }
+    .pos-live-feed { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .feed-item { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 8px 10px; }
+    .feed-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .feed-dot.green { background: var(--green); }
+    .feed-dot.orange { background: var(--orange); }
+    .feed-dot.yellow { background: var(--yellow); }
+    .feed-text { font-size: 0.7rem; color: rgba(255,255,255,0.5); flex: 1; }
+    .feed-time { font-size: 0.65rem; color: rgba(255,255,255,0.25); }
+
+    /* ─── Sections ─── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 100px 48px; position: relative; z-index: 1; }
+    .kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--orange); margin-bottom: 10px; }
+    .section-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; letter-spacing: -0.02em; }
+    .section-sub { font-size: 0.95rem; color: var(--muted); margin-top: 12px; max-width: 500px; line-height: 1.7; font-weight: 300; }
+
+    /* ─── Feature cards ─── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .feat { background: var(--bg2); border: 1px solid var(--border); padding: 32px; transition: border-color 0.3s, background 0.3s; }
+    .feat:hover { background: white; border-color: var(--border2); }
+    .feat-icon { width: 48px; height: 48px; background: rgba(232,64,10,0.1); border: 1px solid rgba(232,64,10,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px; }
+    .feat-title { font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .feat-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-weight: 400; }
+
+    /* ─── Dark strip ─── */
+    .dark-strip { background: var(--dark); padding: 60px 48px; position: relative; z-index: 1; }
+    .ds-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+    .ds-val { font-family: 'Archivo Black', sans-serif; font-size: 3rem; color: var(--orange); letter-spacing: -0.03em; line-height: 1; }
+    .ds-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 6px; font-weight: 300; }
+
+    /* ─── Testimonial band ─── */
+    .testi-band { background: var(--orange); padding: 80px 48px; position: relative; z-index: 1; }
+    .testi-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .testi-quote { font-family: 'Archivo', sans-serif; font-size: clamp(1.3rem, 3vw, 2rem); font-style: italic; color: white; line-height: 1.45; font-weight: 300; }
+    .testi-attr { margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .testi-name { font-family: 'Archivo Black', sans-serif; font-size: 0.875rem; color: rgba(255,255,255,0.9); }
+    .testi-role { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+    .testi-stars { font-size: 1rem; color: var(--yellow); margin-bottom: 16px; }
+
+    /* ─── Pricing ─── */
+    .pricing-section { background: var(--bg2); padding: 100px 48px; position: relative; z-index: 1; }
+    .pricing-inner { max-width: 1200px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .price-card { background: var(--bg); border: 1px solid var(--border); padding: 36px; position: relative; transition: border-color 0.3s; }
+    .price-card.featured { background: var(--dark); border-color: var(--dark); color: white; }
+    .price-tier { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--orange); margin-bottom: 12px; }
+    .price-amount { font-family: 'Archivo Black', sans-serif; font-size: 2.8rem; letter-spacing: -0.03em; }
+    .price-period { font-family: 'Archivo', sans-serif; font-size: 0.875rem; font-weight: 300; color: var(--muted); }
+    .price-card.featured .price-period { color: rgba(255,255,255,0.45); }
+    .price-desc { font-size: 0.82rem; color: var(--muted); margin: 12px 0 20px; line-height: 1.6; }
+    .price-card.featured .price-desc { color: rgba(255,255,255,0.5); }
+    .price-hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+    .price-card.featured .price-hr { border-color: rgba(255,255,255,0.1); }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .price-list li { display: flex; gap: 10px; font-size: 0.82rem; color: var(--muted); }
+    .price-card.featured .price-list li { color: rgba(255,255,255,0.6); }
+    .price-list li::before { content: '→'; color: var(--orange); flex-shrink: 0; }
+    .price-btn { display: block; width: 100%; margin-top: 24px; padding: 14px; text-align: center; font-size: 0.9rem; font-weight: 700; cursor: pointer; font-family: 'Archivo', sans-serif; transition: all 0.2s; text-decoration: none; border: none; }
+    .price-btn.dark { background: var(--dark); color: white; }
+    .price-btn.dark:hover { background: var(--dark2); }
+    .price-btn.orange { background: var(--orange); color: white; }
+    .price-btn.orange:hover { background: var(--orange2); }
+    .price-btn.outline { background: transparent; border: 1px solid var(--border2); color: var(--text); }
+    .price-btn.outline:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ─── CTA ─── */
+    .cta-section { background: var(--dark); padding: 120px 48px; text-align: center; position: relative; z-index: 1; overflow: hidden; }
+    .cta-bg-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', sans-serif; font-size: 20vw; color: var(--orange); opacity: 0.04; letter-spacing: -0.04em; pointer-events: none; white-space: nowrap; overflow: hidden; }
+    .cta-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); color: white; line-height: 1; letter-spacing: -0.03em; position: relative; z-index: 1; }
+    .cta-title span { color: var(--orange); }
+    .cta-sub { font-size: 1rem; color: rgba(255,255,255,0.5); margin-top: 16px; max-width: 440px; margin-left: auto; margin-right: auto; font-weight: 300; position: relative; z-index: 1; }
+    .cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.25); margin-top: 16px; position: relative; z-index: 1; }
+
+    /* ─── Footer ─── */
+    footer { background: var(--dark2); border-top: 1px solid rgba(255,255,255,0.06); padding: 56px 48px 32px; position: relative; z-index: 1; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-logo { font-family: 'Archivo Black', sans-serif; font-size: 1.5rem; color: white; margin-bottom: 10px; }
+    .footer-bio { font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.65; max-width: 220px; font-weight: 300; }
+    .footer-col-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--orange); margin-bottom: 14px; }
+    .footer-col a { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.35); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; } .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; } .hero-inner { grid-template-columns: 1fr; }
+      .section { padding: 60px 20px; }
+      .features-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .dark-strip { padding: 48px 20px; } .ds-inner { grid-template-columns: repeat(2, 1fr); }
+      .pricing-section { padding: 60px 20px; }
+      footer { padding: 40px 20px; } .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo"><div class="nav-logo-mark">R</div>Rush</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#">Integrations</a>
+      <a href="#">For Chains</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-login">Log in</button>
+      <button class="nav-cta">Start Free Trial</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-blob"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-kicker" data-a><div class="kicker-badge">New</div><div class="kicker-text">Rush AI kitchen predictions now live →</div></div>
+        <h1 data-a data-d="1">The OS for<br /><span>modern</span><br />restaurants.</h1>
+        <p class="hero-sub" data-a data-d="2">POS, online ordering, delivery, inventory, staff scheduling, and analytics — in one beautiful system. 60% less time managing, 100% more time cooking.</p>
+        <div class="hero-actions" data-a data-d="3">
+          <button class="btn-orange">Start Free Trial — 30 Days</button>
+          <button class="btn-white">Watch Demo</button>
+        </div>
+        <div class="hero-social-proof" data-a data-d="4">
+          <div class="hsp-avatars"><span>JM</span><span>SK</span><span>AL</span><span>+</span></div>
+          <span class="hsp-text">Trusted by <strong>18,000+</strong> restaurants worldwide</span>
+        </div>
+      </div>
+
+      <div data-a="right">
+        <div class="pos-screen">
+          <div class="pos-header">
+            <div class="pos-table-badge">TABLE 7 · OPEN</div>
+            <div class="pos-time">Sat 7:42 PM</div>
+          </div>
+          <div class="pos-items">
+            <div class="pos-item"><div><div class="pos-item-name">Wagyu Burger</div><div class="pos-item-qty">× 2</div></div><div class="pos-item-price">$56.00</div></div>
+            <div class="pos-item"><div><div class="pos-item-name">Truffle Fries</div><div class="pos-item-qty">× 1</div></div><div class="pos-item-price">$18.00</div></div>
+            <div class="pos-item"><div><div class="pos-item-name">House Red (Btl)</div><div class="pos-item-qty">× 1</div></div><div class="pos-item-price">$52.00</div></div>
+            <div class="pos-item"><div><div class="pos-item-name">Crème Brûlée</div><div class="pos-item-qty">× 2</div></div><div class="pos-item-price">$24.00</div></div>
+          </div>
+          <div class="pos-total"><div class="pos-total-label">Total (incl. tax)</div><div class="pos-total-val">$168.50</div></div>
+          <div class="pos-actions">
+            <button class="pos-btn cash">💵 Cash</button>
+            <button class="pos-btn card">💳 Charge Card</button>
+          </div>
+        </div>
+        <div class="pos-live-feed">
+          <div class="feed-item"><div class="feed-dot green"></div><div class="feed-text">Order #342 — Kitchen confirmed (ETA 14min)</div><div class="feed-time">just now</div></div>
+          <div class="feed-item"><div class="feed-dot orange"></div><div class="feed-text">Table 12 — DoorDash pickup ready</div><div class="feed-time">2 min</div></div>
+          <div class="feed-item"><div class="feed-dot yellow"></div><div class="feed-text">Low stock: Wagyu Patties (3 left)</div><div class="feed-time">5 min</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dark-strip">
+    <div class="ds-inner">
+      <div data-a><div class="ds-val">18k+</div><div class="ds-label">Restaurants powered by Rush</div></div>
+      <div data-a data-d="1"><div class="ds-val">$2.8B</div><div class="ds-label">GMV processed annually</div></div>
+      <div data-a data-d="2"><div class="ds-val">99.9%</div><div class="ds-label">Uptime — never miss a service</div></div>
+      <div data-a data-d="3"><div class="ds-val">+31%</div><div class="ds-label">Avg. revenue increase in year 1</div></div>
+    </div>
+  </div>
+
+  <div id="features" class="section">
+    <div class="kicker" data-a>Everything you need</div>
+    <div class="section-title" data-a data-d="1">One system. Every table. Every order.</div>
+    <div class="section-sub" data-a data-d="2">Replace 7 separate tools with one platform that actually connects your front-of-house, kitchen, and back office.</div>
+    <div class="features-grid">
+      <div class="feat" data-a><div class="feat-icon">🖥️</div><div class="feat-title">Smart POS</div><div class="feat-desc">Blazing-fast point-of-sale with offline mode, custom floor plans, split bills, open tabs, and real-time kitchen tickets. Works on any iPad.</div></div>
+      <div class="feat" data-a data-d="1"><div class="feat-icon">📱</div><div class="feat-title">Online Ordering</div><div class="feat-desc">Commission-free online ordering with your own branded menu page. Accept orders via website, QR code, or embedded widget. Direct to your kitchen.</div></div>
+      <div class="feat" data-a data-d="2"><div class="feat-icon">🛵</div><div class="feat-title">Delivery Management</div><div class="feat-desc">Manage Uber Eats, DoorDash, Grubhub, and direct delivery orders in one screen. Automatic driver dispatch, live tracking, and performance analytics.</div></div>
+      <div class="feat" data-a data-d="3"><div class="feat-icon">📦</div><div class="feat-title">Inventory & COGS</div><div class="feat-desc">Real-time ingredient tracking with automatic deductions per order. Get low-stock alerts, automated PO generation, and precise food cost reports.</div></div>
+      <div class="feat" data-a data-d="4"><div class="feat-icon">👥</div><div class="feat-title">Staff & Scheduling</div><div class="feat-desc">Build schedules in minutes, track hours and tips, run payroll, and manage your team — all in one place, integrated with your labor cost targets.</div></div>
+      <div class="feat" data-a data-d="5"><div class="feat-icon">📊</div><div class="feat-title">Revenue Intelligence</div><div class="feat-desc">AI surfaces your most profitable menu items, peak hours, and table turnover opportunities. Data-driven decisions that actually grow your bottom line.</div></div>
+    </div>
+  </div>
+
+  <div class="testi-band">
+    <div class="testi-inner">
+      <div class="testi-stars" data-a>★★★★★</div>
+      <div class="testi-quote" data-a data-d="1">"Rush paid for itself in the first week. We cut food costs by 18%, stopped losing orders during busy services, and my managers finally have time to be on the floor instead of doing paperwork."</div>
+      <div class="testi-attr" data-a data-d="2">
+        <div class="testi-name">Marco Deluca</div>
+        <div class="testi-role">Owner, Osteria Deluca · San Francisco · 3 locations</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="pricing" class="pricing-section">
+    <div class="pricing-inner">
+      <div class="kicker" data-a>Pricing</div>
+      <div class="section-title" data-a data-d="1">Simple monthly pricing.<br />No commissions. Ever.</div>
+      <div class="pricing-grid">
+        <div class="price-card" data-a>
+          <div class="price-tier">Starter</div>
+          <div class="price-amount">$79 <span class="price-period">/mo</span></div>
+          <div class="price-desc">For single-location restaurants just getting started.</div>
+          <hr class="price-hr" />
+          <ul class="price-list"><li>POS (unlimited devices)</li><li>Online ordering (branded page)</li><li>Basic inventory tracking</li><li>Email support</li></ul>
+          <a href="#" class="price-btn dark">Get Started</a>
+        </div>
+        <div class="price-card featured" data-a data-d="1">
+          <div class="price-tier">Pro</div>
+          <div class="price-amount">$199 <span class="price-period">/mo</span></div>
+          <div class="price-desc">For busy restaurants that need full control over every channel.</div>
+          <hr class="price-hr" />
+          <ul class="price-list"><li>Everything in Starter</li><li>Delivery management hub</li><li>Full inventory & COGS</li><li>Staff scheduling & payroll</li><li>Revenue intelligence AI</li><li>Priority phone support</li></ul>
+          <a href="#" class="price-btn orange">Start 30-Day Free Trial</a>
+        </div>
+        <div class="price-card" data-a data-d="2">
+          <div class="price-tier">Multi-Location</div>
+          <div class="price-amount">$349 <span class="price-period">/mo</span></div>
+          <div class="price-desc">For restaurant groups and chains with 3+ locations.</div>
+          <hr class="price-hr" />
+          <ul class="price-list"><li>Everything in Pro</li><li>Centralised menu management</li><li>Cross-location analytics</li><li>Franchise controls</li><li>Custom reporting</li><li>Dedicated account manager</li></ul>
+          <a href="#" class="price-btn outline">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="cta-bg-text">RUSH</div>
+    <div class="kicker" style="color:var(--orange);display:block;text-align:center;margin-bottom:12px" data-a>Ready to grow?</div>
+    <div class="cta-title" data-a data-d="1">Stop managing.<br />Start <span>thriving.</span></div>
+    <div class="cta-sub" data-a data-d="2">18,000 restaurants already use Rush to run faster, waste less, and earn more. Join them free for 30 days.</div>
+    <div class="cta-actions" data-a data-d="3">
+      <button class="btn-orange" style="padding:16px 36px;font-size:1rem;">Start Free — 30 Days</button>
+      <button class="btn-white" style="border-color:rgba(255,255,255,0.2);padding:16px 36px;font-size:1rem;">Book a Demo</button>
+    </div>
+    <div class="cta-note" data-a data-d="4">No credit card · No setup fee · Cancel anytime</div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div><div class="footer-logo">Rush</div><div class="footer-bio">The complete operating system for modern restaurants. Trusted by 18,000+ food businesses worldwide.</div></div>
+      <div class="footer-col"><div class="footer-col-title">Product</div><a href="#">POS System</a><a href="#">Online Ordering</a><a href="#">Delivery Hub</a><a href="#">Analytics</a></div>
+      <div class="footer-col"><div class="footer-col-title">Industries</div><a href="#">Full Service</a><a href="#">Quick Service</a><a href="#">Food Trucks</a><a href="#">Ghost Kitchens</a></div>
+      <div class="footer-col"><div class="footer-col-title">Company</div><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Support</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Rush Restaurant Technologies, Inc.</div>
+      <div class="footer-copy">Made with ❤️ for restaurateurs everywhere.</div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-a]').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

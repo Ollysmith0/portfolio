@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grove — Sustainability Intelligence Platform</title>
+  <meta name="description" content="Grove helps companies measure, reduce, and report their carbon footprint with automated ESG reporting, supplier tracking, and net-zero roadmaps." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --forest: #0D2B12;
+      --forest2: #132B18;
+      --forest3: #1A3520;
+      --sage: #4A7C59;
+      --sage-light: #6BA880;
+      --lime: #A3E635;
+      --amber: #D4A853;
+      --cream: #F5F0E8;
+      --cream2: #EDE8DE;
+      --text-dark: #1A2E1F;
+      --muted: rgba(165,200,175,0.6);
+      --muted2: rgba(165,200,175,0.35);
+      --border: rgba(74,124,89,0.2);
+      --border2: rgba(74,124,89,0.35);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--forest); color: var(--cream); overflow-x: hidden; line-height: 1.65; }
+
+    /* ─── Scroll animations ─── */
+    [data-a] { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    [data-a="left"] { transform: translateX(-28px); }
+    [data-a="right"] { transform: translateX(28px); }
+    [data-a="scale"] { transform: scale(0.94); }
+    [data-a="fade"] { transform: none; }
+    [data-a].vis { opacity: 1; transform: none; }
+    [data-d="1"].vis { transition-delay: 0.1s; }
+    [data-d="2"].vis { transition-delay: 0.2s; }
+    [data-d="3"].vis { transition-delay: 0.3s; }
+    [data-d="4"].vis { transition-delay: 0.4s; }
+    [data-d="5"].vis { transition-delay: 0.5s; }
+
+    /* ─── Organic texture ─── */
+    body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(ellipse 80% 60% at 30% 20%, rgba(74,124,89,0.2) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 70%, rgba(163,230,53,0.06) 0%, transparent 60%); }
+
+    /* ─── Nav ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,43,18,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 48px; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; font-weight: 700; color: var(--cream); display: flex; align-items: center; gap: 10px; }
+    .nav-leaf { font-size: 1.1rem; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-cta { background: var(--lime); color: var(--text-dark); border: none; padding: 10px 22px; font-size: 0.82rem; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+    .nav-cta:hover { background: #bef264; }
+
+    /* ─── Hero ─── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; z-index: 1; overflow: hidden; }
+    .hero-leaves { position: absolute; right: 0; top: 0; bottom: 0; width: 45%; pointer-events: none; }
+    .leaf-bg { width: 100%; height: 100%; background: linear-gradient(135deg, rgba(74,124,89,0.15) 0%, rgba(26,53,32,0.4) 100%); }
+    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(163,230,53,0.1); border: 1px solid rgba(163,230,53,0.25); padding: 6px 14px; margin-bottom: 24px; font-size: 0.75rem; font-weight: 600; color: var(--lime); }
+    h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(3rem, 7vw, 6rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; max-width: 700px; }
+    h1 em { font-style: italic; color: var(--lime); font-weight: 400; }
+    .hero-sub { margin-top: 24px; font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 520px; font-weight: 300; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+    .btn-lime { background: var(--lime); color: var(--text-dark); border: none; padding: 14px 28px; font-size: 0.9rem; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+    .btn-lime:hover { background: #bef264; transform: translateY(-2px); }
+    .btn-outline { background: transparent; border: 1px solid var(--border2); color: var(--cream); padding: 14px 28px; font-size: 0.9rem; font-weight: 400; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+    .btn-outline:hover { border-color: var(--lime); color: var(--lime); }
+    .hero-trust { display: flex; align-items: center; gap: 20px; margin-top: 44px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); }
+    .trust-icon { color: var(--lime); font-size: 0.9rem; }
+
+    /* ─── Carbon dashboard ─── */
+    .carbon-panel { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); width: 380px; background: rgba(19,43,24,0.9); border: 1px solid var(--border2); padding: 24px; backdrop-filter: blur(16px); }
+    .cp-title { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px; }
+    .cp-main { text-align: center; padding: 20px 0; }
+    .cp-co2 { font-family: 'Libre Baskerville', serif; font-size: 3.4rem; font-weight: 700; color: var(--lime); line-height: 1; }
+    .cp-co2-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+    .cp-change { display: inline-flex; align-items: center; gap: 6px; background: rgba(163,230,53,0.12); border: 1px solid rgba(163,230,53,0.2); padding: 4px 12px; margin-top: 10px; font-size: 0.78rem; font-weight: 600; color: var(--lime); }
+    .cp-bars { margin-top: 20px; }
+    .cp-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .cp-bar-label { font-size: 0.72rem; color: var(--muted); width: 70px; flex-shrink: 0; }
+    .cp-bar-track { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; }
+    .cp-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--sage), var(--lime)); }
+    .cp-bar-val { font-size: 0.7rem; color: var(--muted); width: 36px; text-align: right; }
+    .cp-goals { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cp-goal { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 10px 12px; }
+    .cp-goal-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .cp-goal-val { font-size: 1rem; font-weight: 700; color: var(--lime); margin-top: 2px; }
+
+    /* ─── Common ─── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 100px 48px; position: relative; z-index: 1; }
+    .kicker { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--lime); margin-bottom: 10px; }
+    .section-title { font-family: 'Libre Baskerville', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.2; }
+    .section-title em { font-style: italic; color: var(--lime); font-weight: 400; }
+    .section-sub { font-size: 0.95rem; color: var(--muted); margin-top: 12px; max-width: 500px; font-weight: 300; }
+
+    /* ─── Features ─── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .feat { background: var(--forest3); border: 1px solid var(--border); padding: 32px; transition: border-color 0.3s; }
+    .feat:hover { border-color: var(--border2); }
+    .feat-icon { width: 44px; height: 44px; background: rgba(163,230,53,0.1); border: 1px solid rgba(163,230,53,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 16px; }
+    .feat-title { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .feat-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* ─── Strip ─── */
+    .strip { background: var(--forest3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 60px 48px; position: relative; z-index: 1; }
+    .strip-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+    .strip-val { font-family: 'Libre Baskerville', serif; font-size: 2.8rem; font-weight: 700; color: var(--lime); line-height: 1; }
+    .strip-label { font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+
+    /* ─── Roadmap ─── */
+    .roadmap { display: flex; gap: 0; margin-top: 52px; position: relative; }
+    .roadmap::before { content: ''; position: absolute; top: 28px; left: 28px; right: 28px; height: 1px; background: var(--border2); }
+    .roadmap-step { flex: 1; text-align: center; padding: 0 16px; }
+    .step-node { width: 56px; height: 56px; border-radius: 50%; background: var(--forest3); border: 2px solid var(--border2); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-family: 'Libre Baskerville', serif; font-size: 1.1rem; font-weight: 700; color: var(--lime); position: relative; z-index: 1; }
+    .step-node.active { background: var(--lime); color: var(--text-dark); border-color: var(--lime); }
+    .step-title { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── Pricing ─── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .price-card { background: var(--forest3); border: 1px solid var(--border); padding: 36px; transition: border-color 0.3s; position: relative; }
+    .price-card.featured { border-color: rgba(163,230,53,0.4); }
+    .price-top { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--lime); opacity: 0; }
+    .price-card.featured .price-top { opacity: 1; }
+    .price-tier { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .price-amount { font-family: 'Libre Baskerville', serif; font-size: 2.8rem; font-weight: 700; }
+    .price-period { font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 300; color: var(--muted); }
+    .price-desc { font-size: 0.82rem; color: var(--muted); margin: 12px 0 20px; line-height: 1.6; }
+    .price-hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .price-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: var(--muted); }
+    .price-list li::before { content: '✓'; color: var(--lime); flex-shrink: 0; font-weight: 700; }
+    .price-btn { display: block; width: 100%; margin-top: 24px; padding: 12px; text-align: center; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; text-decoration: none; border: none; }
+    .price-btn.lime { background: var(--lime); color: var(--text-dark); }
+    .price-btn.lime:hover { background: #bef264; }
+    .price-btn.outline { background: transparent; border: 1px solid var(--border2); color: var(--cream); }
+    .price-btn.outline:hover { border-color: var(--lime); color: var(--lime); }
+
+    /* ─── Quote ─── */
+    .quote-section { background: var(--forest3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 100px 48px; position: relative; z-index: 1; text-align: center; }
+    .quote-mark { font-family: 'Libre Baskerville', serif; font-size: 6rem; color: var(--lime); opacity: 0.2; line-height: 0.6; margin-bottom: 28px; }
+    .quote-text { font-family: 'Libre Baskerville', serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-style: italic; font-weight: 400; color: var(--cream); max-width: 750px; margin: 0 auto; line-height: 1.5; }
+    .quote-attr { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .quote-line { width: 40px; height: 1px; background: var(--lime); margin-bottom: 10px; }
+    .quote-name { font-size: 0.875rem; font-weight: 600; color: var(--lime); }
+    .quote-role { font-size: 0.75rem; color: var(--muted); }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 120px 48px; text-align: center; position: relative; z-index: 1; }
+    .cta-title { font-family: 'Libre Baskerville', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; }
+    .cta-title em { font-style: italic; color: var(--lime); font-weight: 400; }
+    .cta-sub { font-size: 1rem; color: var(--muted); margin-top: 16px; max-width: 440px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+    .cta-note { font-size: 0.75rem; color: var(--muted2); margin-top: 14px; }
+
+    /* ─── Footer ─── */
+    footer { background: rgba(8,16,10,0.8); border-top: 1px solid var(--border); padding: 56px 48px 32px; position: relative; z-index: 1; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-logo { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; font-weight: 700; color: var(--cream); margin-bottom: 10px; }
+    .footer-bio { font-size: 0.82rem; color: var(--muted); line-height: 1.65; max-width: 220px; font-weight: 300; }
+    .footer-col-title { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--lime); margin-bottom: 14px; }
+    .footer-col a { display: block; font-size: 0.82rem; color: var(--muted); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 0.78rem; color: var(--muted2); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; } .nav-links { display: none; }
+      .hero { padding: 100px 20px 320px; }
+      .carbon-panel { position: relative; right: auto; top: auto; transform: none; width: 100%; margin-top: 40px; }
+      .section { padding: 60px 20px; }
+      .features-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .roadmap { flex-direction: column; gap: 24px; }
+      .roadmap::before { display: none; }
+      .strip { padding: 48px 20px; } .strip-inner { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 40px 20px; } .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo"><span class="nav-leaf">🌿</span> Grove</div>
+    <div class="nav-links">
+      <a href="#features">Platform</a>
+      <a href="#roadmap">Net-Zero</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#">Enterprise</a>
+    </div>
+    <button class="nav-cta">Start Free</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-leaves"><div class="leaf-bg"></div></div>
+    <div class="hero-inner">
+      <div style="max-width:600px">
+        <div class="hero-tag" data-a>🌱 Certified B-Corporation · Carbon Neutral Platform</div>
+        <h1 data-a data-d="1">
+          Your path to<br />
+          <em>net zero</em>,<br />
+          mapped.
+        </h1>
+        <p class="hero-sub" data-a data-d="2">Grove automates carbon measurement across your entire value chain — Scope 1, 2, and 3 — and generates board-ready ESG reports in minutes, not months.</p>
+        <div class="hero-actions" data-a data-d="3">
+          <button class="btn-lime">Calculate Your Footprint</button>
+          <button class="btn-outline">See How It Works</button>
+        </div>
+        <div class="hero-trust" data-a data-d="4">
+          <div class="trust-item"><span class="trust-icon">✓</span> GHG Protocol aligned</div>
+          <div class="trust-item"><span class="trust-icon">✓</span> TCFD ready reporting</div>
+          <div class="trust-item"><span class="trust-icon">✓</span> SBTi compatible</div>
+        </div>
+      </div>
+      <div class="carbon-panel" data-a="right">
+        <div class="cp-title">Your Carbon Dashboard · Q4 2025</div>
+        <div class="cp-main">
+          <div class="cp-co2">–34%</div>
+          <div class="cp-co2-label">YoY Carbon Reduction</div>
+          <div class="cp-change">↓ 2,840 tCO₂e saved this quarter</div>
+        </div>
+        <div class="cp-bars">
+          <div class="cp-bar-row"><div class="cp-bar-label">Scope 1</div><div class="cp-bar-track"><div class="cp-bar-fill" style="width:45%"></div></div><div class="cp-bar-val">890t</div></div>
+          <div class="cp-bar-row"><div class="cp-bar-label">Scope 2</div><div class="cp-bar-track"><div class="cp-bar-fill" style="width:62%"></div></div><div class="cp-bar-val">1,220t</div></div>
+          <div class="cp-bar-row"><div class="cp-bar-label">Scope 3</div><div class="cp-bar-track"><div class="cp-bar-fill" style="width:78%"></div></div><div class="cp-bar-val">3,140t</div></div>
+        </div>
+        <div class="cp-goals">
+          <div class="cp-goal"><div class="cp-goal-label">2030 Target</div><div class="cp-goal-val">–50%</div></div>
+          <div class="cp-goal"><div class="cp-goal-label">Progress</div><div class="cp-goal-val">68%</div></div>
+          <div class="cp-goal"><div class="cp-goal-label">Offset Credits</div><div class="cp-goal-val">1,200t</div></div>
+          <div class="cp-goal"><div class="cp-goal-label">Net Zero ETA</div><div class="cp-goal-val">2031</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <div data-a><div class="strip-val">3,800+</div><div class="strip-label">Companies using Grove</div></div>
+      <div data-a data-d="1"><div class="strip-val">42M</div><div class="strip-label">Tonnes CO₂ tracked</div></div>
+      <div data-a data-d="2"><div class="strip-val">94%</div><div class="strip-label">Reporting accuracy rate</div></div>
+      <div data-a data-d="3"><div class="strip-val">120+</div><div class="strip-label">Countries supported</div></div>
+    </div>
+  </div>
+
+  <div id="features" class="section">
+    <div class="kicker" data-a>Platform</div>
+    <div class="section-title" data-a data-d="1">Sustainability intelligence,<br /><em>automated</em></div>
+    <div class="features-grid">
+      <div class="feat" data-a><div class="feat-icon">🏭</div><div class="feat-title">Emissions Tracking</div><div class="feat-desc">Automatically pull data from 200+ connected sources — utility bills, payroll, travel, logistics — and calculate your complete Scope 1, 2, and 3 footprint.</div></div>
+      <div class="feat" data-a data-d="1"><div class="feat-icon">📋</div><div class="feat-title">ESG Reporting</div><div class="feat-desc">Generate board-ready reports aligned with GRI, SASB, TCFD, and CDP frameworks. Export beautiful PDFs for investors, auditors, and stakeholders.</div></div>
+      <div class="feat" data-a data-d="2"><div class="feat-icon">🔗</div><div class="feat-title">Supply Chain Visibility</div><div class="feat-desc">Map and track emissions across your entire supplier network. Send automated data collection requests and benchmark against industry peers.</div></div>
+      <div class="feat" data-a data-d="3"><div class="feat-icon">🎯</div><div class="feat-title">Net-Zero Roadmap</div><div class="feat-desc">AI-generated reduction pathways tailored to your industry and SBTi targets. See exactly what levers to pull to hit your net-zero commitments.</div></div>
+      <div class="feat" data-a data-d="4"><div class="feat-icon">💰</div><div class="feat-title">Carbon Credits</div><div class="feat-desc">Buy verified, high-quality carbon offsets directly through Grove's marketplace. Full transparency on project types, vintage, and co-benefits.</div></div>
+      <div class="feat" data-a data-d="5"><div class="feat-icon">⚡</div><div class="feat-title">Reduction Insights</div><div class="feat-desc">AI surfaces your highest-impact reduction opportunities ranked by cost, complexity, and carbon impact. Act where it matters most, first.</div></div>
+    </div>
+  </div>
+
+  <div id="roadmap" class="section" style="padding-top:0">
+    <div class="kicker" data-a>Your Net-Zero Journey</div>
+    <div class="section-title" data-a data-d="1">From measurement to <em>net zero</em> in four steps</div>
+    <div class="roadmap">
+      <div class="roadmap-step" data-a>
+        <div class="step-node active">1</div>
+        <div class="step-title">Measure</div>
+        <div class="step-desc">Connect data sources and calculate your baseline footprint across all three scopes in days, not months.</div>
+      </div>
+      <div class="roadmap-step" data-a data-d="1">
+        <div class="step-node">2</div>
+        <div class="step-title">Analyse</div>
+        <div class="step-desc">Identify hotspots, benchmark against peers, and prioritise the highest-impact reduction opportunities.</div>
+      </div>
+      <div class="roadmap-step" data-a data-d="2">
+        <div class="step-node">3</div>
+        <div class="step-title">Reduce</div>
+        <div class="step-desc">Execute your AI-generated roadmap — from energy efficiency to supplier engagement and renewable procurement.</div>
+      </div>
+      <div class="roadmap-step" data-a data-d="3">
+        <div class="step-node">4</div>
+        <div class="step-title">Report</div>
+        <div class="step-desc">Generate auditor-ready reports, publish your sustainability disclosure, and communicate progress to stakeholders.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-section">
+    <div class="quote-mark">"</div>
+    <div class="quote-text" data-a>Grove turned a 6-month reporting process into a 2-hour dashboard review. Our investors love the transparency, our board loves the clarity, and our team finally has the data to make real sustainability decisions.</div>
+    <div class="quote-attr" data-a data-d="1">
+      <div class="quote-line"></div>
+      <div class="quote-name">Elena Vasquez</div>
+      <div class="quote-role">Chief Sustainability Officer, Patagonia</div>
+    </div>
+  </div>
+
+  <div id="pricing" class="section">
+    <div class="kicker" data-a>Pricing</div>
+    <div class="section-title" data-a data-d="1">Built for every stage<br />of your <em>sustainability journey</em></div>
+    <div class="pricing-grid">
+      <div class="price-card" data-a>
+        <div class="price-top"></div>
+        <div class="price-tier">Essentials</div>
+        <div class="price-amount">$149 <span class="price-period">/mo</span></div>
+        <div class="price-desc">For SMEs beginning their carbon measurement journey.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>Scope 1 & 2 tracking</li><li>Annual ESG report</li><li>GHG Protocol methodology</li><li>5 data connectors</li></ul>
+        <a href="#" class="price-btn outline">Get Started</a>
+      </div>
+      <div class="price-card featured" data-a data-d="1">
+        <div class="price-top"></div>
+        <div class="price-tier">Growth</div>
+        <div class="price-amount">$549 <span class="price-period">/mo</span></div>
+        <div class="price-desc">For companies committed to net-zero with full supply chain visibility.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>Full Scope 1, 2 & 3 tracking</li><li>Unlimited reports (GRI, TCFD, CDP)</li><li>Supplier data collection</li><li>Net-zero roadmap & AI insights</li><li>Carbon credits marketplace</li><li>Dedicated CSM</li></ul>
+        <a href="#" class="price-btn lime">Start 30-Day Trial</a>
+      </div>
+      <div class="price-card" data-a data-d="2">
+        <div class="price-top"></div>
+        <div class="price-tier">Enterprise</div>
+        <div class="price-amount">Custom</div>
+        <div class="price-desc">For large organisations with complex value chains and audit requirements.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>Everything in Growth</li><li>Unlimited data connectors</li><li>Third-party verification support</li><li>Custom reporting frameworks</li><li>API access</li><li>SLA & premium SLO</li></ul>
+        <a href="#" class="price-btn outline">Talk to Sales</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="kicker" data-a>Start Today</div>
+    <div class="cta-title" data-a data-d="1">The planet can't wait.<br /><em>Neither should you.</em></div>
+    <div class="cta-sub" data-a data-d="2">Join 3,800 companies already on the path to net zero. Calculate your footprint in under 10 minutes.</div>
+    <div class="cta-actions" data-a data-d="3">
+      <button class="btn-lime" style="padding:16px 36px;font-size:1rem;">Start Free — No Credit Card</button>
+    </div>
+    <div class="cta-note" data-a data-d="4">30-day free trial · Carbon neutral company · B Corp certified</div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div><div class="footer-logo">🌿 Grove</div><div class="footer-bio">Helping companies measure, reduce, and report their environmental impact on the path to net zero.</div></div>
+      <div class="footer-col"><div class="footer-col-title">Platform</div><a href="#">Carbon Tracking</a><a href="#">ESG Reporting</a><a href="#">Supply Chain</a><a href="#">Carbon Credits</a></div>
+      <div class="footer-col"><div class="footer-col-title">Learn</div><a href="#">Blog</a><a href="#">Guides</a><a href="#">Webinars</a><a href="#">Research</a></div>
+      <div class="footer-col"><div class="footer-col-title">Company</div><a href="#">About</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Contact</a></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Grove Technologies Ltd. · Certified B Corporation</div>
+      <div class="footer-copy">🌿 Carbon neutral company</div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-a]').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

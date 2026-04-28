@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — AI Legal Intelligence Platform</title>
+  <meta name="description" content="Nexus transforms legal practice with AI — contract review in seconds, due diligence at scale, risk detection before it costs you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06091A;
+      --bg2: #080C20;
+      --bg3: #0C1028;
+      --surface: rgba(255,255,255,0.04);
+      --border: rgba(100,120,200,0.15);
+      --border2: rgba(100,120,200,0.25);
+      --cyan: #22D3EE;
+      --cyan2: #06B6D4;
+      --blue: #6366F1;
+      --blue-light: #818CF8;
+      --gold: #F59E0B;
+      --text: #EEF2FF;
+      --muted: rgba(200,210,255,0.5);
+      --muted2: rgba(200,210,255,0.25);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.65; }
+
+    /* ─── Scroll animation system ─── */
+    [data-a] { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    [data-a="left"] { transform: translateX(-32px); }
+    [data-a="right"] { transform: translateX(32px); }
+    [data-a="scale"] { transform: scale(0.92); }
+    [data-a="fade"] { transform: none; }
+    [data-a].vis { opacity: 1; transform: none; }
+    [data-d="1"].vis { transition-delay: 0.08s; }
+    [data-d="2"].vis { transition-delay: 0.16s; }
+    [data-d="3"].vis { transition-delay: 0.24s; }
+    [data-d="4"].vis { transition-delay: 0.32s; }
+    [data-d="5"].vis { transition-delay: 0.40s; }
+    [data-d="6"].vis { transition-delay: 0.48s; }
+
+    /* ─── Background ─── */
+    .bg-grid {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    .bg-glow-1 { position: fixed; width: 800px; height: 800px; top: -400px; left: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 65%); pointer-events: none; }
+    .bg-glow-2 { position: fixed; width: 600px; height: 600px; top: 200px; right: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(34,211,238,0.12) 0%, transparent 65%); pointer-events: none; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6,9,26,0.8); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'IBM Plex Serif', serif; font-size: 1.3rem; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { width: 28px; height: 28px; border-radius: 6px; background: linear-gradient(135deg, var(--blue), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: white; font-family: 'Inter', sans-serif; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: transparent; border: 1px solid var(--border2); color: var(--cyan); font-size: 0.82rem; font-weight: 600; padding: 9px 20px; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .nav-cta:hover { background: rgba(34,211,238,0.1); }
+
+    /* ─── Hero ─── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; z-index: 1; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3); padding: 5px 14px; margin-bottom: 22px; font-size: 0.75rem; font-weight: 600; color: var(--blue-light); }
+    .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-light); }
+    h1 { font-family: 'IBM Plex Serif', serif; font-size: clamp(2.6rem, 5vw, 4.4rem); font-weight: 300; line-height: 1.12; letter-spacing: -0.01em; }
+    h1 em { font-style: italic; color: var(--cyan); }
+    .hero-sub { margin-top: 22px; font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 480px; font-weight: 300; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+    .btn-primary { background: linear-gradient(135deg, var(--blue), var(--cyan2)); color: white; border: none; padding: 13px 28px; font-size: 0.875rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; box-shadow: 0 0 40px rgba(99,102,241,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(99,102,241,0.5); }
+    .btn-ghost { background: transparent; border: 1px solid var(--border2); color: var(--text); padding: 13px 28px; font-size: 0.875rem; font-weight: 400; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+    .hero-metrics { display: flex; gap: 28px; margin-top: 40px; flex-wrap: wrap; }
+    .hm { border-left: 2px solid var(--border2); padding-left: 16px; }
+    .hm-val { font-family: 'IBM Plex Serif', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); line-height: 1; }
+    .hm-label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+    /* ─── Document analyzer UI ─── */
+    .doc-ui { background: var(--bg3); border: 1px solid var(--border2); padding: 24px; }
+    .doc-topbar { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+    .doc-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .doc-dot.r { background: #ef4444; } .doc-dot.y { background: #f59e0b; } .doc-dot.g { background: #10b981; }
+    .doc-header-text { font-size: 0.7rem; color: var(--muted2); margin-left: 8px; font-family: 'Inter', sans-serif; }
+    .doc-row { display: grid; grid-template-columns: 1fr 200px; gap: 16px; }
+    .doc-body { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 16px; }
+    .doc-line { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.08); margin-bottom: 8px; }
+    .doc-line.highlight { background: rgba(34,211,238,0.2); border: 1px solid rgba(34,211,238,0.3); height: 12px; padding: 0 6px; display: flex; align-items: center; }
+    .doc-line.highlight span { font-size: 0.6rem; color: var(--cyan); font-weight: 600; }
+    .doc-line.risk { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); height: 12px; padding: 0 6px; display: flex; align-items: center; }
+    .doc-line.risk span { font-size: 0.6rem; color: #f87171; font-weight: 600; }
+    .doc-sidebar { display: flex; flex-direction: column; gap: 8px; }
+    .doc-finding { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 10px 12px; }
+    .df-type { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .df-type.ok { color: #10b981; }
+    .df-type.warn { color: #f59e0b; }
+    .df-type.risk { color: #f87171; }
+    .df-text { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+    .doc-footer { display: flex; gap: 10px; margin-top: 14px; align-items: center; }
+    .doc-status { font-size: 0.7rem; color: var(--muted2); flex: 1; }
+    .doc-badge { font-size: 0.68rem; font-weight: 600; padding: 4px 10px; background: rgba(34,211,238,0.12); color: var(--cyan); border: 1px solid rgba(34,211,238,0.2); }
+
+    /* ─── Common section styles ─── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 100px 48px; position: relative; z-index: 1; }
+    .kicker { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--cyan); margin-bottom: 10px; }
+    .section-title { font-family: 'IBM Plex Serif', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.2; }
+    .section-title em { font-style: italic; color: var(--cyan); }
+    .section-sub { font-size: 0.95rem; color: var(--muted); margin-top: 12px; max-width: 480px; font-weight: 300; }
+
+    /* ─── Features ─── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .feat { background: var(--bg3); border: 1px solid var(--border); padding: 32px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .feat:hover { border-color: var(--border2); }
+    .feat::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); opacity: 0; transition: opacity 0.3s; }
+    .feat:hover::after { opacity: 0.6; }
+    .feat-icon { width: 40px; height: 40px; background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 16px; }
+    .feat-title { font-family: 'IBM Plex Serif', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+    .feat-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* ─── Stats band ─── */
+    .stats-band { background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 60px 48px; position: relative; z-index: 1; }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+    .stat-val { font-family: 'IBM Plex Serif', serif; font-size: 2.6rem; font-weight: 300; color: var(--text); line-height: 1; }
+    .stat-val span { color: var(--cyan); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+
+    /* ─── Use cases ─── */
+    .use-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 52px; }
+    .uc { background: var(--bg3); border: 1px solid var(--border); padding: 36px; transition: border-color 0.3s; }
+    .uc:hover { border-color: var(--border2); }
+    .uc-num { font-family: 'IBM Plex Serif', serif; font-size: 3rem; font-weight: 300; color: var(--blue); opacity: 0.3; line-height: 1; margin-bottom: 12px; }
+    .uc-title { font-family: 'IBM Plex Serif', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 10px; }
+    .uc-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* ─── Pricing ─── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .price-card { background: var(--bg3); border: 1px solid var(--border); padding: 36px; transition: border-color 0.3s; position: relative; }
+    .price-card.featured { border-color: rgba(34,211,238,0.4); }
+    .top-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--cyan); opacity: 0; }
+    .price-card.featured .top-accent { opacity: 1; }
+    .price-tier { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+    .price-amount { font-family: 'IBM Plex Serif', serif; font-size: 2.8rem; font-weight: 300; }
+    .price-period { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 300; color: var(--muted); }
+    .price-desc { font-size: 0.82rem; color: var(--muted); margin: 12px 0 20px; font-weight: 300; line-height: 1.6; }
+    .price-hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .price-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: var(--muted); }
+    .price-list li::before { content: '›'; color: var(--cyan); font-size: 1rem; flex-shrink: 0; }
+    .price-btn { display: block; width: 100%; margin-top: 24px; padding: 12px; text-align: center; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; text-decoration: none; border: none; }
+    .price-btn.primary { background: linear-gradient(135deg, var(--blue), var(--cyan2)); color: white; }
+    .price-btn.outline { background: transparent; border: 1px solid var(--border2); color: var(--text); }
+    .price-btn.outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ─── Testimonials ─── */
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+    .testi { background: var(--bg3); border: 1px solid var(--border); padding: 28px; }
+    .testi-stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 12px; }
+    .testi-text { font-family: 'IBM Plex Serif', serif; font-size: 0.95rem; font-style: italic; color: var(--muted); line-height: 1.7; margin-bottom: 20px; font-weight: 300; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 36px; height: 36px; background: linear-gradient(135deg, var(--blue), var(--cyan2)); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: white; flex-shrink: 0; }
+    .testi-name { font-size: 0.82rem; font-weight: 600; }
+    .testi-role { font-size: 0.72rem; color: var(--muted); }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 120px 48px; text-align: center; position: relative; z-index: 1; }
+    .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.2) 0%, transparent 65%); pointer-events: none; }
+    .cta-title { font-family: 'IBM Plex Serif', serif; font-size: clamp(2rem, 4.5vw, 3.8rem); font-weight: 300; line-height: 1.1; max-width: 700px; margin: 0 auto; }
+    .cta-title em { font-style: italic; color: var(--cyan); }
+    .cta-sub { font-size: 0.95rem; color: var(--muted); margin-top: 16px; max-width: 440px; margin-left: auto; margin-right: auto; font-weight: 300; }
+    .cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+    .cta-note { font-size: 0.75rem; color: var(--muted2); margin-top: 14px; }
+
+    /* ─── Footer ─── */
+    footer { border-top: 1px solid var(--border); padding: 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 1; }
+    .footer-logo { font-family: 'IBM Plex Serif', serif; font-size: 1.1rem; font-weight: 600; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted2); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; } .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; } .hero-inner { grid-template-columns: 1fr; }
+      .section { padding: 60px 20px; }
+      .features-grid, .pricing-grid, .testi-grid { grid-template-columns: 1fr; }
+      .use-cases { grid-template-columns: 1fr; }
+      .stats-band { padding: 48px 20px; } .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">N</div>
+      Nexus
+    </div>
+    <div class="nav-links">
+      <a href="#features">Platform</a>
+      <a href="#use-cases">Use Cases</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#">Enterprise</a>
+    </div>
+    <button class="nav-cta">Request Demo</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag" data-a><div class="hero-tag-dot"></div> Now with GPT-4o Legal Reasoning</div>
+        <h1 data-a data-d="1">
+          Legal AI that<br />
+          <em>works like</em><br />
+          a senior partner.
+        </h1>
+        <p class="hero-sub" data-a data-d="2">Nexus reviews contracts in 90 seconds, surfaces hidden risks, and generates redline drafts — so your team can focus on the work that truly matters.</p>
+        <div class="hero-actions" data-a data-d="3">
+          <button class="btn-primary">Start Free Trial</button>
+          <button class="btn-ghost">Watch Demo →</button>
+        </div>
+        <div class="hero-metrics" data-a data-d="4">
+          <div class="hm"><div class="hm-val">98%</div><div class="hm-label">Risk detection accuracy</div></div>
+          <div class="hm"><div class="hm-val">90s</div><div class="hm-label">Avg. contract review</div></div>
+          <div class="hm"><div class="hm-val">60%</div><div class="hm-label">Reduction in legal spend</div></div>
+        </div>
+      </div>
+
+      <div data-a="right">
+        <div class="doc-ui">
+          <div class="doc-topbar">
+            <div class="doc-dot r"></div><div class="doc-dot y"></div><div class="doc-dot g"></div>
+            <div class="doc-header-text">NDA_MasterService_v4.pdf — Nexus Analysis</div>
+          </div>
+          <div class="doc-row">
+            <div class="doc-body">
+              <div class="doc-line" style="width:90%"></div>
+              <div class="doc-line" style="width:75%"></div>
+              <div class="doc-line highlight"><span>✓ Standard IP Assignment Clause</span></div>
+              <div class="doc-line" style="width:80%"></div>
+              <div class="doc-line" style="width:65%"></div>
+              <div class="doc-line risk"><span>⚠ Unlimited Liability Exposure</span></div>
+              <div class="doc-line" style="width:88%"></div>
+              <div class="doc-line" style="width:70%"></div>
+              <div class="doc-line" style="width:82%"></div>
+              <div class="doc-line highlight"><span>✓ GDPR Compliant Data Terms</span></div>
+              <div class="doc-line" style="width:60%"></div>
+            </div>
+            <div class="doc-sidebar">
+              <div class="doc-finding"><div class="df-type ok">✓ Compliant</div><div class="df-text">Confidentiality terms aligned with NDA standards</div></div>
+              <div class="doc-finding"><div class="df-type risk">⚠ High Risk</div><div class="df-text">No liability cap — exposure could exceed contract value</div></div>
+              <div class="doc-finding"><div class="df-type warn">○ Review</div><div class="df-text">Non-compete clause: broader than market standard</div></div>
+            </div>
+          </div>
+          <div class="doc-footer">
+            <div class="doc-status">Analyzed 47 clauses · 3 risks · 12 recommendations</div>
+            <div class="doc-badge">Generate Redline →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band">
+    <div class="stats-inner">
+      <div data-a><div class="stat-val">4,200<span>+</span></div><div class="stat-label">Law firms & legal teams</div></div>
+      <div data-a data-d="1"><div class="stat-val">18M<span>+</span></div><div class="stat-label">Documents analyzed</div></div>
+      <div data-a data-d="2"><div class="stat-val">98<span>%</span></div><div class="stat-label">Risk detection accuracy</div></div>
+      <div data-a data-d="3"><div class="stat-val">60<span>%</span></div><div class="stat-label">Avg. legal cost reduction</div></div>
+    </div>
+  </div>
+
+  <div id="features" class="section">
+    <div class="kicker" data-a>Core capabilities</div>
+    <div class="section-title" data-a data-d="1">AI that understands<br /><em>legal language</em> deeply</div>
+    <div class="features-grid">
+      <div class="feat" data-a><div class="feat-icon">📄</div><div class="feat-title">Contract Review</div><div class="feat-desc">Upload any contract and receive a full analysis in under 90 seconds — clause-by-clause, with risk scoring, missing terms, and suggested edits.</div></div>
+      <div class="feat" data-a data-d="1"><div class="feat-icon">🔍</div><div class="feat-title">Due Diligence</div><div class="feat-desc">Scan thousands of documents during M&A or funding rounds. Nexus surfaces critical issues and generates executive summaries automatically.</div></div>
+      <div class="feat" data-a data-d="2"><div class="feat-icon">✏️</div><div class="feat-title">Redline Drafting</div><div class="feat-desc">Generate professionally redlined documents with tracked changes, inline comments, and clause alternatives drawn from market-standard playbooks.</div></div>
+      <div class="feat" data-a data-d="3"><div class="feat-icon">⚠️</div><div class="feat-title">Risk Detection</div><div class="feat-desc">Trained on 50M+ legal documents, Nexus identifies unusual liability caps, one-sided IP assignments, hidden auto-renewals, and regulatory red flags.</div></div>
+      <div class="feat" data-a data-d="4"><div class="feat-icon">🔒</div><div class="feat-title">Compliance Monitoring</div><div class="feat-desc">Continuously monitor your contract portfolio for regulatory changes — GDPR, CCPA, SOC 2. Get alerts when contracts need updating.</div></div>
+      <div class="feat" data-a data-d="5"><div class="feat-icon">🤝</div><div class="feat-title">Collaboration</div><div class="feat-desc">Share analysis, leave comments, and negotiate directly inside Nexus. Full version history, e-signatures, and audit trail included.</div></div>
+    </div>
+  </div>
+
+  <div id="use-cases" class="section" style="padding-top:0">
+    <div class="kicker" data-a>Use Cases</div>
+    <div class="section-title" data-a data-d="1">Built for every legal workflow</div>
+    <div class="use-cases">
+      <div class="uc" data-a><div class="uc-num">01</div><div class="uc-title">In-House Legal Teams</div><div class="uc-desc">Reduce outside counsel spend by 60% while processing 10× more contracts. Your legal team focuses on strategy; Nexus handles the volume.</div></div>
+      <div class="uc" data-a data-d="1"><div class="uc-num">02</div><div class="uc-title">Law Firms</div><div class="uc-desc">Accelerate associate work, improve partner leverage, and deliver faster turnarounds. Bill more hours on strategy, fewer on routine review.</div></div>
+      <div class="uc" data-a data-d="2"><div class="uc-num">03</div><div class="uc-title">M&A Due Diligence</div><div class="uc-desc">Analyze complete data rooms in days, not weeks. Surface deal-breaking provisions before they become closing risks or post-close liabilities.</div></div>
+      <div class="uc" data-a data-d="3"><div class="uc-num">04</div><div class="uc-title">Startup & Scale-up</div><div class="uc-desc">Punch above your weight legally. Get Fortune 500-quality contract review for your vendor agreements, employment contracts, and investor docs.</div></div>
+    </div>
+  </div>
+
+  <div id="pricing" class="section" style="padding-top:0">
+    <div class="kicker" data-a>Pricing</div>
+    <div class="section-title" data-a data-d="1">Clear pricing, no surprises</div>
+    <div class="pricing-grid">
+      <div class="price-card" data-a>
+        <div class="top-accent"></div>
+        <div class="price-tier">Starter</div>
+        <div class="price-amount">$49 <span class="price-period">/mo</span></div>
+        <div class="price-desc">For individuals and small teams reviewing 50+ contracts per month.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>50 documents/mo</li><li>Contract review & risk scoring</li><li>PDF redline export</li><li>Email support</li></ul>
+        <a href="#" class="price-btn outline">Get Started</a>
+      </div>
+      <div class="price-card featured" data-a data-d="1">
+        <div class="top-accent"></div>
+        <div class="price-tier">Professional</div>
+        <div class="price-amount">$199 <span class="price-period">/mo</span></div>
+        <div class="price-desc">For growing legal teams that need full due diligence and collaboration features.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>Unlimited documents</li><li>Due diligence workflows</li><li>AI redline drafting</li><li>Team collaboration (10 seats)</li><li>Compliance monitoring</li><li>Priority support</li></ul>
+        <a href="#" class="price-btn primary">Start Free Trial</a>
+      </div>
+      <div class="price-card" data-a data-d="2">
+        <div class="top-accent"></div>
+        <div class="price-tier">Enterprise</div>
+        <div class="price-amount">Custom</div>
+        <div class="price-desc">For law firms and enterprise legal departments with custom workflow needs.</div>
+        <hr class="price-hr" />
+        <ul class="price-list"><li>Unlimited seats</li><li>Custom AI training on your playbooks</li><li>SSO & SAML</li><li>On-premises option</li><li>Dedicated success manager</li></ul>
+        <a href="#" class="price-btn outline">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="kicker" data-a>Testimonials</div>
+    <div class="section-title" data-a data-d="1">Trusted by top legal teams</div>
+    <div class="testi-grid">
+      <div class="testi" data-a><div class="testi-stars">★★★★★</div><div class="testi-text">"Nexus cut our contract review time from 3 hours to 8 minutes. Our general counsel can't imagine going back. The risk detection alone paid for a year of the subscription on day one."</div><div class="testi-author"><div class="testi-avatar">MH</div><div><div class="testi-name">Michael Harris</div><div class="testi-role">General Counsel, Clearco</div></div></div></div>
+      <div class="testi" data-a data-d="1"><div class="testi-stars">★★★★★</div><div class="testi-text">"We used Nexus for a $200M acquisition data room. It reviewed 6,000 documents in 72 hours — work that would have taken our team 6 weeks. Exceptional accuracy."</div><div class="testi-author"><div class="testi-avatar">PB</div><div><div class="testi-name">Patricia Bauer</div><div class="testi-role">Partner, Latham & Watkins</div></div></div></div>
+      <div class="testi" data-a data-d="2"><div class="testi-stars">★★★★★</div><div class="testi-text">"As a 12-person startup, we can't afford to have outside counsel review every vendor contract. Nexus gives us the same protection at a fraction of the cost."</div><div class="testi-author"><div class="testi-avatar">AK</div><div><div class="testi-name">Anya Kapoor</div><div class="testi-role">CEO, Fabel</div></div></div></div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-bg"></div>
+    <div class="kicker" data-a>Get Started</div>
+    <div class="cta-title" data-a data-d="1">The smartest legal decision<br />you'll make <em>this year.</em></div>
+    <div class="cta-sub" data-a data-d="2">Start reviewing contracts with AI today. No setup required, no credit card needed for the first 14 days.</div>
+    <div class="cta-actions" data-a data-d="3">
+      <button class="btn-primary">Start Free Trial</button>
+      <button class="btn-ghost">Schedule Demo</button>
+    </div>
+    <div class="cta-note" data-a data-d="4">14-day free trial · SOC 2 Type II certified · GDPR compliant</div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Nexus Legal AI</div>
+    <div class="footer-links">
+      <a href="#">Product</a><a href="#">Enterprise</a><a href="#">Security</a>
+      <a href="#">Blog</a><a href="#">Careers</a><a href="#">Legal</a>
+    </div>
+    <div class="footer-copy">© 2025 Nexus Legal Technologies, Inc.</div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-a]').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
