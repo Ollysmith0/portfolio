@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forge CLI — The Developer Infrastructure Platform</title>
+  <meta name="description" content="Forge is the composable developer infrastructure platform. Build, test, deploy, and monitor your stack with the tools engineers actually love." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #000000;
+      --bg2: #0A0A0A;
+      --surface: #111111;
+      --surface2: #161616;
+      --border: #222222;
+      --border2: #2a2a2a;
+      --green: #00FF85;
+      --green2: #00CC6A;
+      --amber: #FFB800;
+      --blue: #5B9BD5;
+      --red: #FF4444;
+      --text: #E8E8E8;
+      --muted: #666666;
+      --muted2: #444444;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+
+    /* ─── Scan line effect ─── */
+    body::after {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,133,0.015) 2px, rgba(0,255,133,0.015) 4px);
+    }
+
+    /* ─── Grid background ─── */
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(0,0,0,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-bracket { color: var(--green); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-version { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted2); border: 1px solid var(--border2); padding: 3px 8px; }
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700;
+      background: var(--green); color: var(--bg); border: none;
+      padding: 9px 18px; cursor: pointer; transition: all 0.15s;
+    }
+    .nav-cta:hover { background: var(--green2); }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 40px 80px; z-index: 1;
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--green);
+      border: 1px solid rgba(0,255,133,0.3); padding: 5px 12px; margin-bottom: 24px;
+    }
+    .hero-label-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blink 1.2s step-end infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+      line-height: 1.2; letter-spacing: -0.02em;
+    }
+    .h1-comment { color: var(--muted2); font-size: 0.85em; font-weight: 400; }
+    .h1-green { color: var(--green); }
+    .h1-amber { color: var(--amber); }
+    .h1-blue { color: var(--blue); }
+    .hero-sub {
+      margin-top: 20px; font-size: 1rem; color: var(--muted);
+      line-height: 1.75; max-width: 460px; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .btn-green {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700;
+      background: var(--green); color: var(--bg); border: none;
+      padding: 12px 24px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-green:hover { background: var(--green2); }
+    .btn-term {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--text); padding: 12px 24px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-term:hover { border-color: var(--border2); background: var(--surface2); }
+    .hero-metrics { display: flex; gap: 24px; margin-top: 36px; flex-wrap: wrap; }
+    .hero-metric { }
+    .hm-value { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--text); }
+    .hm-label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Terminal ─── */
+    .terminal-wrap { }
+    .terminal {
+      background: var(--bg2); border: 1px solid var(--border2);
+      border-radius: 8px; overflow: hidden;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    }
+    .term-bar {
+      background: var(--surface); padding: 10px 14px;
+      display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border);
+    }
+    .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .term-dot.r { background: #FF5F57; } .term-dot.y { background: #FFBD2E; } .term-dot.g { background: #28C940; }
+    .term-title { font-size: 0.7rem; color: var(--muted); margin-left: 6px; flex: 1; text-align: center; }
+    .term-body { padding: 20px; line-height: 1.8; }
+    .t-line { display: flex; }
+    .t-prompt { color: var(--green); margin-right: 8px; flex-shrink: 0; }
+    .t-cmd { color: var(--text); }
+    .t-flag { color: var(--amber); }
+    .t-arg { color: var(--blue); }
+    .t-out { color: var(--muted); margin-left: 0; }
+    .t-success { color: var(--green); }
+    .t-error { color: var(--red); }
+    .t-comment { color: var(--muted2); }
+    .t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--green); margin-left: 2px; vertical-align: middle; animation: cursor-blink 1s step-end infinite; }
+    @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .term-space { height: 6px; }
+
+    /* ─── Install bar ─── */
+    .install-bar {
+      background: var(--surface); border: 1px solid var(--border2);
+      display: flex; align-items: center; padding: 12px 16px; gap: 12px;
+      margin-top: 12px; cursor: pointer; transition: border-color 0.15s;
+    }
+    .install-bar:hover { border-color: var(--green); }
+    .install-prefix { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+    .install-cmd { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--green); flex: 1; }
+    .install-copy { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); border: 1px solid var(--border2); padding: 3px 8px; }
+
+    /* ─── Features ─── */
+    .section { max-width: 1200px; margin: 0 auto; padding: 100px 40px; position: relative; z-index: 1; }
+    .section-kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--green); margin-bottom: 8px; }
+    .section-title { font-family: 'JetBrains Mono', monospace; font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.2; }
+    .section-sub { font-size: 0.95rem; color: var(--muted); margin-top: 12px; max-width: 500px; font-weight: 300; }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 48px; }
+    .feat-card {
+      background: var(--surface); padding: 32px;
+      border: 1px solid var(--border); position: relative; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .feat-card:hover { border-color: var(--border2); }
+    .feat-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--green), transparent); opacity: 0; transition: opacity 0.3s; }
+    .feat-card:hover::after { opacity: 0.5; }
+    .feat-num { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted2); margin-bottom: 12px; }
+    .feat-title { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .feat-title .green { color: var(--green); }
+    .feat-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+    .feat-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; border: 1px solid var(--border2); color: var(--muted2); padding: 3px 8px; margin-top: 14px; }
+
+    /* ─── Code Compare ─── */
+    .compare-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 40px; position: relative; z-index: 1; }
+    .compare-inner { max-width: 1200px; margin: 0 auto; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .code-card { border: 1px solid var(--border2); border-radius: 6px; overflow: hidden; }
+    .code-header { background: var(--surface2); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .code-file { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+    .code-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; padding: 2px 8px; }
+    .code-badge.before { background: rgba(255,68,68,0.15); color: var(--red); border: 1px solid rgba(255,68,68,0.2); }
+    .code-badge.after { background: rgba(0,255,133,0.1); color: var(--green); border: 1px solid rgba(0,255,133,0.2); }
+    .code-body { padding: 18px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; line-height: 2; }
+    .cl { display: flex; align-items: flex-start; }
+    .cl-num { color: var(--muted2); margin-right: 16px; min-width: 20px; text-align: right; user-select: none; }
+    .cl-code { color: var(--muted); }
+    .cl.del { background: rgba(255,68,68,0.06); }
+    .cl.del .cl-code { color: rgba(255,68,68,0.7); }
+    .cl.add { background: rgba(0,255,133,0.05); }
+    .cl.add .cl-code { color: rgba(0,255,133,0.8); }
+    .cl .kw { color: var(--amber); }
+    .cl .fn { color: var(--blue); }
+    .cl .str { color: #CE9178; }
+    .cl .cmt { color: var(--muted2); }
+
+    /* ─── Integrations ─── */
+    .integrations-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-top: 48px; }
+    .integration-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 22px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      transition: border-color 0.2s; cursor: pointer;
+    }
+    .integration-card:hover { border-color: var(--green); }
+    .int-icon { font-size: 1.5rem; }
+    .int-name { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); text-align: center; }
+
+    /* ─── Pricing ─── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+    .price-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 32px;
+      transition: border-color 0.2s; position: relative;
+    }
+    .price-card.featured { border-color: rgba(0,255,133,0.4); }
+    .price-top-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--green); opacity: 0; }
+    .price-card.featured .price-top-line { opacity: 1; }
+    .price-tier { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-bottom: 10px; }
+    .price-amount { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; color: var(--text); }
+    .price-amount .per { font-size: 0.875rem; font-weight: 400; color: var(--muted); }
+    .price-desc { font-size: 0.82rem; color: var(--muted); margin: 12px 0 20px; font-weight: 300; }
+    .price-divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+    .price-feat-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .price-feat-list li { display: flex; align-items: flex-start; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+    .price-feat-list li::before { content: '→'; color: var(--green); flex-shrink: 0; }
+    .price-btn {
+      display: block; width: 100%; margin-top: 24px; padding: 12px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700;
+      text-align: center; text-decoration: none; cursor: pointer; transition: all 0.15s;
+      border: none;
+    }
+    .price-btn.green { background: var(--green); color: var(--bg); }
+    .price-btn.green:hover { background: var(--green2); }
+    .price-btn.outline { background: transparent; border: 1px solid var(--border2); color: var(--text); }
+    .price-btn.outline:hover { border-color: var(--green); color: var(--green); }
+
+    /* ─── Social proof ─── */
+    .proof-bar {
+      background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 24px 40px; position: relative; z-index: 1;
+      display: flex; justify-content: center; align-items: center; gap: 60px; flex-wrap: wrap;
+    }
+    .proof-item { display: flex; align-items: center; gap: 10px; }
+    .proof-icon { font-size: 1rem; }
+    .proof-text { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+    .proof-val { color: var(--green); }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 120px 40px; text-align: center; position: relative; z-index: 1; }
+    .cta-inner { max-width: 700px; margin: 0 auto; }
+    .cta-title { font-family: 'JetBrains Mono', monospace; font-size: clamp(1.5rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; }
+    .cta-title .green { color: var(--green); }
+    .cta-sub { font-size: 0.95rem; color: var(--muted); margin-top: 16px; font-weight: 300; }
+    .cta-install { margin-top: 36px; }
+    .cta-note { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted2); margin-top: 14px; }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border); padding: 40px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+      position: relative; z-index: 1;
+    }
+    .footer-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; }
+    .footer-logo .bracket { color: var(--green); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted2); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links, .nav-version { display: none; }
+      .hero { padding: 90px 20px 60px; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .features-grid, .compare-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .integrations-grid { grid-template-columns: repeat(3, 1fr); }
+      .proof-bar { gap: 20px; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-logo-bracket">[</span>forge<span class="nav-logo-bracket">]</span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#">Docs</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="nav-version">v2.4.1</div>
+    <button class="nav-cta">$ npm install -g forge</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-label">
+          <div class="hero-label-dot"></div>
+          v2.4.1 — STABLE · Open Source
+        </div>
+        <h1>
+          <span class="h1-comment">// Build. Test. Ship.</span><br />
+          <span class="h1-green">developer</span><br />
+          <span class="h1-amber">infrastructure</span><br />
+          <span class="h1-blue">reimagined</span>
+        </h1>
+        <p class="hero-sub">
+          Forge is the composable infrastructure CLI that replaces 7 separate dev tools. One binary. Zero config. Pure speed.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-green">Get Started →</button>
+          <button class="btn-term">View on GitHub</button>
+        </div>
+        <div class="hero-metrics">
+          <div class="hero-metric">
+            <div class="hm-value">40k+</div>
+            <div class="hm-label">GitHub stars</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hm-value">2.8M</div>
+            <div class="hm-label">Weekly downloads</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hm-value">~90ms</div>
+            <div class="hm-label">Cold start time</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal -->
+      <div class="terminal-wrap">
+        <div class="terminal">
+          <div class="term-bar">
+            <div class="term-dot r"></div>
+            <div class="term-dot y"></div>
+            <div class="term-dot g"></div>
+            <div class="term-title">bash — ~/my-project</div>
+          </div>
+          <div class="term-body">
+            <div class="t-line"><span class="t-prompt">❯</span><span class="t-cmd">forge <span class="t-flag">init</span> <span class="t-arg">my-api</span></span></div>
+            <div class="t-line"><span class="t-out">  ✓ Scaffolding project...</span></div>
+            <div class="t-line"><span class="t-out">  ✓ Installing dependencies...</span></div>
+            <div class="t-line"><span class="t-out">  ✓ Configuring pipelines...</span></div>
+            <div class="t-line"><span class="t-success">  ✓ Ready in 1.2s</span></div>
+            <div class="term-space"></div>
+            <div class="t-line"><span class="t-prompt">❯</span><span class="t-cmd">forge <span class="t-flag">deploy</span> <span class="t-flag">--env</span> <span class="t-arg">production</span></span></div>
+            <div class="t-line"><span class="t-out">  Building... </span><span style="color:#FFB800">████████████</span><span class="t-out"> 100%</span></div>
+            <div class="t-line"><span class="t-out">  Running tests... </span><span class="t-success">48 passed</span></div>
+            <div class="t-line"><span class="t-success">  ✓ Deployed to production</span></div>
+            <div class="t-line"><span class="t-out">  → https://my-api.forge.dev</span></div>
+            <div class="term-space"></div>
+            <div class="t-line"><span class="t-prompt">❯</span><span class="t-cursor"></span></div>
+          </div>
+        </div>
+        <div class="install-bar">
+          <span class="install-prefix">$</span>
+          <span class="install-cmd">npm install -g @forge/cli</span>
+          <span class="install-copy">copy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof -->
+  <div class="proof-bar">
+    <div class="proof-item"><span class="proof-icon">⭐</span><span class="proof-text"><span class="proof-val">40,218</span> GitHub stars</span></div>
+    <div class="proof-item"><span class="proof-icon">📦</span><span class="proof-text"><span class="proof-val">2.8M</span> weekly downloads</span></div>
+    <div class="proof-item"><span class="proof-icon">🏢</span><span class="proof-text">Used at <span class="proof-val">3,200+</span> companies</span></div>
+    <div class="proof-item"><span class="proof-icon">🔐</span><span class="proof-text"><span class="proof-val">SOC 2</span> Type II certified</span></div>
+    <div class="proof-item"><span class="proof-icon">⚡</span><span class="proof-text"><span class="proof-val">99.99%</span> API uptime</span></div>
+  </div>
+
+  <!-- Features -->
+  <div id="features" class="section">
+    <div class="section-kicker">// core.features</div>
+    <div class="section-title">Replaces your entire<br />dev toolchain</div>
+    <div class="section-sub">One CLI to build, test, lint, bundle, deploy, and monitor. No more context switching between 7 different tools.</div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-num">01 / 06</div>
+        <div class="feat-title"><span class="green">forge</span>.build()</div>
+        <div class="feat-desc">Incremental builds powered by esbuild. Automatic code splitting, tree-shaking, and zero-config TypeScript. Build times under 200ms on most projects.</div>
+        <div class="feat-tag">turbo-mode</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">02 / 06</div>
+        <div class="feat-title"><span class="green">forge</span>.test()</div>
+        <div class="feat-desc">Built-in test runner with parallel execution, watch mode, and coverage reports. Compatible with Jest, Vitest, and Playwright out of the box.</div>
+        <div class="feat-tag">parallel-workers</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">03 / 06</div>
+        <div class="feat-title"><span class="green">forge</span>.deploy()</div>
+        <div class="feat-desc">One-command deployments to any cloud provider. Automatic preview environments on every PR, with instant rollback capabilities.</div>
+        <div class="feat-tag">multi-cloud</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">04 / 06</div>
+        <div class="feat-title"><span class="green">forge</span>.monitor()</div>
+        <div class="feat-desc">Real-time performance metrics, error tracking, and distributed tracing without leaving your terminal. Alerts you before users notice problems.</div>
+        <div class="feat-tag">real-time</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Code Compare -->
+  <div class="compare-section">
+    <div class="compare-inner">
+      <div class="section-kicker">// before.vs.after</div>
+      <div class="section-title">Cut your config by 90%</div>
+      <div class="compare-grid">
+        <div class="code-card">
+          <div class="code-header">
+            <span class="code-file">package.json (before)</span>
+            <span class="code-badge before">× old way</span>
+          </div>
+          <div class="code-body">
+            <div class="cl del"><span class="cl-num">1</span><span class="cl-code"><span class="kw">"devDependencies"</span>: {</span></div>
+            <div class="cl del"><span class="cl-num">2</span><span class="cl-code">  <span class="str">"webpack"</span>: <span class="str">"^5.0"</span>,</span></div>
+            <div class="cl del"><span class="cl-num">3</span><span class="cl-code">  <span class="str">"babel-loader"</span>: <span class="str">"^9.0"</span>,</span></div>
+            <div class="cl del"><span class="cl-num">4</span><span class="cl-code">  <span class="str">"eslint"</span>: <span class="str">"^8.0"</span>,</span></div>
+            <div class="cl del"><span class="cl-num">5</span><span class="cl-code">  <span class="str">"jest"</span>: <span class="str">"^29.0"</span>,</span></div>
+            <div class="cl del"><span class="cl-num">6</span><span class="cl-code">  <span class="str">"ts-node"</span>: <span class="str">"^10.0"</span>,</span></div>
+            <div class="cl del"><span class="cl-num">7</span><span class="cl-code">  <span class="str">"concurrently"</span>: <span class="str">"^7.0"</span></span></div>
+            <div class="cl del"><span class="cl-num">8</span><span class="cl-code">}</span></div>
+          </div>
+        </div>
+        <div class="code-card">
+          <div class="code-header">
+            <span class="code-file">forge.config.ts (after)</span>
+            <span class="code-badge after">✓ forge way</span>
+          </div>
+          <div class="code-body">
+            <div class="cl add"><span class="cl-num">1</span><span class="cl-code"><span class="kw">import</span> { <span class="fn">defineConfig</span> } <span class="kw">from</span> <span class="str">'forge'</span></span></div>
+            <div class="cl add"><span class="cl-num">2</span><span class="cl-code">&nbsp;</span></div>
+            <div class="cl add"><span class="cl-num">3</span><span class="cl-code"><span class="kw">export default</span> <span class="fn">defineConfig</span>({</span></div>
+            <div class="cl add"><span class="cl-num">4</span><span class="cl-code">  <span class="fn">preset</span>: <span class="str">'node-api'</span>,</span></div>
+            <div class="cl add"><span class="cl-num">5</span><span class="cl-code">  <span class="cmt">// that's it.</span></span></div>
+            <div class="cl add"><span class="cl-num">6</span><span class="cl-code">})</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Integrations -->
+  <div id="integrations" class="section">
+    <div class="section-kicker">// plugins.registry</div>
+    <div class="section-title">Works with your entire stack</div>
+    <div class="integrations-grid">
+      <div class="integration-card"><div class="int-icon">⚛️</div><div class="int-name">React</div></div>
+      <div class="integration-card"><div class="int-icon">▲</div><div class="int-name">Next.js</div></div>
+      <div class="integration-card"><div class="int-icon">🦀</div><div class="int-name">Rust</div></div>
+      <div class="integration-card"><div class="int-icon">🐹</div><div class="int-name">Go</div></div>
+      <div class="integration-card"><div class="int-icon">🐍</div><div class="int-name">Python</div></div>
+      <div class="integration-card"><div class="int-icon">🐳</div><div class="int-name">Docker</div></div>
+      <div class="integration-card"><div class="int-icon">☸️</div><div class="int-name">Kubernetes</div></div>
+      <div class="integration-card"><div class="int-icon">🔥</div><div class="int-name">Firebase</div></div>
+      <div class="integration-card"><div class="int-icon">🟠</div><div class="int-name">AWS</div></div>
+      <div class="integration-card"><div class="int-icon">🔵</div><div class="int-name">Azure</div></div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div id="pricing" class="section" style="padding-top:0">
+    <div class="section-kicker">// pricing.tiers</div>
+    <div class="section-title">Start free. Scale infinitely.</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-top-line"></div>
+        <div class="price-tier">// tier.hobby</div>
+        <div class="price-amount">$0 <span class="per">/mo</span></div>
+        <div class="price-desc">For side projects and open source contributors.</div>
+        <hr class="price-divider" />
+        <ul class="price-feat-list">
+          <li>5 projects</li>
+          <li>100 deployments/mo</li>
+          <li>Community support</li>
+          <li>Basic monitoring</li>
+        </ul>
+        <a href="#" class="price-btn outline">$ forge login</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-top-line"></div>
+        <div class="price-tier">// tier.pro</div>
+        <div class="price-amount">$19 <span class="per">/mo</span></div>
+        <div class="price-desc">For professional developers and small teams.</div>
+        <hr class="price-divider" />
+        <ul class="price-feat-list">
+          <li>Unlimited projects</li>
+          <li>Unlimited deployments</li>
+          <li>Priority support</li>
+          <li>Advanced monitoring</li>
+          <li>Team collaboration</li>
+          <li>Custom domains</li>
+        </ul>
+        <a href="#" class="price-btn green">$ forge upgrade --pro</a>
+      </div>
+      <div class="price-card">
+        <div class="price-top-line"></div>
+        <div class="price-tier">// tier.enterprise</div>
+        <div class="price-amount">Custom</div>
+        <div class="price-desc">For organizations with advanced security and compliance needs.</div>
+        <hr class="price-divider" />
+        <ul class="price-feat-list">
+          <li>Self-hosted option</li>
+          <li>SSO / SAML</li>
+          <li>Audit logs</li>
+          <li>SLA guarantee</li>
+          <li>Dedicated engineer</li>
+        </ul>
+        <a href="#" class="price-btn outline">$ forge contact --sales</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <div class="section-kicker">// ready.to.ship?</div>
+      <div class="cta-title">Stop configuring.<br />Start <span class="green">building</span>.</div>
+      <p class="cta-sub">Get your first project deployed in under 2 minutes. No credit card required.</p>
+      <div class="cta-install">
+        <div class="install-bar" style="max-width:400px;margin:0 auto;">
+          <span class="install-prefix">$</span>
+          <span class="install-cmd">npm install -g @forge/cli && forge init</span>
+          <span class="install-copy">copy</span>
+        </div>
+      </div>
+      <div class="cta-note">// open source · MIT license · no lock-in</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo"><span class="bracket">[</span>forge<span class="bracket">]</span></div>
+    <div class="footer-links">
+      <a href="#">Docs</a>
+      <a href="#">GitHub</a>
+      <a href="#">Discord</a>
+      <a href="#">Status</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+    <div class="footer-copy">// © 2025 Forge Systems, Inc.</div>
+  </footer>
+</body>
+</html>

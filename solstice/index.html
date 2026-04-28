@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solstice Realty — Exceptional Homes, Extraordinary Lives</title>
+  <meta name="description" content="Solstice Realty curates the world's most coveted properties. Discover luxury homes, penthouses, and estates with our exclusive concierge service." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ivory: #F9F6F0;
+      --warm: #F2EDE5;
+      --cream: #EDE6D9;
+      --gold: #B8963E;
+      --gold-light: #D4AF6A;
+      --dark: #1A1208;
+      --brown: #3D2B1A;
+      --text: #2C2016;
+      --muted: #8A7660;
+      --border: #DDD5C8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--ivory); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,246,240,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 60px; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; letter-spacing: 0.04em;
+      color: var(--dark); display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-line { width: 24px; height: 1px; background: var(--gold); }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-cta {
+      font-family: 'Lato', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); padding: 10px 22px; cursor: pointer;
+      transition: all 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold); color: white; }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #2C1810 0%, #1A0E08 40%, #3D2416 100%);
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(184,150,62,0.3) 80px, rgba(184,150,62,0.3) 81px),
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(184,150,62,0.3) 80px, rgba(184,150,62,0.3) 81px);
+    }
+    .hero-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(26,8,8,0.85) 40%, rgba(26,8,8,0.3) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 0 60px 100px; max-width: 780px; }
+    .hero-kicker {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+    }
+    .kicker-line { width: 40px; height: 1px; background: var(--gold); }
+    .kicker-text { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.01em; color: var(--ivory);
+    }
+    h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-desc {
+      margin-top: 28px; font-size: 1rem; line-height: 1.75;
+      color: rgba(249,246,240,0.65); max-width: 480px; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 16px; margin-top: 44px; align-items: center; }
+    .btn-gold {
+      font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: var(--gold); color: white; border: none;
+      padding: 16px 32px; cursor: pointer; transition: all 0.25s;
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-outline-white {
+      font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: transparent; border: 1px solid rgba(249,246,240,0.4); color: var(--ivory);
+      padding: 16px 32px; cursor: pointer; transition: all 0.25s;
+    }
+    .btn-outline-white:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .hero-stats {
+      position: absolute; bottom: 0; right: 0; z-index: 2;
+      display: flex; gap: 0;
+    }
+    .hero-stat {
+      background: rgba(249,246,240,0.05); backdrop-filter: blur(16px);
+      border-left: 1px solid rgba(184,150,62,0.2); padding: 28px 36px;
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
+      font-weight: 400; color: var(--gold-light); line-height: 1;
+    }
+    .hero-stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(249,246,240,0.5); margin-top: 6px; }
+
+    /* ─── Properties ─── */
+    .properties-section { padding: 100px 60px; background: var(--ivory); }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+    .section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .section-label span { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.15;
+      letter-spacing: -0.01em; color: var(--dark);
+    }
+    .section-title em { font-style: italic; }
+    .view-all { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: opacity 0.2s; }
+    .view-all:hover { opacity: 0.7; }
+    .properties-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2px; }
+    .property-card { position: relative; overflow: hidden; cursor: pointer; }
+    .property-card:hover .prop-img { transform: scale(1.06); }
+    .prop-img {
+      width: 100%; height: 420px; object-fit: cover;
+      transition: transform 0.6s ease; display: block;
+    }
+    .property-card.tall .prop-img { height: 420px; }
+    .property-card.short .prop-img { height: 208px; }
+    .prop-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,18,8,0.75) 0%, transparent 50%);
+    }
+    .prop-info {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 24px;
+    }
+    .prop-location { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 6px; }
+    .prop-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--ivory); line-height: 1.2; }
+    .prop-price { font-size: 0.875rem; font-weight: 700; color: var(--gold-light); margin-top: 6px; }
+    .prop-meta { display: flex; gap: 16px; margin-top: 8px; }
+    .prop-meta span { font-size: 0.72rem; color: rgba(249,246,240,0.6); letter-spacing: 0.05em; }
+    .prop-tag {
+      position: absolute; top: 18px; left: 18px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--gold); color: white; padding: 4px 10px;
+    }
+
+    /* ─── Services ─── */
+    .services-section { padding: 100px 60px; background: var(--warm); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
+    .service-item {
+      background: var(--ivory); padding: 44px 36px;
+      border: 1px solid var(--border); position: relative;
+      transition: background 0.3s;
+    }
+    .service-item:hover { background: white; }
+    .service-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); opacity: 0.4; line-height: 1; margin-bottom: 20px; }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; color: var(--dark); }
+    .service-desc { font-size: 0.875rem; line-height: 1.75; color: var(--muted); font-weight: 300; }
+    .service-line { width: 32px; height: 1px; background: var(--gold); margin-bottom: 16px; }
+
+    /* ─── Testimonial ─── */
+    .quote-section { padding: 120px 60px; background: var(--dark); text-align: center; position: relative; overflow: hidden; }
+    .quote-bg { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(184,150,62,0.05) 80px, rgba(184,150,62,0.05) 81px), repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(184,150,62,0.05) 80px, rgba(184,150,62,0.05) 81px); }
+    .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 8rem; color: var(--gold); opacity: 0.2; line-height: 0.5; margin-bottom: 32px; }
+    .quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3vw, 2.4rem); font-weight: 300; font-style: italic; color: var(--ivory); max-width: 780px; margin: 0 auto; line-height: 1.5; }
+    .quote-attr { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .quote-line { width: 40px; height: 1px; background: var(--gold); margin-bottom: 12px; }
+    .quote-name { font-size: 0.875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); }
+    .quote-role { font-size: 0.78rem; letter-spacing: 0.06em; color: rgba(249,246,240,0.45); }
+
+    /* ─── Agents ─── */
+    .agents-section { padding: 100px 60px; background: var(--ivory); }
+    .agents-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
+    .agent-card { text-align: center; }
+    .agent-photo {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover; margin-bottom: 20px;
+      filter: grayscale(20%); transition: filter 0.3s;
+    }
+    .agent-card:hover .agent-photo { filter: grayscale(0%); }
+    .agent-photo-placeholder {
+      width: 100%; aspect-ratio: 3/4; background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300; color: var(--gold);
+    }
+    .agent-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--dark); }
+    .agent-title { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+    .agent-contact { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+    .agent-btn { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 14px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; transition: all 0.2s; }
+    .agent-btn:hover { background: var(--gold); color: white; }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 120px 60px; background: var(--warm); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .cta-left { }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.15; color: var(--dark); }
+    .cta-title em { font-style: italic; color: var(--gold); }
+    .cta-desc { font-size: 0.95rem; line-height: 1.75; color: var(--muted); margin-top: 20px; font-weight: 300; }
+    .cta-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .form-input {
+      padding: 14px 16px; border: 1px solid var(--border);
+      background: white; font-family: 'Lato', sans-serif;
+      font-size: 0.9rem; color: var(--dark); outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--gold); }
+    .form-select {
+      padding: 14px 16px; border: 1px solid var(--border);
+      background: white; font-family: 'Lato', sans-serif;
+      font-size: 0.9rem; color: var(--muted); outline: none;
+      appearance: none; cursor: pointer;
+    }
+    .form-submit {
+      background: var(--dark); color: white; border: none;
+      font-family: 'Lato', sans-serif; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 16px 32px; cursor: pointer; transition: background 0.25s;
+      align-self: flex-start;
+    }
+    .form-submit:hover { background: var(--gold); }
+
+    /* ─── Footer ─── */
+    footer { background: var(--dark); padding: 60px; color: rgba(249,246,240,0.6); }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-logo-wrap { }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--ivory); margin-bottom: 12px; }
+    .footer-tagline { font-size: 0.85rem; line-height: 1.65; font-weight: 300; max-width: 240px; }
+    .footer-col-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 0.85rem; color: rgba(249,246,240,0.5); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--ivory); }
+    .footer-bottom { border-top: 1px solid rgba(249,246,240,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 0.8rem; }
+    .footer-gold { color: var(--gold-light); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 24px 80px; }
+      .hero-stats { display: none; }
+      .properties-section, .services-section, .quote-section, .agents-section, .cta-section { padding: 60px 24px; }
+      .properties-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .agents-grid { grid-template-columns: repeat(2, 1fr); }
+      .cta-section { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-line"></div>
+      Solstice Realty
+    </div>
+    <div class="nav-links">
+      <a href="#properties">Properties</a>
+      <a href="#services">Services</a>
+      <a href="#agents">Our Team</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-cta">Private Viewing</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-bg-pattern"></div>
+    </div>
+    <!-- Faux architectural photo using CSS gradient -->
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#2C1810 0%,#4A2E1A 30%,#1A0E08 60%,#3D2416 100%);"></div>
+    <div style="position:absolute;inset:0;opacity:0.15;background-image:repeating-linear-gradient(45deg,rgba(184,150,62,0.1) 0px,transparent 1px,transparent 40px,rgba(184,150,62,0.1) 41px),repeating-linear-gradient(-45deg,rgba(184,150,62,0.05) 0px,transparent 1px,transparent 40px,rgba(184,150,62,0.05) 41px);"></div>
+    <div class="hero-img-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-kicker">
+        <div class="kicker-line"></div>
+        <div class="kicker-text">Luxury Real Estate</div>
+      </div>
+      <h1>
+        Exceptional homes,<br />
+        <em>extraordinary</em><br />
+        lives.
+      </h1>
+      <p class="hero-desc">
+        We curate the world's most coveted properties — from beachfront villas in Maldives to sky-high penthouses in Manhattan. Your dream home is our masterpiece.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-gold">Explore Properties</button>
+        <button class="btn-outline-white">Private Consultation</button>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">$4.2B</div>
+        <div class="hero-stat-label">Sales Volume</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">840+</div>
+        <div class="hero-stat-label">Homes Sold</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">18yr</div>
+        <div class="hero-stat-label">Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Properties -->
+  <section id="properties" class="properties-section">
+    <div class="section-header">
+      <div>
+        <div class="section-label"><div class="kicker-line"></div><span>Featured</span></div>
+        <div class="section-title">
+          Curated <em>properties</em><br />for discerning buyers
+        </div>
+      </div>
+      <a href="#" class="view-all">View All Listings</a>
+    </div>
+    <div class="properties-grid">
+      <div class="property-card tall">
+        <div style="width:100%;height:420px;background:linear-gradient(160deg,#2D3A2E 0%,#1A2B1A 50%,#0D1A0D 100%);position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,0.02) 3px,rgba(255,255,255,0.02) 4px);"></div>
+          <div style="position:absolute;bottom:30%;left:20%;width:60%;height:40%;background:rgba(255,255,255,0.06);border-radius:4px;"></div>
+        </div>
+        <div class="prop-overlay"></div>
+        <div class="prop-tag">Exclusive</div>
+        <div class="prop-info">
+          <div class="prop-location">Malibu, California</div>
+          <div class="prop-name">Ocean Crest Villa</div>
+          <div class="prop-price">$18,500,000</div>
+          <div class="prop-meta">
+            <span>7 bed</span>
+            <span>9 bath</span>
+            <span>12,400 sqft</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <div class="property-card short">
+          <div style="width:100%;height:208px;background:linear-gradient(135deg,#1A1A2E 0%,#16213E 50%,#0F3460 100%);"></div>
+          <div class="prop-overlay"></div>
+          <div class="prop-info">
+            <div class="prop-location">Manhattan, New York</div>
+            <div class="prop-name">Sky Penthouse 5400</div>
+            <div class="prop-price">$22,000,000</div>
+          </div>
+        </div>
+        <div class="property-card short">
+          <div style="width:100%;height:208px;background:linear-gradient(135deg,#3D2B1A 0%,#5C3D20 50%,#7A5230 100%);"></div>
+          <div class="prop-overlay"></div>
+          <div class="prop-info">
+            <div class="prop-location">Côte d'Azur, France</div>
+            <div class="prop-name">Villa Méditerranée</div>
+            <div class="prop-price">€14,750,000</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <div class="property-card short">
+          <div style="width:100%;height:208px;background:linear-gradient(135deg,#1C2B1A 0%,#2D4A20 60%,#1A3310 100%);"></div>
+          <div class="prop-overlay"></div>
+          <div class="prop-info">
+            <div class="prop-location">Aspen, Colorado</div>
+            <div class="prop-name">Alpine Lodge Estate</div>
+            <div class="prop-price">$9,200,000</div>
+          </div>
+        </div>
+        <div class="property-card short">
+          <div style="width:100%;height:208px;background:linear-gradient(135deg,#251A3D 0%,#3D2B5C 60%,#1A0F2E 100%);"></div>
+          <div class="prop-overlay"></div>
+          <div class="prop-info">
+            <div class="prop-location">Dubai, UAE</div>
+            <div class="prop-name">The Palm Signature</div>
+            <div class="prop-price">AED 52,000,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services-section">
+    <div class="section-label"><div class="kicker-line"></div><span>Services</span></div>
+    <div class="section-title">White-glove <em>service</em><br />at every step</div>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <div class="service-line"></div>
+        <div class="service-name">Buyer Representation</div>
+        <div class="service-desc">From the first viewing to final closing, your dedicated agent advocates exclusively for your interests, navigating every negotiation with precision.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <div class="service-line"></div>
+        <div class="service-name">Luxury Leasing</div>
+        <div class="service-desc">Access our exclusive network of premier rental properties worldwide. Short-term stays to long-term leases — curated for discerning lifestyles.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <div class="service-line"></div>
+        <div class="service-name">Portfolio Management</div>
+        <div class="service-desc">Strategic investment advice for high-net-worth clients. We identify emerging markets, optimize portfolios, and maximize long-term returns.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote-section">
+    <div class="quote-bg"></div>
+    <div class="quote-mark">"</div>
+    <div class="quote-text">
+      Solstice found us our dream home in six weeks. Their knowledge of the market, their patience, and their absolute dedication to finding the perfect fit was extraordinary.
+    </div>
+    <div class="quote-attr">
+      <div class="quote-line"></div>
+      <div class="quote-name">Alexandra & James Whitmore</div>
+      <div class="quote-role">Purchased — Ocean Crest Villa, Malibu</div>
+    </div>
+  </section>
+
+  <!-- Agents -->
+  <section id="agents" class="agents-section">
+    <div class="section-label"><div class="kicker-line"></div><span>Our Team</span></div>
+    <div class="section-title">Meet our <em>agents</em></div>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-photo-placeholder">CR</div>
+        <div class="agent-name">Catherine Ross</div>
+        <div class="agent-title">Senior Luxury Specialist</div>
+        <div class="agent-contact">
+          <a href="#" class="agent-btn">Profile</a>
+          <a href="#" class="agent-btn">Contact</a>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-photo-placeholder">DM</div>
+        <div class="agent-name">David Martinez</div>
+        <div class="agent-title">International Director</div>
+        <div class="agent-contact">
+          <a href="#" class="agent-btn">Profile</a>
+          <a href="#" class="agent-btn">Contact</a>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-photo-placeholder">SL</div>
+        <div class="agent-name">Sophie Laurent</div>
+        <div class="agent-title">European Markets Lead</div>
+        <div class="agent-contact">
+          <a href="#" class="agent-btn">Profile</a>
+          <a href="#" class="agent-btn">Contact</a>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-photo-placeholder">RK</div>
+        <div class="agent-name">Raj Kapoor</div>
+        <div class="agent-title">Investment Advisor</div>
+        <div class="agent-contact">
+          <a href="#" class="agent-btn">Profile</a>
+          <a href="#" class="agent-btn">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Contact -->
+  <section id="contact" class="cta-section">
+    <div class="cta-left">
+      <div class="section-label"><div class="kicker-line"></div><span>Private Consultation</span></div>
+      <div class="cta-title">
+        Begin your search for <em>the extraordinary</em>
+      </div>
+      <p class="cta-desc">
+        Our team of luxury specialists is ready to personally guide you through the finest properties in our portfolio. Completely confidential, no obligation.
+      </p>
+    </div>
+    <div class="cta-right">
+      <form class="cta-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">First Name</label>
+            <input class="form-input" type="text" placeholder="Alexandra" />
+          </div>
+          <div class="form-field">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" type="text" placeholder="Whitmore" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="a.whitmore@email.com" />
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label">Budget Range</label>
+            <select class="form-select">
+              <option>$5M – $10M</option>
+              <option>$10M – $25M</option>
+              <option>$25M – $50M</option>
+              <option>$50M+</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Preferred Market</label>
+            <select class="form-select">
+              <option>United States</option>
+              <option>Europe</option>
+              <option>Middle East</option>
+              <option>Asia Pacific</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="form-submit">Request Private Consultation</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo-wrap">
+        <div class="footer-logo">Solstice Realty</div>
+        <div class="footer-tagline">Curating extraordinary homes for extraordinary lives since 2007.</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Properties</div>
+        <a href="#">Residential</a>
+        <a href="#">Commercial</a>
+        <a href="#">International</a>
+        <a href="#">New Developments</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Services</div>
+        <a href="#">Buying</a>
+        <a href="#">Leasing</a>
+        <a href="#">Investment</a>
+        <a href="#">Relocation</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="#">About Us</a>
+        <a href="#">Our Team</a>
+        <a href="#">Press</a>
+        <a href="#">Careers</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Solstice Realty. All rights reserved.</div>
+      <div class="footer-copy"><span class="footer-gold">Licensed Real Estate Broker</span> · DRE #02084991</div>
+    </div>
+  </footer>
+</body>
+</html>
