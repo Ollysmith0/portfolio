@@ -3,9 +3,198 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
-    <script type="module" crossorigin src="/portfolio/assets/index-DfEO6K6X.js"></script>
-    <link rel="stylesheet" crossorigin href="/portfolio/assets/index-CtPBHwNc.css">
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="description" content="Premium web development & e-commerce solutions. I build conversion-optimized WordPress, Shopify, and custom stores with payment integration. 50+ stores built with 98% client satisfaction." />
+    <meta name="keywords" content="web development, e-commerce, Shopify store, WordPress, web design, portfolio, landing page, React developer" />
+    <meta name="author" content="Olly Smith" />
+    
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Olly Smith Store | Premium Web & E-Commerce Solutions" />
+    <meta property="og:description" content="Beautiful stores that sell themselves. WordPress, Shopify, or fully custom — I build conversion-optimized stores with payment integration." />
+    <meta property="og:url" content="https://ollysmith.store/" />
+    <meta property="og:image" content="https://ollysmith.store/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Olly Smith Store | Premium Web & E-Commerce Solutions" />
+    <meta name="twitter:description" content="Beautiful stores that sell themselves. I build conversion-optimized WordPress, Shopify, & custom stores." />
+    <meta name="twitter:image" content="https://ollysmith.store/og-image.png" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ollysmith.store/" />
+    
+    <!-- Preconnect & DNS Prefetch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    
+    <title>Olly Smith Store | Premium Web & E-Commerce Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Olly Smith Store",
+      "url": "https://ollysmith.store",
+      "logo": "https://ollysmith.store/favicon.svg",
+      "description": "Premium web development and e-commerce solutions",
+      "sameAs": [
+        "https://github.com/Ollysmith0",
+        "https://www.linkedin.com/in/huynh-tu-66422a195/",
+        "https://www.facebook.com/tu.huynh.399"
+      ],
+      "contact": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "ollysmith0@gmail.com",
+        "availableLanguage": ["en", "vi"]
+      },
+      "areaServed": "Worldwide",
+      "serviceType": "Web Development, E-commerce Solutions",
+      "availableLanguage": ["en"]
+    }
+    </script>
+
+    <!-- JSON-LD Person + Pricing Offers -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Olly Smith",
+      "url": "https://ollysmith.store",
+      "image": "https://ollysmith.store/assets/avatar-BI84xHkb.jpg",
+      "jobTitle": "Freelance Web Developer",
+      "email": "ollysmith0@gmail.com",
+      "knowsAbout": ["Web Development", "E-commerce", "Shopify", "WordPress", "React", "WooCommerce", "Next.js"],
+      "sameAs": [
+        "https://github.com/Ollysmith0",
+        "https://www.linkedin.com/in/huynh-tu-66422a195/",
+        "https://www.facebook.com/tu.huynh.399"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Development Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Starter Website",
+            "description": "1-page design, contact form, mobile responsive, basic SEO. Delivery in 24 hours.",
+            "price": "150",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Business Store",
+            "description": "Full e-commerce store with up to 50 products, payment gateway, custom theme. Delivery in 3 days.",
+            "price": "450",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Premium Store",
+            "description": "Enterprise-grade store with unlimited products, custom features, multi-language support. Delivery in 7 days.",
+            "price": "1000",
+            "priceCurrency": "USD"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- JSON-LD FAQ (enables Google rich results / accordion) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does it take to build a Shopify or WordPress store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Delivery time depends on the plan: Starter (1-page site) is delivered in 24 hours, Business Store in 3 days, and Premium with custom features in 7 days. All timelines are guaranteed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included in the price?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every plan includes design, development, mobile responsiveness, and basic SEO setup. Business and Premium plans include payment gateway integration, product setup, and multiple rounds of revisions. No hidden fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to provide anything to get started?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Just your logo (or we can design one), brand colors, product list, and any content you want on the site. We handle all the technical setup — hosting, domain connection, payment integration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which platform should I choose — Shopify or WordPress?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shopify is best for pure e-commerce: it's fast, reliable, and built for selling. WordPress (WooCommerce) is better if you need a blog, more content flexibility, or lower transaction fees. We recommend the best fit after a quick chat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you work with my existing domain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We connect your store to any existing domain (GoDaddy, Namecheap, Cloudflare, etc.). If you don't have a domain yet, we can help you choose and register one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment gateways do you support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We set up Stripe, PayPal, Shopify Payments, and most regional gateways. If you need a specific payment provider for your country, just let us know and we'll check compatibility."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer ongoing support after launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Premium plan includes 30 days of priority support post-launch. For all plans, we're available on WhatsApp for urgent issues. Long-term maintenance packages are available on request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you redesign my existing store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We can redesign and migrate your existing Shopify, WordPress, or any other platform. Send us a link to your current site and we'll give you a custom quote within 24 hours."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C5JZP4Z6HH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-C5JZP4Z6HH');
+    </script>
+    <script type="module" crossorigin src="/assets/index-D1n3Z7__.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-DJG_os-6.js">
+    <link rel="modulepreload" crossorigin href="/assets/router-CpbZsAl2.js">
+    <link rel="modulepreload" crossorigin href="/assets/framer-BpMfK1_i.js">
+    <link rel="modulepreload" crossorigin href="/assets/helmet-4q_0sOhR.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-oxhMRxKG.css">
   </head>
   <body>
     <div id="root"></div>

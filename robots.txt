@@ -1,0 +1,18 @@
+# Robots.txt for ollysmith.store
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Specific rules for different crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow private/admin pages (if added in future)
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://ollysmith.store/sitemap.xml
