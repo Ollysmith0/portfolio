@@ -33,6 +33,20 @@
       padding: 0 60px; height: 72px;
       display: flex; align-items: center; justify-content: space-between;
     }
+    
+    /* ─── Scroll animations ─── */
+    [data-a] { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    [data-a="left"] { transform: translateX(-28px); }
+    [data-a="right"] { transform: translateX(28px); }
+    [data-a="scale"] { transform: scale(0.93); }
+    [data-a="fade"] { transform: none; }
+    [data-a].vis { opacity: 1; transform: none; }
+    [data-d="1"].vis { transition-delay: 0.1s; }
+    [data-d="2"].vis { transition-delay: 0.2s; }
+    [data-d="3"].vis { transition-delay: 0.3s; }
+    [data-d="4"].vis { transition-delay: 0.4s; }
+    [data-d="5"].vis { transition-delay: 0.5s; }
+
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.5rem; font-weight: 400; letter-spacing: 0.04em;
@@ -566,5 +580,12 @@
       <div class="footer-copy"><span class="footer-gold">Licensed Real Estate Broker</span> · DRE #02084991</div>
     </div>
   </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+    }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-a]').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
