@@ -40,13 +40,27 @@ import fmPulse from "@/assets/template-fm-pulse.png";
 import fmOrbit from "@/assets/template-fm-orbit.png";
 import fmNeonlab from "@/assets/template-fm-neonlab.png";
 import fmGlitch from "@/assets/template-fm-glitch.png";
+// Landing page templates
+import lpLuminary from "@/assets/template-lp-luminary.png";
+import lpSolstice from "@/assets/template-lp-solstice.png";
+import lpForge from "@/assets/template-lp-forge.png";
+import lpAura from "@/assets/template-lp-aura.png";
+import lpApex from "@/assets/template-lp-apex.png";
+// Mobile app templates (React Native demos)
+import rnFinpulse from "@/assets/template-rn-finpulse.png";
+import rnFittrack from "@/assets/template-rn-fittrack.png";
+import rnNomad from "@/assets/template-rn-nomad.png";
+import rnAster from "@/assets/template-rn-aster.png";
+import rnMedpulse from "@/assets/template-rn-medpulse.png";
+import rnNoirshop from "@/assets/template-rn-noirshop.png";
+import rnNestify from "@/assets/template-rn-nestify.png";
+
+const MOBILE_DEMO_BASE_URL = `${import.meta.env.BASE_URL}mobile-demo.html?app=`;
 
 export const NAV_LINKS = [
   { label: "Home", href: "#hero" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Blog", href: "/blog" },
+  { label: "Work", href: "#portfolio" },
+  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -64,70 +78,70 @@ export type Service = {
   title: string;
   description: string;
   features: readonly string[];
-  icon: "wordpress" | "shopify" | "portfolio" | "custom";
+  icon: "wordpress" | "landing" | "b2b" | "custom";
   accent: string;
 };
 
 export const SERVICES: Service[] = [
   {
-    title: "WordPress Store",
+    title: "React Native App Development",
     description:
-      "Full WooCommerce store with custom theme, product catalog, cart, checkout, and payment gateway.",
+      "Full-featured cross-platform mobile apps for iOS and Android from a single codebase — production-ready, smooth, and built to scale.",
     features: [
-      "WooCommerce setup",
-      "Custom theme design",
-      "Payment gateway (Stripe/PayPal)",
-      "SEO optimized",
-      "Responsive design",
-      "Product import",
+      "iOS & Android from one codebase",
+      "React Native + TypeScript",
+      "Custom UI components",
+      "State management (Redux / Zustand)",
+      "REST & GraphQL integration",
+      "App Store / Play Store submission",
     ],
-    icon: "wordpress",
-    accent: "#21759b",
+    icon: "custom",
+    accent: "#61DAFB",
   },
   {
-    title: "Shopify Store",
+    title: "Mobile UI/UX Implementation",
     description:
-      "Premium Shopify store with custom theme, product management, and conversion-optimized checkout.",
+      "Pixel-perfect translation of Figma designs into buttery-smooth native mobile screens with micro-interactions and fluid animations.",
     features: [
-      "Custom Shopify theme",
-      "Product setup & variants",
-      "Shopify Payments",
-      "Inventory management",
-      "Mobile optimized",
-      "App integrations",
+      "Figma to React Native",
+      "Framer Motion animations",
+      "Gesture handling",
+      "Responsive layouts",
+      "Dark/light theme support",
+      "Accessibility-ready",
     ],
-    icon: "shopify",
-    accent: "#96bf48",
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "Stunning portfolio with contact form, project showcase, and professional branding that converts visitors.",
-    features: [
-      "Custom design",
-      "Contact form to email",
-      "Project showcase",
-      "Fast performance",
-      "Analytics setup",
-      "Domain & hosting help",
-    ],
-    icon: "portfolio",
+    icon: "landing",
     accent: "#ff7a2f",
   },
   {
-    title: "Custom Solution",
+    title: "App Architecture & Consulting",
     description:
-      "Bespoke web application or store built to your exact specs. React, Next.js, or any modern stack.",
+      "Technical leadership for mobile teams — codebase audits, architecture design, and performance optimization for existing RN projects.",
     features: [
-      "Custom architecture",
-      "API integrations",
-      "Admin dashboard",
-      "Scalable infrastructure",
-      "Ongoing support",
-      "Full source code",
+      "Codebase reviews",
+      "Performance profiling",
+      "Navigation architecture",
+      "CI/CD pipeline setup",
+      "Expo or bare workflow",
+      "Team onboarding",
     ],
-    icon: "custom",
+    icon: "b2b",
     accent: "#8df6cf",
+  },
+  {
+    title: "Framer Motion & Web",
+    description:
+      "Interactive web experiences, animated landing pages, and portfolio sites built with React and Framer Motion.",
+    features: [
+      "React / TypeScript / Vite",
+      "Framer Motion animations",
+      "Responsive design",
+      "Performance-optimized",
+      "SEO-friendly structure",
+      "Source-code handoff",
+    ],
+    icon: "wordpress",
+    accent: "#c8b6ff",
   },
 ];
 
@@ -139,50 +153,51 @@ export type PricingPlan = {
   description: string;
   features: readonly string[];
   popular?: boolean;
+  spotsLeft?: number;
 };
 
 export const PRICING_PLANS: PricingPlan[] = [
   {
-    id: "starter",
-    title: "Starter",
-    price: "$150",
-    description: "Perfect for a simple portfolio or landing page.",
+    id: "mvp",
+    title: "MVP App",
+    price: "From $1,200",
+    description: "A focused MVP for one platform — perfect for validating your idea fast.",
     features: [
-      "1-page design",
-      "Contact form",
-      "Mobile responsive",
-      "Basic SEO",
-      "1 round of revisions",
-      "Delivery in 24 hours",
+      "3–5 core screens",
+      "React Native (iOS + Android)",
+      "1 API integration",
+      "Basic navigation flow",
+      "Loading & error states",
+      "Source code handoff",
     ],
   },
   {
-    id: "business",
-    title: "Business Store",
-    price: "$450",
-    description: "Full e-commerce store ready to sell.",
+    id: "full-app",
+    title: "Full App",
+    price: "From $3,500",
+    description: "A production-ready app with authentication, API, and a polished UI.",
     features: [
-      "Up to 50 products",
-      "Payment gateway setup",
-      "Custom theme design",
-      "SEO & analytics",
-      "3 rounds of revisions",
-      "Delivery in 3 days",
+      "Complete screen set",
+      "Auth (email / OAuth / biometric)",
+      "REST or GraphQL integration",
+      "Push notifications",
+      "2 revision rounds",
+      "App Store submission support",
     ],
     popular: true,
   },
   {
-    id: "premium",
-    title: "Premium",
-    price: "$1,000",
-    description: "Enterprise-grade store with all bells and whistles.",
+    id: "custom-scope",
+    title: "Custom Scope",
+    price: "Custom quote",
+    description: "For complex apps, existing codebase work, or long-term project collaboration.",
     features: [
-      "Unlimited products",
-      "Custom features & APIs",
-      "Multi-language support",
-      "Advanced analytics",
-      "Priority support 30 days",
-      "Delivery in 7 days",
+      "Scope review before start",
+      "Architecture recommendation",
+      "Custom integrations",
+      "CI/CD & deployment pipeline",
+      "Priority communication",
+      "Retainer or fixed-price",
     ],
   },
 ];
@@ -194,10 +209,67 @@ export type PortfolioItem = {
   image: string;
   url: string;
   tags: readonly string[];
-  category: "shopify" | "portfolio" | "wordpress" | "framer";
+  category: "mobile" | "shopify" | "portfolio" | "wordpress" | "framer" | "landing";
 };
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
+  // ── Mobile Apps (React Native) ──
+  {
+    title: "FinPulse",
+    description: "Personal finance & investment tracker with dark UI, real-time charts, and card management.",
+    image: rnFinpulse,
+    url: `${MOBILE_DEMO_BASE_URL}finpulse`,
+    tags: ["React Native", "Fintech", "Charts"],
+    category: "mobile",
+  },
+  {
+    title: "FitTrack Pro",
+    description: "Fitness & workout tracker with streak system, animated progress bars, and exercise logging.",
+    image: rnFittrack,
+    url: `${MOBILE_DEMO_BASE_URL}fittrack`,
+    tags: ["React Native", "Health", "Fitness"],
+    category: "mobile",
+  },
+  {
+    title: "Nomad Travel",
+    description: "Premium travel booking app with destination discovery, hotel detail, and trip itinerary.",
+    image: rnNomad,
+    url: `${MOBILE_DEMO_BASE_URL}nomad`,
+    tags: ["React Native", "Travel", "Booking"],
+    category: "mobile",
+  },
+  {
+    title: "Aster Social",
+    description: "Dating & social platform with swipe card UI, match feed, and real-time messaging.",
+    image: rnAster,
+    url: `${MOBILE_DEMO_BASE_URL}aster`,
+    tags: ["React Native", "Social", "Dating"],
+    category: "mobile",
+  },
+  {
+    title: "MedPulse",
+    description: "Telemedicine & health dashboard with vitals monitoring, doctor search, and appointment booking.",
+    image: rnMedpulse,
+    url: `${MOBILE_DEMO_BASE_URL}medpulse`,
+    tags: ["React Native", "Healthcare", "MedTech"],
+    category: "mobile",
+  },
+  {
+    title: "Noir Shop",
+    description: "Luxury fashion e-commerce with editorial product grid, detail view, and cart checkout.",
+    image: rnNoirshop,
+    url: `${MOBILE_DEMO_BASE_URL}noirshop`,
+    tags: ["React Native", "E-Commerce", "Luxury"],
+    category: "mobile",
+  },
+  {
+    title: "Nestify",
+    description: "Real estate app with property search, detail view, virtual tour, and interactive map.",
+    image: rnNestify,
+    url: `${MOBILE_DEMO_BASE_URL}nestify`,
+    tags: ["React Native", "PropTech", "Real Estate"],
+    category: "mobile",
+  },
   {
     title: "Velocity SaaS",
     description: "SaaS landing page template with modern design system.",
@@ -435,34 +507,34 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   },
   // ── New Framer ──
   {
-    title: "Horizon Design Agency",
-    description: "Bold agency with gradient purple-blue and smooth motion.",
+    title: "Flux Studio Agency",
+    description: "Dark agency site with headline slide-up reveal, animated gradient orbs, and scroll-driven parallax.",
     image: fmHorizon,
-    url: "https://fm-horizon.vercel.app/",
+    url: "https://3-flux-agency.vercel.app/",
     tags: ["Framer", "Agency", "Gradient"],
     category: "framer",
   },
   {
-    title: "Pulse Analytics",
-    description: "SaaS dashboard with green accent and live metrics preview.",
+    title: "Nova SaaS Platform",
+    description: "Midnight-navy SaaS landing with floating particles, animated bar chart dashboard, live count-up metrics, and cyan glow accents.",
     image: fmPulse,
-    url: "https://fm-pulse.vercel.app/",
-    tags: ["Framer", "SaaS", "Dashboard"],
+    url: "https://6-nova-saas.vercel.app/",
+    tags: ["Framer", "SaaS", "Cyan"],
     category: "framer",
   },
   {
-    title: "Orbit Creative Studio",
-    description: "Immersive studio with spinning orbit animation and marquee.",
+    title: "Prism Studio",
+    description: "Luxury photography studio with warm amber palette, gold grain texture, scroll-driven count-up stats, and headline clip reveal.",
     image: fmOrbit,
-    url: "https://fm-orbit.vercel.app/",
-    tags: ["Framer", "Creative", "Motion"],
+    url: "https://5-prism-studio.vercel.app/",
+    tags: ["Framer", "Photography", "Amber"],
     category: "framer",
   },
   {
-    title: "NeonLab Digital Lab",
-    description: "Hacker-style digital lab with neon green terminal aesthetic.",
+    title: "Void.dev Portfolio",
+    description: "Terminal-style dev portfolio with live typing animation, scanning line, and neon green aesthetic.",
     image: fmNeonlab,
-    url: "https://fm-neonlab.vercel.app/",
+    url: "https://4-void-dev.vercel.app/",
     tags: ["Framer", "Developer", "Neon"],
     category: "framer",
   },
@@ -474,6 +546,47 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     tags: ["Framer", "Creative", "Experimental"],
     category: "framer",
   },
+  // ── Landing Page Templates ──
+  {
+    title: "Luminary — SaaS Analytics",
+    description: "AI-powered analytics platform landing page with live dashboard mockup, dark navy theme, electric indigo/violet gradients, and Space Grotesk typography.",
+    image: lpLuminary,
+    url: "https://ollysmith0.github.io/portfolio/luminary/",
+    tags: ["Landing Page", "SaaS", "Analytics", "Dark UI"],
+    category: "landing",
+  },
+  {
+    title: "Solstice — Luxury Real Estate",
+    description: "Premium real estate landing page with Cormorant Garamond serif typography, gold accents, warm ivory palette, and full-bleed property gallery.",
+    image: lpSolstice,
+    url: "https://ollysmith0.github.io/portfolio/solstice/",
+    tags: ["Landing Page", "Real Estate", "Luxury", "Serif"],
+    category: "landing",
+  },
+  {
+    title: "Forge — Developer Tools CLI",
+    description: "Developer infrastructure platform landing page with pure black terminal aesthetic, JetBrains Mono typography, syntax-highlighted code blocks, and green/amber accents.",
+    image: lpForge,
+    url: "https://ollysmith0.github.io/portfolio/forge/",
+    tags: ["Landing Page", "Developer Tools", "Terminal", "CLI"],
+    category: "landing",
+  },
+  {
+    title: "Aura — Wellness App",
+    description: "Mindfulness app landing page with soft lavender/sage gradient palette, DM Serif Display typography, organic shapes, and a detailed phone UI mockup.",
+    image: lpAura,
+    url: "https://ollysmith0.github.io/portfolio/aura/",
+    tags: ["Landing Page", "Wellness", "App", "Pastel"],
+    category: "landing",
+  },
+  {
+    title: "Apex — Fintech Trading",
+    description: "Next-gen fintech trading platform landing page with dark charcoal theme, real-time chart UI mockup, Syne font, teal accents, and order book visualization.",
+    image: lpApex,
+    url: "https://ollysmith0.github.io/portfolio/apex/",
+    tags: ["Landing Page", "Fintech", "Trading", "Dark UI"],
+    category: "landing",
+  },
 ];
 
 // ── Testimonials ──────────────────────────────────────────────
@@ -483,7 +596,7 @@ export const TESTIMONIALS = [
     role: "Product Manager @ Proptech",
     avatar: propertyguruvn,
     rating: 5,
-    text: "Olly delivered outstanding work on our real-estate platform. His attention to detail and ability to translate designs into pixel-perfect code is remarkable.",
+    text: "Olly built our property search app from Figma to App Store in 6 weeks. The animations and performance are outstanding — clients love it.",
     date: "Nov 2024",
   },
   {
@@ -491,7 +604,7 @@ export const TESTIMONIALS = [
     role: "CTO @ PlanetTota",
     avatar: planettota,
     rating: 5,
-    text: "A highly skilled engineer who understands both design and code. The NFT marketplace he built exceeded all our expectations.",
+    text: "A highly skilled React Native engineer who understands both design and architecture. He refactored our entire navigation and it's night and day.",
     date: "Sep 2024",
   },
   {
@@ -499,7 +612,7 @@ export const TESTIMONIALS = [
     role: "Lead Designer @ MoneyForward",
     avatar: cloudfixedasset,
     rating: 5,
-    text: "Olly bridged the gap between design and development flawlessly. Our cloud asset management UI has never looked better.",
+    text: "Olly bridged the gap between design and development flawlessly. Every micro-interaction in our finance app came out exactly as designed.",
     date: "Aug 2024",
   },
   {
@@ -507,7 +620,7 @@ export const TESTIMONIALS = [
     role: "CEO @ PatientPop",
     avatar: patientpop,
     rating: 4,
-    text: "Reliable, skilled, and communicates clearly. The patient portal Olly built is clean, fast, and our users love it.",
+    text: "Reliable, skilled, and communicates clearly. The patient portal app Olly built is clean, fast, and our users love the onboarding flow.",
     date: "Jun 2024",
   },
   {
@@ -515,7 +628,7 @@ export const TESTIMONIALS = [
     role: "Freelance Collaborator",
     avatar: propertyguruvn,
     rating: 5,
-    text: "Working with Olly was a great experience. He's proactive, asks the right questions, and always delivers on time.",
+    text: "We brought Olly in to speed up our React Native sprint. He's proactive, asks the right questions, and always delivers on time.",
     date: "Mar 2024",
   },
   {
@@ -523,7 +636,7 @@ export const TESTIMONIALS = [
     role: "UX Lead @ Startup",
     avatar: planettota,
     rating: 5,
-    text: "The Figma prototypes he turned into reality were stunning. His understanding of design systems is top-notch.",
+    text: "The Framer Motion interactions he added to our app demo were stunning. His understanding of mobile UX patterns is top-notch.",
     date: "Jan 2024",
   },
 ] as const;

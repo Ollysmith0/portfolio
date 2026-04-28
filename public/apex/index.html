@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex — Trade Smarter. Win Bigger.</title>
+  <meta name="description" content="Apex is the next-generation fintech trading platform. Institutional-grade tools for serious traders. Real-time data, AI signals, and zero-commission trading." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0C14;
+      --bg2: #0F0F1A;
+      --bg3: #141420;
+      --surface: rgba(255,255,255,0.03);
+      --surface2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.06);
+      --border2: rgba(255,255,255,0.1);
+      --teal: #00D4AA;
+      --teal2: #00B894;
+      --green: #00FF7F;
+      --red: #FF4757;
+      --amber: #FFC312;
+      --purple: #6C63FF;
+      --text: #F0F0F8;
+      --muted: rgba(240,240,248,0.45);
+      --muted2: rgba(240,240,248,0.25);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+
+    /* ─── Background effects ─── */
+    .bg-effects {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .bg-grad-1 { position: absolute; width: 700px; height: 700px; top: -300px; left: -200px; background: radial-gradient(circle, rgba(0,212,170,0.12) 0%, transparent 70%); border-radius: 50%; }
+    .bg-grad-2 { position: absolute; width: 600px; height: 600px; top: 200px; right: -200px; background: radial-gradient(circle, rgba(108,99,255,0.1) 0%, transparent 70%); border-radius: 50%; }
+    .bg-lines {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(12,12,20,0.85); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 800; color: var(--text);
+      display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em;
+    }
+    .nav-logo-mark {
+      width: 26px; height: 26px; background: var(--teal); clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 0.85rem; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; gap: 12px; align-items: center; }
+    .nav-login { font-size: 0.85rem; font-weight: 500; color: var(--muted); background: transparent; border: none; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; transition: color 0.2s; }
+    .nav-login:hover { color: var(--text); }
+    .nav-cta {
+      font-family: 'IBM Plex Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+      background: var(--teal); color: var(--bg); border: none;
+      padding: 10px 22px; cursor: pointer; transition: all 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+    }
+    .nav-cta:hover { background: var(--teal2); transform: translateY(-1px); }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 110px 48px 80px; z-index: 1;
+    }
+    .hero-inner { max-width: 1280px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 55% 45%; gap: 64px; align-items: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.25);
+      padding: 6px 14px; margin-bottom: 24px;
+    }
+    .badge-live { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); }
+    .live-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: livepulse 1.5s infinite; }
+    @keyframes livepulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,170,0.6); } 50% { box-shadow: 0 0 0 6px rgba(0,212,170,0); } }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 800;
+      line-height: 1.0; letter-spacing: -0.04em;
+    }
+    .h1-teal { color: var(--teal); }
+    .h1-line { display: block; }
+    .hero-sub {
+      margin-top: 22px; font-size: 1rem; color: var(--muted);
+      line-height: 1.75; max-width: 500px; font-weight: 400;
+    }
+    .hero-actions { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; align-items: center; }
+    .btn-teal {
+      font-family: 'IBM Plex Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+      background: var(--teal); color: var(--bg); border: none;
+      padding: 14px 28px; cursor: pointer; transition: all 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+    }
+    .btn-teal:hover { background: var(--teal2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,170,0.3); }
+    .btn-outline {
+      font-family: 'IBM Plex Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+      background: transparent; border: 1px solid var(--border2); color: var(--text);
+      padding: 14px 28px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 36px; }
+    .trust-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1px solid var(--border); padding: 8px 14px;
+    }
+    .trust-icon { font-size: 0.9rem; }
+    .trust-label { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+    .trust-val { font-size: 0.75rem; color: var(--text); font-weight: 600; }
+
+    /* ─── Chart mockup ─── */
+    .chart-panel {
+      background: var(--bg3); border: 1px solid var(--border2);
+      padding: 20px; position: relative;
+    }
+    .cp-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+    }
+    .cp-asset { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; }
+    .cp-price { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--teal); }
+    .cp-change { font-size: 0.8rem; font-weight: 600; background: rgba(0,255,127,0.1); color: var(--green); padding: 3px 8px; }
+    .cp-tabs { display: flex; gap: 0; margin-bottom: 14px; }
+    .cp-tab { font-size: 0.72rem; font-weight: 600; padding: 5px 12px; cursor: pointer; color: var(--muted); background: transparent; border: 1px solid transparent; }
+    .cp-tab.active { background: var(--surface2); border-color: var(--border2); color: var(--text); }
+    .chart-area { position: relative; height: 160px; }
+    .chart-svg { width: 100%; height: 100%; }
+    .chart-area-fill { fill: url(#chartGrad); opacity: 0.3; }
+    .chart-line { fill: none; stroke: var(--teal); stroke-width: 2; }
+    .cp-info-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+    .cp-info-item { background: var(--surface); padding: 10px; }
+    .cp-info-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .cp-info-val { font-size: 0.85rem; font-weight: 600; margin-top: 3px; }
+    .cp-info-val.up { color: var(--green); }
+    .cp-info-val.down { color: var(--red); }
+
+    /* ─── Orderbook panel ─── */
+    .ob-panel { background: var(--bg3); border: 1px solid var(--border2); padding: 16px; margin-top: 8px; }
+    .ob-title { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .ob-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; font-size: 0.72rem; margin-bottom: 4px; align-items: center; }
+    .ob-bar { height: 20px; display: flex; align-items: center; padding: 0 6px; font-weight: 600; }
+    .ob-bar.bid { background: rgba(0,255,127,0.1); color: var(--green); justify-content: flex-end; }
+    .ob-bar.ask { background: rgba(255,71,87,0.1); color: var(--red); }
+    .ob-price { font-weight: 700; color: var(--text); text-align: center; font-size: 0.8rem; }
+
+    /* ─── Features ─── */
+    .section { max-width: 1280px; margin: 0 auto; padding: 100px 48px; position: relative; z-index: 1; }
+    .section-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--teal); margin-bottom: 10px;
+    }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
+    .section-sub { font-size: 0.95rem; color: var(--muted); margin-top: 12px; max-width: 480px; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
+    .feat-card {
+      background: var(--bg3); border: 1px solid var(--border); padding: 32px;
+      position: relative; overflow: hidden; transition: border-color 0.25s;
+    }
+    .feat-card:hover { border-color: rgba(0,212,170,0.3); }
+    .feat-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,212,170,0.04) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
+    .feat-card:hover::before { opacity: 1; }
+    .feat-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--teal); opacity: 0.15; line-height: 1; margin-bottom: 16px; }
+    .feat-icon-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .feat-icon { font-size: 1.3rem; }
+    .feat-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
+    .feat-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* ─── Metrics ─── */
+    .metrics-band {
+      background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 60px 48px; position: relative; z-index: 1;
+    }
+    .metrics-inner { max-width: 1280px; margin: 0 auto; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; }
+    .metric-item { text-align: center; }
+    .metric-val { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--teal); letter-spacing: -0.04em; line-height: 1; }
+    .metric-label { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+
+    /* ─── Security ─── */
+    .security-section {
+      background: linear-gradient(135deg, rgba(0,212,170,0.06) 0%, rgba(108,99,255,0.06) 100%);
+      border-top: 1px solid var(--border); padding: 80px 48px; position: relative; z-index: 1;
+    }
+    .security-inner { max-width: 1280px; margin: 0 auto; }
+    .security-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+    .sec-card { text-align: center; padding: 24px; }
+    .sec-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .sec-title { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+    .sec-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── Pricing ─── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
+    .price-card {
+      background: var(--bg3); border: 1px solid var(--border); padding: 36px;
+      position: relative; transition: border-color 0.25s;
+    }
+    .price-card:hover { border-color: rgba(0,212,170,0.3); }
+    .price-card.featured { background: linear-gradient(135deg, rgba(0,212,170,0.08) 0%, rgba(108,99,255,0.05) 100%); border-color: rgba(0,212,170,0.4); }
+    .featured-tag {
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--teal); color: var(--bg); font-size: 0.7rem; font-weight: 700;
+      padding: 4px 14px; white-space: nowrap; font-family: 'Syne', sans-serif;
+      clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px);
+    }
+    .price-tier { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 10px; }
+    .price-amount { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; }
+    .price-period { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.875rem; font-weight: 400; color: var(--muted); }
+    .price-desc { font-size: 0.85rem; color: var(--muted); margin: 12px 0 24px; font-weight: 300; line-height: 1.6; }
+    .price-hr { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .price-list li { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--muted); }
+    .price-list li::before { content: '→'; color: var(--teal); flex-shrink: 0; font-size: 0.8rem; }
+    .price-btn {
+      display: block; width: 100%; margin-top: 28px; padding: 13px; text-align: center;
+      font-family: 'Syne', sans-serif; font-size: 0.875rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: all 0.2s; border: none;
+    }
+    .price-btn.teal {
+      background: var(--teal); color: var(--bg);
+      clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+    }
+    .price-btn.teal:hover { background: var(--teal2); }
+    .price-btn.outline { background: transparent; border: 1px solid var(--border2); color: var(--text); }
+    .price-btn.outline:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      padding: 130px 48px; text-align: center; position: relative; z-index: 1;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0,212,170,0.12) 0%, transparent 60%);
+    }
+    .cta-title { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+    .cta-title .teal { color: var(--teal); }
+    .cta-sub { font-size: 1rem; color: var(--muted); margin-top: 18px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 40px; flex-wrap: wrap; }
+    .cta-disclaimer { font-size: 0.78rem; color: var(--muted2); margin-top: 18px; }
+
+    /* ─── Footer ─── */
+    footer {
+      border-top: 1px solid var(--border); padding: 60px 48px 32px; position: relative; z-index: 1;
+    }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .footer-logo-mark { width: 20px; height: 20px; background: var(--teal); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); }
+    .footer-bio { font-size: 0.82rem; color: var(--muted); line-height: 1.65; max-width: 220px; font-weight: 300; }
+    .footer-col-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(240,240,248,0.7); margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 0.82rem; color: var(--muted); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--teal); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 0.78rem; color: var(--muted2); }
+    .footer-legal { font-size: 0.72rem; color: var(--muted2); max-width: 600px; line-height: 1.5; }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      .features-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .security-grid { grid-template-columns: repeat(2, 1fr); }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .metrics-band, .security-section { padding: 60px 20px; }
+      .section { padding: 60px 20px; }
+      footer { padding: 40px 20px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-effects">
+    <div class="bg-grad-1"></div>
+    <div class="bg-grad-2"></div>
+    <div class="bg-lines"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-mark"></div>
+      APEX
+    </div>
+    <div class="nav-links">
+      <a href="#features">Platform</a>
+      <a href="#security">Security</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#">Markets</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-login">Log In</button>
+      <button class="nav-cta">Open Account</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <div class="badge-live">
+            <div class="live-dot"></div>
+            Markets Open · S&P 500 +1.24%
+          </div>
+        </div>
+        <h1>
+          <span class="h1-line">Trade</span>
+          <span class="h1-line"><span class="h1-teal">smarter.</span></span>
+          <span class="h1-line">Win bigger.</span>
+        </h1>
+        <p class="hero-sub">
+          Institutional-grade trading tools for serious traders. Real-time market data, AI-powered signals, zero-commission trading, and sub-millisecond execution.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-teal">Open Free Account</button>
+          <button class="btn-outline">View Demo</button>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-badge"><span class="trust-icon">🏛️</span><div><div class="trust-val">$48B+</div><div class="trust-label">Assets under management</div></div></div>
+          <div class="trust-badge"><span class="trust-icon">👤</span><div><div class="trust-val">2.1M</div><div class="trust-label">Active traders</div></div></div>
+          <div class="trust-badge"><span class="trust-icon">⚡</span><div><div class="trust-val">&lt;0.8ms</div><div class="trust-label">Order execution</div></div></div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div>
+        <div class="chart-panel">
+          <div class="cp-header">
+            <div>
+              <div class="cp-asset">BTC / USD</div>
+              <div style="font-size:0.72rem;color:var(--muted);margin-top:2px;">Bitcoin · Crypto</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="cp-price">$67,482.50</div>
+              <div class="cp-change">↑ +3.84% today</div>
+            </div>
+          </div>
+          <div class="cp-tabs">
+            <div class="cp-tab">1H</div>
+            <div class="cp-tab active">1D</div>
+            <div class="cp-tab">1W</div>
+            <div class="cp-tab">1M</div>
+          </div>
+          <div class="chart-area">
+            <svg class="chart-svg" viewBox="0 0 400 160" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#00D4AA" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#00D4AA" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path class="chart-area-fill" d="M0,140 L20,120 L40,130 L60,100 L80,110 L100,85 L120,90 L140,70 L160,80 L180,55 L200,65 L220,40 L240,50 L260,30 L280,45 L300,20 L320,35 L340,15 L360,25 L380,10 L400,20 L400,160 L0,160 Z"/>
+              <path class="chart-line" d="M0,140 L20,120 L40,130 L60,100 L80,110 L100,85 L120,90 L140,70 L160,80 L180,55 L200,65 L220,40 L240,50 L260,30 L280,45 L300,20 L320,35 L340,15 L360,25 L380,10 L400,20"/>
+              <circle cx="400" cy="20" r="4" fill="#00D4AA"/>
+              <circle cx="400" cy="20" r="8" fill="#00D4AA" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="cp-info-row">
+            <div class="cp-info-item">
+              <div class="cp-info-label">Open</div>
+              <div class="cp-info-val">$64,920</div>
+            </div>
+            <div class="cp-info-item">
+              <div class="cp-info-label">High</div>
+              <div class="cp-info-val up">$68,150</div>
+            </div>
+            <div class="cp-info-item">
+              <div class="cp-info-label">Low</div>
+              <div class="cp-info-val down">$63,780</div>
+            </div>
+            <div class="cp-info-item">
+              <div class="cp-info-label">Volume</div>
+              <div class="cp-info-val">$14.2B</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-panel">
+          <div class="ob-title">Order Book</div>
+          <div class="ob-row">
+            <div class="ob-bar bid">2.480 BTC</div>
+            <div class="ob-price">67,483</div>
+            <div class="ob-bar ask">1.920 BTC</div>
+          </div>
+          <div class="ob-row">
+            <div class="ob-bar bid">1.850 BTC</div>
+            <div class="ob-price">67,450</div>
+            <div class="ob-bar ask">3.100 BTC</div>
+          </div>
+          <div class="ob-row">
+            <div class="ob-bar bid">4.200 BTC</div>
+            <div class="ob-price">67,420</div>
+            <div class="ob-bar ask">0.780 BTC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <div class="metrics-band">
+    <div class="metrics-inner">
+      <div class="metrics-grid">
+        <div class="metric-item"><div class="metric-val">$48B+</div><div class="metric-label">Total trading volume</div></div>
+        <div class="metric-item"><div class="metric-val">2.1M</div><div class="metric-label">Active traders</div></div>
+        <div class="metric-item"><div class="metric-val">0.8ms</div><div class="metric-label">Avg execution time</div></div>
+        <div class="metric-item"><div class="metric-val">99.98%</div><div class="metric-label">Platform uptime</div></div>
+        <div class="metric-item"><div class="metric-val">180+</div><div class="metric-label">Assets tradeable</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div id="features" class="section">
+    <div class="section-kicker">Platform</div>
+    <div class="section-title">Built for serious traders</div>
+    <div class="section-sub">Every tool you need to analyze markets, manage risk, and execute trades with institutional precision.</div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-num">01</div>
+        <div class="feat-icon-row"><span class="feat-icon">⚡</span><span class="feat-title">Lightning Execution</span></div>
+        <div class="feat-desc">Sub-millisecond order routing to 25+ liquidity pools. Direct market access with co-located servers for the fastest fills in the industry.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">02</div>
+        <div class="feat-icon-row"><span class="feat-icon">🤖</span><span class="feat-title">AI Signal Engine</span></div>
+        <div class="feat-desc">Machine learning models trained on 15 years of market data surface high-probability setups in real time. Backtested. Live-tested. Proven.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">03</div>
+        <div class="feat-icon-row"><span class="feat-icon">📊</span><span class="feat-title">Advanced Charting</span></div>
+        <div class="feat-desc">TradingView-powered charts with 100+ technical indicators, custom drawing tools, multi-timeframe analysis, and pattern recognition.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">04</div>
+        <div class="feat-icon-row"><span class="feat-icon">🎯</span><span class="feat-title">Risk Management</span></div>
+        <div class="feat-desc">Portfolio-level stop losses, position sizing algorithms, real-time P&L, margin monitoring, and automatic exposure limits.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">05</div>
+        <div class="feat-icon-row"><span class="feat-icon">📱</span><span class="feat-title">Mobile Trading</span></div>
+        <div class="feat-desc">Full platform power on iOS and Android. Execute trades, monitor positions, and receive alerts — anywhere, with one tap.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">06</div>
+        <div class="feat-icon-row"><span class="feat-icon">🔌</span><span class="feat-title">API Access</span></div>
+        <div class="feat-desc">REST and WebSocket APIs for algorithmic traders. Build and deploy your own strategies with full institutional-grade infrastructure.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Security -->
+  <div id="security" class="security-section">
+    <div class="security-inner">
+      <div class="section-kicker">Security</div>
+      <div class="section-title">Your capital, protected</div>
+      <div class="security-grid">
+        <div class="sec-card"><span class="sec-icon">🏦</span><div class="sec-title">FDIC Insured</div><div class="sec-desc">Cash deposits insured up to $250,000 per customer through our banking partners.</div></div>
+        <div class="sec-card"><span class="sec-icon">🔐</span><div class="sec-title">256-bit Encryption</div><div class="sec-desc">Military-grade encryption for all data in transit and at rest. Zero-knowledge architecture for keys.</div></div>
+        <div class="sec-card"><span class="sec-icon">🛡️</span><div class="sec-title">SOC 2 Type II</div><div class="sec-desc">Independently audited security controls verified annually by a Big 4 accounting firm.</div></div>
+        <div class="sec-card"><span class="sec-icon">⚖️</span><div class="sec-title">SEC Regulated</div><div class="sec-desc">Licensed broker-dealer registered with the SEC and FINRA. Full regulatory compliance.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div id="pricing" class="section">
+    <div class="section-kicker">Pricing</div>
+    <div class="section-title">No hidden fees. Ever.</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Trader</div>
+        <div class="price-amount">$0 <span class="price-period">/mo</span></div>
+        <div class="price-desc">Zero commissions on stocks and ETFs. Start trading in minutes.</div>
+        <hr class="price-hr" />
+        <ul class="price-list">
+          <li>$0 stock & ETF trades</li>
+          <li>Real-time quotes</li>
+          <li>Basic charting</li>
+          <li>Mobile app</li>
+        </ul>
+        <a href="#" class="price-btn outline">Open Free Account</a>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-tag">Pro Traders</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount">$29 <span class="price-period">/mo</span></div>
+        <div class="price-desc">Advanced tools for active traders who demand more from their platform.</div>
+        <hr class="price-hr" />
+        <ul class="price-list">
+          <li>Everything in Trader</li>
+          <li>AI signal engine</li>
+          <li>Advanced charting (100+ indicators)</li>
+          <li>Options & futures</li>
+          <li>API access</li>
+          <li>Level 2 order flow</li>
+          <li>Tax loss harvesting</li>
+        </ul>
+        <a href="#" class="price-btn teal">Start 30-Day Free Trial</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Institutional</div>
+        <div class="price-amount">Custom</div>
+        <div class="price-desc">For hedge funds, family offices, and institutional desks. Custom pricing and SLAs.</div>
+        <hr class="price-hr" />
+        <ul class="price-list">
+          <li>Everything in Pro</li>
+          <li>Co-location access</li>
+          <li>FIX protocol</li>
+          <li>Prime brokerage</li>
+          <li>Custom reporting</li>
+          <li>Dedicated desk</li>
+        </ul>
+        <a href="#" class="price-btn outline">Contact Institutional Sales</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="section-kicker">Start Trading</div>
+    <div class="cta-title">Your edge starts<br /><span class="teal">here.</span></div>
+    <p class="cta-sub">Open a free account in 3 minutes. No minimum balance, no commissions, no BS.</p>
+    <div class="cta-actions">
+      <button class="btn-teal" style="font-size:1rem;padding:16px 36px;">Open Free Account</button>
+      <button class="btn-outline" style="font-size:1rem;padding:16px 36px;">View Demo Account</button>
+    </div>
+    <div class="cta-disclaimer">Trading involves risk. Past performance does not guarantee future results. Please review our risk disclosure before trading.</div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><div class="footer-logo-mark"></div>APEX</div>
+        <div class="footer-bio">Institutional-grade trading for everyone. Licensed, regulated, and built for serious traders.</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Platform</div>
+        <a href="#">Stock Trading</a>
+        <a href="#">Options</a>
+        <a href="#">Crypto</a>
+        <a href="#">ETFs</a>
+        <a href="#">API</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Learn</div>
+        <a href="#">Trading Academy</a>
+        <a href="#">Market News</a>
+        <a href="#">Research</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Support</a>
+        <a href="#">Legal</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Apex Trading Inc. All rights reserved. Member FINRA/SIPC.</div>
+      <div class="footer-legal">Trading involves substantial risk of loss and is not appropriate for all investors. Securities products offered through Apex Trading Inc., a registered broker-dealer.</div>
+    </div>
+  </footer>
+</body>
+</html>
