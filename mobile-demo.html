@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050509" />
+    <title>React Native Demo | Olly Smith</title>
+    <style>
+      :root {
+        --bg: #050509;
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel-strong: rgba(255, 255, 255, 0.1);
+        --line: rgba(255, 255, 255, 0.13);
+        --text: #f4f4f7;
+        --muted: #a9a9b4;
+        --accent: #61dafb;
+        --accent-2: #8df6cf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 10% 0%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 34rem),
+          radial-gradient(circle at 90% 12%, color-mix(in srgb, var(--accent-2) 22%, transparent), transparent 32rem),
+          linear-gradient(135deg, #050509 0%, #090914 52%, #050509 100%);
+      }
+
+      a,
+      button {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .shell {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+        backdrop-filter: blur(18px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.84);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        color: var(--accent);
+      }
+
+      .back-link {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 9px 13px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 13px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+        align-items: center;
+        gap: clamp(28px, 6vw, 76px);
+        min-height: calc(100vh - 90px);
+        padding: 42px 0 74px;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .kicker::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 24px var(--accent);
+      }
+
+      h1 {
+        max-width: 780px;
+        margin: 18px 0 16px;
+        font-size: clamp(2.5rem, 9vw, 6.2rem);
+        line-height: 0.88;
+        letter-spacing: -0.07em;
+      }
+
+      .lead {
+        max-width: 680px;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        line-height: 1.75;
+      }
+
+      .chips,
+      .tabs,
+      .metrics,
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chips,
+      .tabs,
+      .metrics,
+      .actions {
+        margin-top: 24px;
+      }
+
+      .chip,
+      .tab,
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .chip {
+        padding: 8px 12px;
+        color: #e9e9ef;
+        font-size: 12px;
+      }
+
+      .tab {
+        padding: 9px 12px;
+        color: rgba(255, 255, 255, 0.58);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        transition: 180ms ease;
+      }
+
+      .tab.active {
+        border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+        color: var(--text);
+        background: color-mix(in srgb, var(--accent) 18%, transparent);
+        box-shadow: 0 0 32px color-mix(in srgb, var(--accent) 22%, transparent);
+      }
+
+      .metric {
+        min-width: 126px;
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+
+      .metric-value {
+        display: block;
+        color: #fff;
+        font-size: 21px;
+        font-weight: 850;
+        letter-spacing: -0.04em;
+      }
+
+      .metric-label {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border-radius: 999px;
+        padding: 0 17px;
+        color: #050509;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        font-size: 14px;
+        font-weight: 850;
+      }
+
+      .button.secondary {
+        border: 1px solid var(--line);
+        color: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .phone-wrap {
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+
+      .phone-glow {
+        position: absolute;
+        inset: 10%;
+        border-radius: 999px;
+        background: var(--accent);
+        filter: blur(92px);
+        opacity: 0.22;
+      }
+
+      .phone {
+        position: relative;
+        width: min(100%, 352px);
+        min-height: 710px;
+        border: 10px solid #0b0b10;
+        border-radius: 46px;
+        overflow: hidden;
+        background: #101019;
+        box-shadow: 0 34px 100px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+
+      .notch {
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        z-index: 3;
+        width: 98px;
+        height: 26px;
+        transform: translateX(-50%);
+        border-radius: 0 0 18px 18px;
+        background: #050509;
+      }
+
+      .screen {
+        min-height: 690px;
+        padding: 52px 18px 18px;
+        background:
+          radial-gradient(circle at 15% 4%, color-mix(in srgb, var(--accent) 40%, transparent), transparent 11rem),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+      }
+
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .app-title {
+        margin: 0;
+        font-size: 25px;
+        line-height: 1;
+        letter-spacing: -0.05em;
+      }
+
+      .avatar {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 16px;
+        background: color-mix(in srgb, var(--accent) 24%, rgba(255, 255, 255, 0.1));
+        font-weight: 900;
+      }
+
+      .phone-subtitle {
+        margin: 7px 0 0;
+        color: rgba(255, 255, 255, 0.58);
+        font-size: 13px;
+      }
+
+      .hero-card {
+        margin-top: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 28px;
+        padding: 20px;
+        background:
+          linear-gradient(135deg, color-mix(in srgb, var(--accent) 46%, transparent), rgba(255, 255, 255, 0.06)),
+          rgba(255, 255, 255, 0.06);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+      }
+
+      .hero-card p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+      }
+
+      .hero-card strong {
+        display: block;
+        margin-top: 8px;
+        color: #fff;
+        font-size: 36px;
+        line-height: 1;
+        letter-spacing: -0.07em;
+      }
+
+      .chart {
+        display: flex;
+        align-items: end;
+        gap: 8px;
+        height: 86px;
+        margin-top: 18px;
+      }
+
+      .bar {
+        flex: 1;
+        min-width: 0;
+        border-radius: 999px 999px 8px 8px;
+        background: rgba(255, 255, 255, 0.82);
+        opacity: 0.92;
+      }
+
+      .section-title {
+        margin: 22px 0 12px;
+        color: rgba(255, 255, 255, 0.84);
+        font-size: 13px;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .phone-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .phone-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 19px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .row-icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 14px;
+        background: color-mix(in srgb, var(--accent) 22%, rgba(255, 255, 255, 0.08));
+      }
+
+      .row-copy {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .row-title {
+        overflow: hidden;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 780;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .row-meta {
+        margin-top: 3px;
+        color: rgba(255, 255, 255, 0.52);
+        font-size: 12px;
+      }
+
+      .row-value {
+        color: #fff;
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .bottom-nav {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 22px;
+        padding: 10px;
+        background: rgba(5, 5, 9, 0.52);
+      }
+
+      .nav-item {
+        display: grid;
+        gap: 4px;
+        place-items: center;
+        color: rgba(255, 255, 255, 0.46);
+        font-size: 10px;
+      }
+
+      .nav-item.active {
+        color: var(--accent);
+      }
+
+      .nav-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: currentColor;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .feature {
+        min-height: 112px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .feature strong {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 15px;
+      }
+
+      .feature span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      @media (max-width: 900px) {
+        .shell {
+          padding: 14px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          min-height: auto;
+          padding-top: 28px;
+        }
+
+        .phone {
+          width: min(100%, 338px);
+          min-height: 660px;
+        }
+
+        .screen {
+          min-height: 640px;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .brand {
+          letter-spacing: 0.14em;
+        }
+
+        .tabs {
+          overflow-x: auto;
+          flex-wrap: nowrap;
+          margin-right: -14px;
+          padding-bottom: 4px;
+        }
+
+        .tab {
+          flex: 0 0 auto;
+        }
+
+        .metric {
+          flex: 1 1 calc(50% - 10px);
+          min-width: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" id="homeLink" href="/portfolio/">
+          <span class="brand-mark">OS</span>
+          App Demo Kit
+        </a>
+        <a class="back-link" id="backLink" href="/portfolio/">Back to portfolio</a>
+      </header>
+
+      <main class="hero">
+        <section>
+          <div class="kicker">React Native mobile demo</div>
+          <h1 id="title">FinPulse</h1>
+          <p class="lead" id="description"></p>
+
+          <div class="chips" id="tags"></div>
+          <div class="tabs" id="tabs" aria-label="Mobile demo projects"></div>
+          <div class="metrics" id="metrics"></div>
+
+          <div class="actions">
+            <a class="button" id="contactLink" href="/portfolio/#contact">Book this app style</a>
+            <a class="button secondary" id="portfolioLink" href="/portfolio/#portfolio">See all work</a>
+          </div>
+
+          <div class="features" id="features"></div>
+        </section>
+
+        <section class="phone-wrap" aria-label="App preview">
+          <div class="phone-glow"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="app-header">
+                <div>
+                  <h2 class="app-title" id="phoneTitle">FinPulse</h2>
+                  <p class="phone-subtitle" id="phoneSubtitle"></p>
+                </div>
+                <div class="avatar" id="avatar">F</div>
+              </div>
+
+              <div class="hero-card">
+                <p id="heroLabel"></p>
+                <strong id="heroValue"></strong>
+                <div class="chart" id="chart"></div>
+              </div>
+
+              <div class="section-title" id="listTitle"></div>
+              <div class="phone-list" id="phoneList"></div>
+
+              <div class="bottom-nav" id="bottomNav"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const demos = {
+        finpulse: {
+          title: "FinPulse",
+          accent: "#61dafb",
+          accent2: "#8df6cf",
+          description: "A polished finance app demo with card management, investment tracking, charts, and dark-mode dashboard patterns.",
+          tags: ["React Native", "Fintech", "Charts", "Cards"],
+          metrics: [
+            ["12 screens", "Dashboard to settings"],
+            ["4.9 rating", "Premium mobile UI"],
+            ["Dark mode", "Finance-ready design"],
+          ],
+          features: [
+            ["Wallet dashboard", "Balance, cards, and cashflow overview in one screen."],
+            ["Animated charts", "Portfolio movement and monthly spend visualization."],
+            ["Secure patterns", "Biometric-friendly account and transaction flows."],
+          ],
+          phone: {
+            subtitle: "Your money today",
+            heroLabel: "Total portfolio",
+            heroValue: "$48,920",
+            chart: [42, 58, 45, 72, 62, 86, 76],
+            listTitle: "Recent activity",
+            rows: [
+              ["Card payment", "Spotify subscription", "-$12"],
+              ["Investment", "ETF monthly buy", "+$420"],
+              ["Transfer", "Salary account", "+$2.8k"],
+            ],
+            nav: ["Home", "Cards", "Chart", "More"],
+          },
+        },
+        fittrack: {
+          title: "FitTrack Pro",
+          accent: "#a3ff5f",
+          accent2: "#21e6a8",
+          description: "A fitness tracker demo with workout plans, streaks, progress cards, and exercise logging for health products.",
+          tags: ["React Native", "Health", "Fitness", "Progress"],
+          metrics: [
+            ["18 flows", "Workout and nutrition"],
+            ["7 day streak", "Habit-first UX"],
+            ["60 FPS", "Smooth interactions"],
+          ],
+          features: [
+            ["Workout logging", "Track sets, reps, rest timers, and notes."],
+            ["Streak system", "Motivates users with daily goals and milestones."],
+            ["Progress cards", "Clean summaries for weight, calories, and training load."],
+          ],
+          phone: {
+            subtitle: "Today's training",
+            heroLabel: "Active calories",
+            heroValue: "684 kcal",
+            chart: [38, 64, 56, 78, 44, 88, 70],
+            listTitle: "Workout plan",
+            rows: [
+              ["Upper body", "6 exercises - 42 min", "Start"],
+              ["Run session", "5.2 km target", "72%"],
+              ["Recovery", "Mobility and stretch", "15m"],
+            ],
+            nav: ["Plan", "Log", "Stats", "Me"],
+          },
+        },
+        nomad: {
+          title: "Nomad Travel",
+          accent: "#ffb86b",
+          accent2: "#7dd3fc",
+          description: "A travel booking app demo with destination discovery, hotel detail pages, trip plans, and mobile-first checkout.",
+          tags: ["React Native", "Travel", "Booking", "Maps"],
+          metrics: [
+            ["10 pages", "Search to itinerary"],
+            ["3 layouts", "Hotels, trips, guides"],
+            ["Map-ready", "Location UI included"],
+          ],
+          features: [
+            ["Destination cards", "Rich image-first discovery for travel shoppers."],
+            ["Booking flow", "Dates, guests, pricing, and checkout screens."],
+            ["Itinerary view", "Day-by-day plan with flights, stays, and activities."],
+          ],
+          phone: {
+            subtitle: "Explore next escape",
+            heroLabel: "Featured trip",
+            heroValue: "Bali, 6 days",
+            chart: [32, 46, 62, 84, 72, 64, 90],
+            listTitle: "Popular stays",
+            rows: [
+              ["Ocean Villa", "Uluwatu - 4.9 stars", "$189"],
+              ["Forest Cabin", "Ubud - private pool", "$142"],
+              ["City Loft", "Canggu - near beach", "$98"],
+            ],
+            nav: ["Search", "Trips", "Map", "Saved"],
+          },
+        },
+        aster: {
+          title: "Aster Social",
+          accent: "#ff7ab6",
+          accent2: "#a78bfa",
+          description: "A social and dating app demo with swipe cards, match feed, profile screens, and real-time messaging patterns.",
+          tags: ["React Native", "Social", "Dating", "Chat"],
+          metrics: [
+            ["Swipe UI", "Gesture-driven cards"],
+            ["Chat-ready", "Messaging screens"],
+            ["Profiles", "Match and discovery"],
+          ],
+          features: [
+            ["Swipe discovery", "Gesture-first profile browsing with motion feedback."],
+            ["Match feed", "Clean cards for likes, matches, and recommendations."],
+            ["Realtime chat UI", "Message bubbles, typing states, and media-ready layout."],
+          ],
+          phone: {
+            subtitle: "People near you",
+            heroLabel: "New match",
+            heroValue: "Ari, 92%",
+            chart: [58, 72, 48, 86, 62, 74, 92],
+            listTitle: "Match queue",
+            rows: [
+              ["Maya", "Designer - 2 km away", "98%"],
+              ["Leo", "Founder - likes hiking", "91%"],
+              ["Nina", "Photographer - online", "88%"],
+            ],
+            nav: ["Swipe", "Likes", "Chat", "Me"],
+          },
+        },
+        medpulse: {
+          title: "MedPulse",
+          accent: "#7dd3fc",
+          accent2: "#34d399",
+          description: "A telemedicine dashboard demo with vitals, doctor search, appointment booking, and patient-friendly health cards.",
+          tags: ["React Native", "Healthcare", "MedTech", "Booking"],
+          metrics: [
+            ["HIPAA-style", "Healthcare UI patterns"],
+            ["Vitals", "Patient dashboard"],
+            ["Booking", "Doctor appointment flow"],
+          ],
+          features: [
+            ["Vitals dashboard", "Heart rate, oxygen, sleep, and medication reminders."],
+            ["Doctor search", "Filter specialists and book available time slots."],
+            ["Care timeline", "Appointments, test results, and follow-up tasks."],
+          ],
+          phone: {
+            subtitle: "Health overview",
+            heroLabel: "Heart rate",
+            heroValue: "72 BPM",
+            chart: [48, 52, 68, 56, 74, 64, 70],
+            listTitle: "Upcoming care",
+            rows: [
+              ["Dr. Nguyen", "Cardiology - today 4:00 PM", "Join"],
+              ["Medication", "Vitamin D reminder", "8 PM"],
+              ["Lab result", "Blood panel updated", "View"],
+            ],
+            nav: ["Home", "Care", "Docs", "Me"],
+          },
+        },
+        noirshop: {
+          title: "Noir Shop",
+          accent: "#f5d38b",
+          accent2: "#fb7185",
+          description: "A luxury ecommerce app demo with editorial product grids, product detail screens, cart, and premium checkout UI.",
+          tags: ["React Native", "E-Commerce", "Luxury", "Checkout"],
+          metrics: [
+            ["Storefront", "Product discovery"],
+            ["Cart flow", "Checkout screens"],
+            ["Premium UI", "Luxury design system"],
+          ],
+          features: [
+            ["Editorial catalog", "Large product cards with fashion-forward hierarchy."],
+            ["Product detail", "Variants, gallery, size guide, and wishlist states."],
+            ["Checkout flow", "Cart, shipping, payment, and order confirmation screens."],
+          ],
+          phone: {
+            subtitle: "Luxury essentials",
+            heroLabel: "Editor's pick",
+            heroValue: "Noir Coat",
+            chart: [76, 52, 82, 64, 90, 58, 72],
+            listTitle: "New arrivals",
+            rows: [
+              ["Silk blazer", "Limited black edition", "$240"],
+              ["Leather tote", "Handmade finish", "$320"],
+              ["Mono sneakers", "Premium streetwear", "$180"],
+            ],
+            nav: ["Shop", "Drop", "Bag", "Me"],
+          },
+        },
+        nestify: {
+          title: "Nestify",
+          accent: "#c4b5fd",
+          accent2: "#60a5fa",
+          description: "A real-estate mobile app demo with property search, saved homes, detail pages, virtual tour cards, and map UI.",
+          tags: ["React Native", "PropTech", "Real Estate", "Map"],
+          metrics: [
+            ["Map search", "Location-first browsing"],
+            ["Listings", "Property cards and filters"],
+            ["Tour flow", "Schedule visit UI"],
+          ],
+          features: [
+            ["Property search", "Filter by price, rooms, location, and amenities."],
+            ["Listing details", "Gallery, agent contact, mortgage, and map sections."],
+            ["Virtual tour", "Tour booking and saved homes for buyers or renters."],
+          ],
+          phone: {
+            subtitle: "Homes near you",
+            heroLabel: "Featured home",
+            heroValue: "$820k",
+            chart: [44, 58, 66, 80, 68, 84, 74],
+            listTitle: "Recommended",
+            rows: [
+              ["Skyline Loft", "2 beds - District 1", "$820k"],
+              ["Garden House", "4 beds - quiet area", "$1.2m"],
+              ["River Studio", "1 bed - furnished", "$410k"],
+            ],
+            nav: ["Map", "Saved", "Tours", "Me"],
+          },
+        },
+      };
+
+      const order = ["finpulse", "fittrack", "nomad", "aster", "medpulse", "noirshop", "nestify"];
+      const params = new URLSearchParams(window.location.search);
+      const initialApp = (params.get("app") || "finpulse").toLowerCase();
+      let activeApp = demos[initialApp] ? initialApp : "finpulse";
+
+      const els = {
+        title: document.getElementById("title"),
+        description: document.getElementById("description"),
+        tags: document.getElementById("tags"),
+        tabs: document.getElementById("tabs"),
+        metrics: document.getElementById("metrics"),
+        features: document.getElementById("features"),
+        phoneTitle: document.getElementById("phoneTitle"),
+        phoneSubtitle: document.getElementById("phoneSubtitle"),
+        avatar: document.getElementById("avatar"),
+        heroLabel: document.getElementById("heroLabel"),
+        heroValue: document.getElementById("heroValue"),
+        chart: document.getElementById("chart"),
+        listTitle: document.getElementById("listTitle"),
+        phoneList: document.getElementById("phoneList"),
+        bottomNav: document.getElementById("bottomNav"),
+      };
+
+      function basePath() {
+        const marker = "/mobile-demo.html";
+        const index = window.location.pathname.indexOf(marker);
+        return index >= 0 ? window.location.pathname.slice(0, index + 1) : "/portfolio/";
+      }
+
+      function setSafeLinks() {
+        const base = basePath();
+        document.getElementById("homeLink").href = base;
+        document.getElementById("backLink").href = base;
+        document.getElementById("contactLink").href = `${base}#contact`;
+        document.getElementById("portfolioLink").href = `${base}#portfolio`;
+      }
+
+      function renderList(container, items, getHtml) {
+        container.innerHTML = items.map(getHtml).join("");
+      }
+
+      function switchApp(appKey, pushState = true) {
+        activeApp = demos[appKey] ? appKey : "finpulse";
+        const data = demos[activeApp];
+        document.documentElement.style.setProperty("--accent", data.accent);
+        document.documentElement.style.setProperty("--accent-2", data.accent2);
+        document.title = `${data.title} Demo | Olly Smith`;
+
+        els.title.textContent = data.title;
+        els.description.textContent = data.description;
+        els.phoneTitle.textContent = data.title;
+        els.phoneSubtitle.textContent = data.phone.subtitle;
+        els.avatar.textContent = data.title.charAt(0);
+        els.heroLabel.textContent = data.phone.heroLabel;
+        els.heroValue.textContent = data.phone.heroValue;
+        els.listTitle.textContent = data.phone.listTitle;
+
+        renderList(els.tags, data.tags, (tag) => `<span class="chip">${tag}</span>`);
+        renderList(
+          els.metrics,
+          data.metrics,
+          ([value, label]) => `<div class="metric"><span class="metric-value">${value}</span><span class="metric-label">${label}</span></div>`
+        );
+        renderList(
+          els.features,
+          data.features,
+          ([title, body]) => `<article class="feature"><strong>${title}</strong><span>${body}</span></article>`
+        );
+        renderList(
+          els.chart,
+          data.phone.chart,
+          (height) => `<span class="bar" style="height:${height}%"></span>`
+        );
+        renderList(
+          els.phoneList,
+          data.phone.rows,
+          ([title, meta, value]) => `
+            <div class="phone-row">
+              <div class="row-icon">${title.charAt(0)}</div>
+              <div class="row-copy">
+                <div class="row-title">${title}</div>
+                <div class="row-meta">${meta}</div>
+              </div>
+              <div class="row-value">${value}</div>
+            </div>
+          `
+        );
+        renderList(
+          els.bottomNav,
+          data.phone.nav,
+          (item, index) => `<div class="nav-item ${index === 0 ? "active" : ""}"><span class="nav-dot"></span><span>${item}</span></div>`
+        );
+
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.classList.toggle("active", tab.dataset.app === activeApp);
+        });
+
+        if (pushState) {
+          const nextUrl = `${window.location.pathname}?app=${activeApp}`;
+          window.history.replaceState(null, "", nextUrl);
+        }
+      }
+
+      function initTabs() {
+        renderList(
+          els.tabs,
+          order,
+          (key) => `<button class="tab" type="button" data-app="${key}">${demos[key].title}</button>`
+        );
+        els.tabs.addEventListener("click", (event) => {
+          const button = event.target.closest("button[data-app]");
+          if (!button) return;
+          switchApp(button.dataset.app);
+        });
+      }
+
+      setSafeLinks();
+      initTabs();
+      switchApp(activeApp, false);
+    </script>
+  </body>
+</html>
