@@ -16,6 +16,10 @@
     .logo{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
     .btn{padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,var(--a),var(--b));color:#071022;text-decoration:none;font-weight:700}
     .hero{min-height:88vh;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}
+    .wf-badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(96,216,255,.08);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aeddff}
+    .wf-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--b))}
+    .hero-orbit{position:relative;height:180px;margin-top:16px}
+    .hero-orbit span{position:absolute;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);font-size:11px;color:#ccdcff}
     .hero h1{font-size:clamp(2.5rem,6vw,5.4rem);line-height:.9;letter-spacing:-.03em}
     .lead{margin-top:14px;color:var(--muted);line-height:1.75;max-width:50ch}
     .stack{display:grid;gap:14px}
@@ -42,9 +46,15 @@
 
     <main class="hero reveal">
       <div>
-        <div class="k">Revenue Intelligence Platform</div>
+        <div class="wf-badge"><span class="wf-dot"></span> Webflow Interaction Hero</div>
+        <div class="k" style="margin-top:12px">Revenue Intelligence Platform</div>
         <h1>From noisy pipeline to confident forecast.</h1>
         <p class="lead">A split-screen SaaS layout with analytics rail, conversion CTA, and enterprise-style data presentation. Designed as a premium Webflow concept.</p>
+        <div class="hero-orbit">
+          <span style="left:0;top:8px">CMS Collection: Accounts</span>
+          <span style="left:190px;top:54px">IX2 Scroll Trigger</span>
+          <span style="left:56px;top:108px">Component Variant: KPI Card</span>
+        </div>
       </div>
       <div class="stack">
         <article class="card">
