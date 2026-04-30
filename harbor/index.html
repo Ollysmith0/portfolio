@@ -3,116 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harbor Cargo — Webflow Style Project</title>
+  <title>Harbor Cargo - Webflow Style Project</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg:#0f1f2d; --panel:#132737; --line:#264153; --text:#eaf4ff; --muted:#9db1c2; --a:#ffb000; --b:#ffd76a; }
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    body{ font-family:Inter,system-ui,sans-serif; color:var(--text); background:linear-gradient(180deg,#0d1b27,#122434); }
-    .wrap{ max-width:1140px; margin:0 auto; padding:24px; }
-    .nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom:42px; }
-    .brand{ font-family:"Barlow Condensed",sans-serif; text-transform:uppercase; letter-spacing:.08em; font-size:1.1rem; }
-    .btn{ text-decoration:none; color:#10202e; background:linear-gradient(135deg,var(--a),var(--b)); padding:10px 15px; border-radius:10px; font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:.06em; }
-    .hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:16px; min-height:68vh; }
-    .left{ background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:30px; }
-    .k{ color:#8da3b6; font-size:11px; text-transform:uppercase; letter-spacing:.2em; margin-bottom:12px; }
-    h1{ font-family:"Barlow Condensed",sans-serif; font-size:clamp(2.8rem,6vw,5.3rem); line-height:.88; letter-spacing:.01em; text-transform:uppercase; }
-    .lead{ margin-top:12px; color:var(--muted); line-height:1.75; max-width:58ch; }
-    .stats{ margin-top:22px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-    .stat{ background:#0f202f; border:1px solid var(--line); border-radius:14px; padding:12px; }
-    .stat b{ font:700 1.4rem/1 "Barlow Condensed",sans-serif; color:var(--a); letter-spacing:.03em; }
-    .right{ display:grid; gap:12px; }
-    .card{ background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:18px; }
-    .route{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px dashed rgba(255,255,255,.2); padding:9px 0; color:#d8e8f7; font-size:14px; }
-    section{ margin:70px 0; }
-    .services,.grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-    .services .card h3{ font-family:"Barlow Condensed",sans-serif; font-size:1.5rem; text-transform:uppercase; margin-bottom:8px; }
-    .services .card p{ color:var(--muted); line-height:1.65; }
-    .timeline .card { min-height:150px; }
-    footer{ border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:14px; }
-    @media (max-width:920px){ .hero{ grid-template-columns:1fr; min-height:unset;} .stats,.services,.grid3{ grid-template-columns:1fr; } }
+    :root{--bg:#0d1c29;--panel:#132838;--line:#2a475b;--txt:#e8f3ff;--muted:#99b0c3;--a:#ffb100}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,#0d1c29,#122a3d);color:var(--txt)}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+    .brand{font-family:"Barlow Condensed",sans-serif;font-size:1.2rem;letter-spacing:.08em;text-transform:uppercase}
+    .btn{padding:10px 14px;border-radius:10px;background:var(--a);color:#172838;text-decoration:none;font-weight:800;text-transform:uppercase;font-size:12px}
+    .hero{min-height:85vh;display:grid;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px}
+    .top{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}
+    .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8ea8bc;margin-bottom:10px}
+    h1{font-family:"Barlow Condensed",sans-serif;font-size:clamp(3rem,7vw,6.2rem);line-height:.85;text-transform:uppercase}
+    .lead{margin-top:12px;color:var(--muted);line-height:1.75;max-width:64ch}
+    .ops{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    .ops .mini{background:#102232;border:1px solid var(--line);padding:12px;border-radius:12px}
+    .ops strong{display:block;color:var(--a);font-size:1.2rem}
+    .route-board{display:grid;gap:8px}
+    .route{display:flex;justify-content:space-between;border:1px dashed rgba(255,255,255,.2);padding:10px;border-radius:10px}
+    .timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .timeline .node{padding:14px;border-radius:12px;border:1px solid var(--line);background:#102131}
+    .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted)}
+    @media(max-width:980px){.top,.ops,.timeline,.proof{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header class="nav">
+    <header class="nav reveal">
       <div class="brand">Harbor Cargo</div>
-      <a class="btn" href="#">Get Freight Quote</a>
+      <a class="btn" href="#">Get Quote</a>
     </header>
-
     <main class="hero">
-      <section class="left reveal">
-        <div class="k">Global Logistics System</div>
-        <h1>Reliable shipping for high-volume supply chains.</h1>
-        <p class="lead">Industrial Webflow-style corporate website with bold condensed typography, operational dashboard blocks, and conversion-ready B2B messaging.</p>
-        <div class="stats">
-          <div class="stat"><b>128K</b><div>Containers/year</div></div>
-          <div class="stat"><b>42</b><div>Port partners</div></div>
-          <div class="stat"><b>98.7%</b><div>On-time delivery</div></div>
+      <section class="top reveal">
+        <article class="panel">
+          <div class="k">Global Freight Control</div>
+          <h1>Move cargo like clockwork.</h1>
+          <p class="lead">Unlike the other projects, Harbor uses an operations-dashboard layout with a sequential flow map, route board, and KPI control panels.</p>
+          <div class="ops">
+            <div class="mini"><strong>128K</strong><span>Containers/year</span></div>
+            <div class="mini"><strong>42</strong><span>Port partners</span></div>
+            <div class="mini"><strong>98.7%</strong><span>On-time</span></div>
+            <div class="mini"><strong>24/7</strong><span>Control tower</span></div>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="k">Live Routes</div>
+          <div class="route-board">
+            <div class="route"><span>Shanghai - LA</span><span>On Schedule</span></div>
+            <div class="route"><span>Busan - Rotterdam</span><span>+2h</span></div>
+            <div class="route"><span>Singapore - Sydney</span><span>Departed</span></div>
+            <div class="route"><span>Dubai - Hamburg</span><span>Docked</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel reveal">
+        <div class="k">Shipment Lifecycle</div>
+        <div class="timeline">
+          <div class="node"><strong>Booking</strong><p class="lead" style="font-size:13px">Carrier and slot allocation.</p></div>
+          <div class="node"><strong>Docs</strong><p class="lead" style="font-size:13px">Auto customs compliance.</p></div>
+          <div class="node"><strong>Transit</strong><p class="lead" style="font-size:13px">Milestone tracking feed.</p></div>
+          <div class="node"><strong>Handover</strong><p class="lead" style="font-size:13px">Bonded warehouse routing.</p></div>
+          <div class="node"><strong>Delivery</strong><p class="lead" style="font-size:13px">Proof-of-delivery sync.</p></div>
         </div>
       </section>
-      <aside class="right reveal">
-        <article class="card">
-          <div class="k">Live Routes</div>
-          <div class="route"><span>Shanghai → LA</span><span>On Schedule</span></div>
-          <div class="route"><span>Busan → Rotterdam</span><span>+2h</span></div>
-          <div class="route"><span>Singapore → Sydney</span><span>Departed</span></div>
-          <div class="route" style="border-bottom:none;"><span>Dubai → Hamburg</span><span>Docked</span></div>
-        </article>
-        <article class="card">
-          <div class="k">Service Promise</div>
-          <p style="color:var(--muted);line-height:1.7;">Track every shipment, reduce delay risk, and keep procurement teams informed with real-time status and exception alerts.</p>
-        </article>
-      </aside>
+
+      <section class="proof reveal">
+        <article class="panel"><h3>Ocean Freight</h3><p class="lead" style="font-size:14px">FCL and LCL operations with SLA-backed routing plans.</p></article>
+        <article class="panel"><h3>Land Transport</h3><p class="lead" style="font-size:14px">Cross-border trucking and inland consolidation.</p></article>
+        <article class="panel"><h3>Warehouse Ops</h3><p class="lead" style="font-size:14px">Inventory, palletization, and outbound orchestration.</p></article>
+      </section>
     </main>
-
-    <section class="services reveal">
-      <article class="card"><h3>Ocean Freight</h3><p>FCL/LCL operations with SLA-backed timelines and customs coordination.</p></article>
-      <article class="card"><h3>Land Transport</h3><p>Cross-border trucking with bonded corridors and live vehicle tracking.</p></article>
-      <article class="card"><h3>Warehouse Ops</h3><p>Inventory handling, pallet optimization, and fast outbound dispatch.</p></article>
-    </section>
-
-    <section class="timeline reveal">
-      <div class="k">Operational Timeline</div>
-      <div class="grid3">
-        <article class="card"><h3>01 Booking</h3><p>Allocate vessel slots and issue digital shipment plans.</p></article>
-        <article class="card"><h3>02 Customs</h3><p>Automated documentation and exception monitoring.</p></article>
-        <article class="card"><h3>03 Delivery</h3><p>Live milestone updates until final destination handoff.</p></article>
-      </div>
-    </section>
-
-    <section class="reveal">
-      <div class="k">Why enterprise teams choose Harbor</div>
-      <div class="grid3">
-        <article class="card"><h3>Predictable ETA</h3><p>Delay-risk models and proactive rerouting recommendations.</p></article>
-        <article class="card"><h3>Procurement Visibility</h3><p>Single dashboard for purchasing, logistics, and finance teams.</p></article>
-        <article class="card"><h3>Audit-ready Data</h3><p>Unified shipment history and SLA performance exports.</p></article>
-      </div>
-    </section>
-
-    <section class="reveal">
-      <article class="card">
-        <div class="k">FAQ</div>
-        <p style="margin-bottom:10px;"><strong>Can Harbor handle multi-country routing?</strong><br><span style="color:var(--muted);">Yes, across ocean, trucking, and bonded warehouse handoffs.</span></p>
-        <p style="margin-bottom:10px;"><strong>Do you support enterprise APIs?</strong><br><span style="color:var(--muted);">Yes. EDI and API integrations for ERP/TMS systems.</span></p>
-        <p><strong>What is onboarding time?</strong><br><span style="color:var(--muted);">Typical implementation is 2–3 weeks for core workflows.</span></p>
-      </article>
-    </section>
-
-    <footer>Harbor Cargo — production-ready Webflow-inspired logistics website.</footer>
+    <footer>Harbor Cargo - premium Webflow-inspired logistics command layout.</footer>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
     gsap.registerPlugin(ScrollTrigger);
-    gsap.from('.nav', { y: -28, opacity: 0, duration: 0.8, ease: 'power3.out' });
-    gsap.from('.hero h1, .hero .lead, .hero .stat, .hero .route', { y: 22, opacity: 0, duration: 0.75, stagger: 0.06, ease: 'power3.out', delay: 0.1 });
-    gsap.to('.stats .stat', { y: -5, repeat: -1, yoyo: true, duration: 1.8, stagger: 0.15, ease: 'sine.inOut' });
-    gsap.utils.toArray('.reveal').forEach((el) => {
-      gsap.from(el, { y: 44, opacity: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 84%' } });
-    });
+    gsap.from('.top .panel', { y: 24, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
+    gsap.to('.ops .mini', { y: -4, repeat: -1, yoyo: true, duration: 1.6, stagger: 0.12, ease: 'sine.inOut' });
+    gsap.utils.toArray('.reveal').forEach((el) => gsap.from(el, { y: 38, opacity: 0, duration: 0.82, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 84%' } }));
   </script>
 </body>
 </html>

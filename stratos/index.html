@@ -3,44 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stratos AI — Webflow Style Project</title>
+  <title>Stratos AI - Webflow Style Project</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg:#070b19; --panel:#0d1329; --text:#eef3ff; --muted:#9aa8c7; --a:#56d4ff; --b:#7d7bff; --line:rgba(255,255,255,.09); }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:Inter,system-ui,sans-serif; color:var(--text); background:radial-gradient(65rem 35rem at 90% -20%, rgba(125,123,255,.25), transparent),radial-gradient(45rem 25rem at 0% 30%, rgba(86,212,255,.2), transparent),var(--bg); }
-    .wrap { max-width:1120px; margin:0 auto; padding:24px; }
-    .nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:48px; }
-    .logo { font-weight:800; letter-spacing:.12em; font-size:12px; text-transform:uppercase; }
-    .btn { display:inline-block; padding:12px 18px; border-radius:12px; background:linear-gradient(135deg,var(--a),var(--b)); color:#061024; font-weight:700; text-decoration:none; }
-    .btn.sec { background:transparent; color:var(--text); border:1px solid var(--line); }
-    .hero { display:grid; gap:24px; grid-template-columns:1.1fr .9fr; align-items:center; min-height:72vh; }
-    h1 { font-size:clamp(2.3rem,5vw,4.4rem); line-height:.95; letter-spacing:-.03em; }
-    .lead { margin-top:16px; color:var(--muted); max-width:56ch; line-height:1.7; }
-    .chips { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
-    .chip { border:1px solid var(--line); border-radius:999px; padding:8px 12px; font-size:12px; color:#c9d7f6; }
-    .panel { background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:24px; padding:20px; }
-    .card-title,.kicker { color:#8fb3ff; font-size:11px; text-transform:uppercase; letter-spacing:.2em; margin-bottom:10px; }
-    .stat { font-size:2.2rem; font-weight:800; margin-bottom:12px; }
-    .bars { display:grid; grid-template-columns:repeat(12,1fr); gap:5px; align-items:end; height:82px; }
-    .bars span { border-radius:4px 4px 2px 2px; background:linear-gradient(180deg,var(--a),var(--b)); opacity:.85; }
-    section { margin:80px 0; }
-    .grid3,.grid4 { display:grid; gap:14px; }
-    .grid3 { grid-template-columns:repeat(3,1fr); }
-    .grid4 { grid-template-columns:repeat(4,1fr); }
-    .f h3 { font-size:1.05rem; margin-bottom:8px; }
-    .f p, .muted { color:var(--muted); line-height:1.65; }
-    .logos { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
-    .logo-box { border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center; color:#c6d6fb; font-weight:700; background:rgba(255,255,255,.02); }
-    .price { padding:22px; }
-    .price b { font-size:2rem; display:block; margin:6px 0 10px; }
-    .faq { padding:18px 20px; }
-    .faq h4 { margin-bottom:6px; }
-    footer { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:14px; }
-    @media (max-width:980px){ .hero,.grid4,.logos{ grid-template-columns:1fr 1fr; min-height:unset;} .grid3{grid-template-columns:1fr;} }
-    @media (max-width:720px){ .hero,.grid4,.logos{ grid-template-columns:1fr; } }
+    :root { --bg:#060a16; --panel:#0d1329; --line:rgba(255,255,255,.1); --txt:#eef2ff; --muted:#9aabd0; --a:#60d8ff; --b:#7a7cff; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,sans-serif;background:radial-gradient(60rem 30rem at 90% -20%,rgba(122,124,255,.3),transparent),var(--bg);color:var(--txt)}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;padding:14px 0;background:linear-gradient(180deg,rgba(6,10,22,.95),rgba(6,10,22,.65),transparent);backdrop-filter:blur(6px);z-index:10}
+    .logo{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+    .btn{padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,var(--a),var(--b));color:#071022;text-decoration:none;font-weight:700}
+    .hero{min-height:88vh;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}
+    .hero h1{font-size:clamp(2.5rem,6vw,5.4rem);line-height:.9;letter-spacing:-.03em}
+    .lead{margin-top:14px;color:var(--muted);line-height:1.75;max-width:50ch}
+    .stack{display:grid;gap:14px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:18px}
+    .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8fb3ff;margin-bottom:8px}
+    .big{font-size:2.3rem;font-weight:900}
+    .rail{display:grid;gap:10px}
+    .metric{display:flex;justify-content:space-between;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:#c8d6ff}
+    section{margin:80px 0}
+    .feature-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px}
+    .list{display:grid;gap:10px}
+    .list .card{padding:16px}
+    .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    footer{padding:26px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
+    @media (max-width:950px){.hero,.feature-layout,.case-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -50,85 +40,63 @@
       <a class="btn" href="#">Book Demo</a>
     </header>
 
-    <main class="hero">
-      <div class="reveal">
-        <div class="kicker">Enterprise SaaS</div>
-        <h1>Forecast revenue with clarity, not guesswork.</h1>
-        <p class="lead">A professional Webflow-style SaaS website concept built for B2B analytics brands. Includes dashboard storytelling, KPI hierarchy, and conversion-focused CTA blocks.</p>
-        <div class="chips">
-          <span class="chip">B2B SaaS</span><span class="chip">Data Platform</span><span class="chip">Webflow Style</span>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:18px;">
-          <a href="#" class="btn">Start free trial</a><a href="#" class="btn sec">See live demo</a>
-        </div>
+    <main class="hero reveal">
+      <div>
+        <div class="k">Revenue Intelligence Platform</div>
+        <h1>From noisy pipeline to confident forecast.</h1>
+        <p class="lead">A split-screen SaaS layout with analytics rail, conversion CTA, and enterprise-style data presentation. Designed as a premium Webflow concept.</p>
       </div>
-      <aside class="panel reveal">
-        <div class="card-title">Q2 Performance</div>
-        <div class="stat">$2.84M ARR</div>
-        <div class="bars">
-          <span style="height:34%"></span><span style="height:41%"></span><span style="height:46%"></span><span style="height:52%"></span>
-          <span style="height:58%"></span><span style="height:63%"></span><span style="height:66%"></span><span style="height:72%"></span>
-          <span style="height:79%"></span><span style="height:85%"></span><span style="height:90%"></span><span style="height:98%"></span>
-        </div>
-      </aside>
+      <div class="stack">
+        <article class="card">
+          <div class="k">Quarter Snapshot</div>
+          <div class="big">$3.12M ARR</div>
+          <div class="rail" style="margin-top:12px">
+            <div class="metric"><span>Lead Velocity</span><strong>+22%</strong></div>
+            <div class="metric"><span>Win Rate</span><strong>34.8%</strong></div>
+            <div class="metric"><span>Cycle Time</span><strong>-11 days</strong></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="k">Actions</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="#">Start Trial</a><a class="btn" href="#" style="background:#1a2547;color:#dce8ff">See Dashboard</a></div>
+        </article>
+      </div>
     </main>
 
-    <section class="reveal">
-      <div class="kicker">Trusted by teams</div>
-      <div class="logos">
-        <div class="logo-box">NEXA</div><div class="logo-box">PARA</div><div class="logo-box">METRIX</div><div class="logo-box">VANTA</div><div class="logo-box">QUANTIX</div>
-      </div>
+    <section class="feature-layout reveal">
+      <article class="card">
+        <div class="k">Core Workflow</div>
+        <div class="list">
+          <div class="metric"><span>1. Connect CRM + Billing</span><span>15 min</span></div>
+          <div class="metric"><span>2. Model weighted forecast</span><span>AI</span></div>
+          <div class="metric"><span>3. Align GTM plans</span><span>Weekly</span></div>
+          <div class="metric"><span>4. Trigger playbooks</span><span>Auto</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="k">Why teams switch</div>
+        <p class="lead" style="margin-top:0;max-width:none">Most tools report history. Stratos predicts what happens next and gives each role an opinionated next move. Leadership sees confidence score, reps see target accounts, and finance sees verified revenue scenarios.</p>
+      </article>
     </section>
 
     <section class="reveal">
-      <div class="kicker">Capabilities</div>
-      <div class="grid3">
-        <article class="panel f"><h3>Pipeline Scoring</h3><p>Automatically prioritize deals with weighted confidence models and real-time trend signals.</p></article>
-        <article class="panel f"><h3>Scenario Planning</h3><p>Run best-case/worst-case projections with ready-to-share executive reports.</p></article>
-        <article class="panel f"><h3>Team Alignment</h3><p>Sync marketing, sales, and finance in one decision layer with role-based access.</p></article>
+      <div class="k">Customer Stories</div>
+      <div class="case-grid">
+        <article class="card"><h3>Series B SaaS</h3><p class="lead" style="font-size:14px">Improved forecasting error from 31% to 8% in one quarter.</p></article>
+        <article class="card"><h3>Marketplace</h3><p class="lead" style="font-size:14px">Cut pipeline review time by 47% across GTM teams.</p></article>
+        <article class="card"><h3>Enterprise IT</h3><p class="lead" style="font-size:14px">Rolled out scenario planning in 3 regions within 2 weeks.</p></article>
       </div>
     </section>
 
-    <section class="reveal">
-      <div class="kicker">Workflow</div>
-      <div class="grid4">
-        <article class="panel f"><h3>01 Connect Data</h3><p>Pull CRM, billing, and campaign data in under 30 minutes.</p></article>
-        <article class="panel f"><h3>02 Model Trends</h3><p>Forecast with AI confidence scores and anomaly detection.</p></article>
-        <article class="panel f"><h3>03 Align Teams</h3><p>Share executive views and weekly planning snapshots.</p></article>
-        <article class="panel f"><h3>04 Close Faster</h3><p>Trigger next-best-actions for each opportunity stage.</p></article>
-      </div>
-    </section>
-
-    <section class="reveal">
-      <div class="kicker">Pricing</div>
-      <div class="grid3">
-        <article class="panel price"><h3>Starter</h3><b>$49</b><p class="muted">Small sales teams validating predictable growth.</p></article>
-        <article class="panel price"><h3>Growth</h3><b>$149</b><p class="muted">For scaling teams with pipeline complexity and multi-source data.</p></article>
-        <article class="panel price"><h3>Enterprise</h3><b>Custom</b><p class="muted">SSO, governance, and advanced forecasting for larger orgs.</p></article>
-      </div>
-    </section>
-
-    <section class="reveal">
-      <div class="kicker">FAQ</div>
-      <div class="grid3">
-        <article class="panel faq"><h4>How long is setup?</h4><p class="muted">Most teams complete setup in 1 day with guided onboarding.</p></article>
-        <article class="panel faq"><h4>Can I use my CRM?</h4><p class="muted">Yes. Native integrations with HubSpot, Salesforce, and Pipedrive.</p></article>
-        <article class="panel faq"><h4>Is this secure?</h4><p class="muted">Enterprise encryption, SOC-2 style controls, and role-based access.</p></article>
-      </div>
-    </section>
-
-    <footer>Stratos AI — premium Webflow-inspired project template.</footer>
+    <footer>Stratos AI - premium Webflow-inspired SaaS website.</footer>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
     gsap.registerPlugin(ScrollTrigger);
-    gsap.from('.nav', { y: -28, opacity: 0, duration: 0.9, ease: 'power3.out' });
-    gsap.from('.hero h1, .hero .lead, .hero .chip, .hero .btn', { y: 22, opacity: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out', delay: 0.15 });
-    gsap.to('.bars span', { scaleY: 1.06, transformOrigin: 'bottom', duration: 0.9, yoyo: true, repeat: -1, stagger: 0.06, ease: 'sine.inOut' });
-    gsap.utils.toArray('.reveal').forEach((el) => {
-      gsap.from(el, { y: 48, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 82%' } });
-    });
+    gsap.from('.nav', { y: -22, opacity: 0, duration: 0.8, ease: 'power3.out' });
+    gsap.from('.hero h1, .hero .lead, .hero .card', { y: 26, opacity: 0, duration: 0.85, stagger: 0.1, ease: 'power3.out', delay: 0.12 });
+    gsap.utils.toArray('.reveal').forEach((el) => gsap.from(el, { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 84%' } }));
   </script>
 </body>
 </html>
