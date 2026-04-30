@@ -27,11 +27,12 @@
     .card{ background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:18px; }
     .route{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px dashed rgba(255,255,255,.2); padding:9px 0; color:#d8e8f7; font-size:14px; }
     section{ margin:70px 0; }
-    .services{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .services,.grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
     .services .card h3{ font-family:"Barlow Condensed",sans-serif; font-size:1.5rem; text-transform:uppercase; margin-bottom:8px; }
     .services .card p{ color:var(--muted); line-height:1.65; }
+    .timeline .card { min-height:150px; }
     footer{ border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:14px; }
-    @media (max-width:920px){ .hero{ grid-template-columns:1fr; min-height:unset;} .stats,.services{ grid-template-columns:1fr; } }
+    @media (max-width:920px){ .hero{ grid-template-columns:1fr; min-height:unset;} .stats,.services,.grid3{ grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -42,7 +43,7 @@
     </header>
 
     <main class="hero">
-      <section class="left">
+      <section class="left reveal">
         <div class="k">Global Logistics System</div>
         <h1>Reliable shipping for high-volume supply chains.</h1>
         <p class="lead">Industrial Webflow-style corporate website with bold condensed typography, operational dashboard blocks, and conversion-ready B2B messaging.</p>
@@ -52,7 +53,7 @@
           <div class="stat"><b>98.7%</b><div>On-time delivery</div></div>
         </div>
       </section>
-      <aside class="right">
+      <aside class="right reveal">
         <article class="card">
           <div class="k">Live Routes</div>
           <div class="route"><span>Shanghai → LA</span><span>On Schedule</span></div>
@@ -67,13 +68,51 @@
       </aside>
     </main>
 
-    <section class="services">
+    <section class="services reveal">
       <article class="card"><h3>Ocean Freight</h3><p>FCL/LCL operations with SLA-backed timelines and customs coordination.</p></article>
       <article class="card"><h3>Land Transport</h3><p>Cross-border trucking with bonded corridors and live vehicle tracking.</p></article>
       <article class="card"><h3>Warehouse Ops</h3><p>Inventory handling, pallet optimization, and fast outbound dispatch.</p></article>
     </section>
 
+    <section class="timeline reveal">
+      <div class="k">Operational Timeline</div>
+      <div class="grid3">
+        <article class="card"><h3>01 Booking</h3><p>Allocate vessel slots and issue digital shipment plans.</p></article>
+        <article class="card"><h3>02 Customs</h3><p>Automated documentation and exception monitoring.</p></article>
+        <article class="card"><h3>03 Delivery</h3><p>Live milestone updates until final destination handoff.</p></article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="k">Why enterprise teams choose Harbor</div>
+      <div class="grid3">
+        <article class="card"><h3>Predictable ETA</h3><p>Delay-risk models and proactive rerouting recommendations.</p></article>
+        <article class="card"><h3>Procurement Visibility</h3><p>Single dashboard for purchasing, logistics, and finance teams.</p></article>
+        <article class="card"><h3>Audit-ready Data</h3><p>Unified shipment history and SLA performance exports.</p></article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <article class="card">
+        <div class="k">FAQ</div>
+        <p style="margin-bottom:10px;"><strong>Can Harbor handle multi-country routing?</strong><br><span style="color:var(--muted);">Yes, across ocean, trucking, and bonded warehouse handoffs.</span></p>
+        <p style="margin-bottom:10px;"><strong>Do you support enterprise APIs?</strong><br><span style="color:var(--muted);">Yes. EDI and API integrations for ERP/TMS systems.</span></p>
+        <p><strong>What is onboarding time?</strong><br><span style="color:var(--muted);">Typical implementation is 2–3 weeks for core workflows.</span></p>
+      </article>
+    </section>
+
     <footer>Harbor Cargo — production-ready Webflow-inspired logistics website.</footer>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.nav', { y: -28, opacity: 0, duration: 0.8, ease: 'power3.out' });
+    gsap.from('.hero h1, .hero .lead, .hero .stat, .hero .route', { y: 22, opacity: 0, duration: 0.75, stagger: 0.06, ease: 'power3.out', delay: 0.1 });
+    gsap.to('.stats .stat', { y: -5, repeat: -1, yoyo: true, duration: 1.8, stagger: 0.15, ease: 'sine.inOut' });
+    gsap.utils.toArray('.reveal').forEach((el) => {
+      gsap.from(el, { y: 44, opacity: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 84%' } });
+    });
+  </script>
 </body>
 </html>

@@ -8,30 +8,39 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg:#070b19; --panel:#0d1329; --text:#eef3ff; --muted:#9aa8c7; --a:#56d4ff; --b:#7d7bff; }
+    :root { --bg:#070b19; --panel:#0d1329; --text:#eef3ff; --muted:#9aa8c7; --a:#56d4ff; --b:#7d7bff; --line:rgba(255,255,255,.09); }
     * { box-sizing:border-box; margin:0; padding:0; }
     body { font-family:Inter,system-ui,sans-serif; color:var(--text); background:radial-gradient(65rem 35rem at 90% -20%, rgba(125,123,255,.25), transparent),radial-gradient(45rem 25rem at 0% 30%, rgba(86,212,255,.2), transparent),var(--bg); }
     .wrap { max-width:1120px; margin:0 auto; padding:24px; }
     .nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:48px; }
     .logo { font-weight:800; letter-spacing:.12em; font-size:12px; text-transform:uppercase; }
     .btn { display:inline-block; padding:12px 18px; border-radius:12px; background:linear-gradient(135deg,var(--a),var(--b)); color:#061024; font-weight:700; text-decoration:none; }
+    .btn.sec { background:transparent; color:var(--text); border:1px solid var(--line); }
     .hero { display:grid; gap:24px; grid-template-columns:1.1fr .9fr; align-items:center; min-height:72vh; }
     h1 { font-size:clamp(2.3rem,5vw,4.4rem); line-height:.95; letter-spacing:-.03em; }
     .lead { margin-top:16px; color:var(--muted); max-width:56ch; line-height:1.7; }
     .chips { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
-    .chip { border:1px solid rgba(255,255,255,.15); border-radius:999px; padding:8px 12px; font-size:12px; color:#c9d7f6; }
-    .panel { background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.09); border-radius:24px; padding:20px; }
-    .card-title { color:#8fb3ff; font-size:11px; text-transform:uppercase; letter-spacing:.15em; margin-bottom:14px; }
+    .chip { border:1px solid var(--line); border-radius:999px; padding:8px 12px; font-size:12px; color:#c9d7f6; }
+    .panel { background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:24px; padding:20px; }
+    .card-title,.kicker { color:#8fb3ff; font-size:11px; text-transform:uppercase; letter-spacing:.2em; margin-bottom:10px; }
     .stat { font-size:2.2rem; font-weight:800; margin-bottom:12px; }
     .bars { display:grid; grid-template-columns:repeat(12,1fr); gap:5px; align-items:end; height:82px; }
     .bars span { border-radius:4px 4px 2px 2px; background:linear-gradient(180deg,var(--a),var(--b)); opacity:.85; }
     section { margin:80px 0; }
-    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    .kicker { color:#8fb3ff; font-size:11px; text-transform:uppercase; letter-spacing:.2em; margin-bottom:10px; }
+    .grid3,.grid4 { display:grid; gap:14px; }
+    .grid3 { grid-template-columns:repeat(3,1fr); }
+    .grid4 { grid-template-columns:repeat(4,1fr); }
     .f h3 { font-size:1.05rem; margin-bottom:8px; }
-    .f p { color:var(--muted); line-height:1.65; }
-    footer { border-top:1px solid rgba(255,255,255,.1); padding:26px 0 40px; color:var(--muted); font-size:14px; }
-    @media (max-width:900px){ .hero{ grid-template-columns:1fr; min-height:unset; } .grid3{ grid-template-columns:1fr; } }
+    .f p, .muted { color:var(--muted); line-height:1.65; }
+    .logos { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .logo-box { border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center; color:#c6d6fb; font-weight:700; background:rgba(255,255,255,.02); }
+    .price { padding:22px; }
+    .price b { font-size:2rem; display:block; margin:6px 0 10px; }
+    .faq { padding:18px 20px; }
+    .faq h4 { margin-bottom:6px; }
+    footer { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:14px; }
+    @media (max-width:980px){ .hero,.grid4,.logos{ grid-template-columns:1fr 1fr; min-height:unset;} .grid3{grid-template-columns:1fr;} }
+    @media (max-width:720px){ .hero,.grid4,.logos{ grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -42,15 +51,18 @@
     </header>
 
     <main class="hero">
-      <div>
+      <div class="reveal">
         <div class="kicker">Enterprise SaaS</div>
         <h1>Forecast revenue with clarity, not guesswork.</h1>
         <p class="lead">A professional Webflow-style SaaS website concept built for B2B analytics brands. Includes dashboard storytelling, KPI hierarchy, and conversion-focused CTA blocks.</p>
         <div class="chips">
           <span class="chip">B2B SaaS</span><span class="chip">Data Platform</span><span class="chip">Webflow Style</span>
         </div>
+        <div style="display:flex;gap:10px;margin-top:18px;">
+          <a href="#" class="btn">Start free trial</a><a href="#" class="btn sec">See live demo</a>
+        </div>
       </div>
-      <aside class="panel">
+      <aside class="panel reveal">
         <div class="card-title">Q2 Performance</div>
         <div class="stat">$2.84M ARR</div>
         <div class="bars">
@@ -61,7 +73,14 @@
       </aside>
     </main>
 
-    <section>
+    <section class="reveal">
+      <div class="kicker">Trusted by teams</div>
+      <div class="logos">
+        <div class="logo-box">NEXA</div><div class="logo-box">PARA</div><div class="logo-box">METRIX</div><div class="logo-box">VANTA</div><div class="logo-box">QUANTIX</div>
+      </div>
+    </section>
+
+    <section class="reveal">
       <div class="kicker">Capabilities</div>
       <div class="grid3">
         <article class="panel f"><h3>Pipeline Scoring</h3><p>Automatically prioritize deals with weighted confidence models and real-time trend signals.</p></article>
@@ -70,7 +89,46 @@
       </div>
     </section>
 
+    <section class="reveal">
+      <div class="kicker">Workflow</div>
+      <div class="grid4">
+        <article class="panel f"><h3>01 Connect Data</h3><p>Pull CRM, billing, and campaign data in under 30 minutes.</p></article>
+        <article class="panel f"><h3>02 Model Trends</h3><p>Forecast with AI confidence scores and anomaly detection.</p></article>
+        <article class="panel f"><h3>03 Align Teams</h3><p>Share executive views and weekly planning snapshots.</p></article>
+        <article class="panel f"><h3>04 Close Faster</h3><p>Trigger next-best-actions for each opportunity stage.</p></article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="kicker">Pricing</div>
+      <div class="grid3">
+        <article class="panel price"><h3>Starter</h3><b>$49</b><p class="muted">Small sales teams validating predictable growth.</p></article>
+        <article class="panel price"><h3>Growth</h3><b>$149</b><p class="muted">For scaling teams with pipeline complexity and multi-source data.</p></article>
+        <article class="panel price"><h3>Enterprise</h3><b>Custom</b><p class="muted">SSO, governance, and advanced forecasting for larger orgs.</p></article>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="kicker">FAQ</div>
+      <div class="grid3">
+        <article class="panel faq"><h4>How long is setup?</h4><p class="muted">Most teams complete setup in 1 day with guided onboarding.</p></article>
+        <article class="panel faq"><h4>Can I use my CRM?</h4><p class="muted">Yes. Native integrations with HubSpot, Salesforce, and Pipedrive.</p></article>
+        <article class="panel faq"><h4>Is this secure?</h4><p class="muted">Enterprise encryption, SOC-2 style controls, and role-based access.</p></article>
+      </div>
+    </section>
+
     <footer>Stratos AI — premium Webflow-inspired project template.</footer>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.nav', { y: -28, opacity: 0, duration: 0.9, ease: 'power3.out' });
+    gsap.from('.hero h1, .hero .lead, .hero .chip, .hero .btn', { y: 22, opacity: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out', delay: 0.15 });
+    gsap.to('.bars span', { scaleY: 1.06, transformOrigin: 'bottom', duration: 0.9, yoyo: true, repeat: -1, stagger: 0.06, ease: 'sine.inOut' });
+    gsap.utils.toArray('.reveal').forEach((el) => {
+      gsap.from(el, { y: 48, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 82%' } });
+    });
+  </script>
 </body>
 </html>
