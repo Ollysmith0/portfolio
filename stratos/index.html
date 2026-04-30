@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stratos AI — Webflow Style Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#070b19; --panel:#0d1329; --text:#eef3ff; --muted:#9aa8c7; --a:#56d4ff; --b:#7d7bff; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:Inter,system-ui,sans-serif; color:var(--text); background:radial-gradient(65rem 35rem at 90% -20%, rgba(125,123,255,.25), transparent),radial-gradient(45rem 25rem at 0% 30%, rgba(86,212,255,.2), transparent),var(--bg); }
+    .wrap { max-width:1120px; margin:0 auto; padding:24px; }
+    .nav { display:flex; justify-content:space-between; align-items:center; margin-bottom:48px; }
+    .logo { font-weight:800; letter-spacing:.12em; font-size:12px; text-transform:uppercase; }
+    .btn { display:inline-block; padding:12px 18px; border-radius:12px; background:linear-gradient(135deg,var(--a),var(--b)); color:#061024; font-weight:700; text-decoration:none; }
+    .hero { display:grid; gap:24px; grid-template-columns:1.1fr .9fr; align-items:center; min-height:72vh; }
+    h1 { font-size:clamp(2.3rem,5vw,4.4rem); line-height:.95; letter-spacing:-.03em; }
+    .lead { margin-top:16px; color:var(--muted); max-width:56ch; line-height:1.7; }
+    .chips { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+    .chip { border:1px solid rgba(255,255,255,.15); border-radius:999px; padding:8px 12px; font-size:12px; color:#c9d7f6; }
+    .panel { background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.09); border-radius:24px; padding:20px; }
+    .card-title { color:#8fb3ff; font-size:11px; text-transform:uppercase; letter-spacing:.15em; margin-bottom:14px; }
+    .stat { font-size:2.2rem; font-weight:800; margin-bottom:12px; }
+    .bars { display:grid; grid-template-columns:repeat(12,1fr); gap:5px; align-items:end; height:82px; }
+    .bars span { border-radius:4px 4px 2px 2px; background:linear-gradient(180deg,var(--a),var(--b)); opacity:.85; }
+    section { margin:80px 0; }
+    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .kicker { color:#8fb3ff; font-size:11px; text-transform:uppercase; letter-spacing:.2em; margin-bottom:10px; }
+    .f h3 { font-size:1.05rem; margin-bottom:8px; }
+    .f p { color:var(--muted); line-height:1.65; }
+    footer { border-top:1px solid rgba(255,255,255,.1); padding:26px 0 40px; color:var(--muted); font-size:14px; }
+    @media (max-width:900px){ .hero{ grid-template-columns:1fr; min-height:unset; } .grid3{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="logo">Stratos AI</div>
+      <a class="btn" href="#">Book Demo</a>
+    </header>
+
+    <main class="hero">
+      <div>
+        <div class="kicker">Enterprise SaaS</div>
+        <h1>Forecast revenue with clarity, not guesswork.</h1>
+        <p class="lead">A professional Webflow-style SaaS website concept built for B2B analytics brands. Includes dashboard storytelling, KPI hierarchy, and conversion-focused CTA blocks.</p>
+        <div class="chips">
+          <span class="chip">B2B SaaS</span><span class="chip">Data Platform</span><span class="chip">Webflow Style</span>
+        </div>
+      </div>
+      <aside class="panel">
+        <div class="card-title">Q2 Performance</div>
+        <div class="stat">$2.84M ARR</div>
+        <div class="bars">
+          <span style="height:34%"></span><span style="height:41%"></span><span style="height:46%"></span><span style="height:52%"></span>
+          <span style="height:58%"></span><span style="height:63%"></span><span style="height:66%"></span><span style="height:72%"></span>
+          <span style="height:79%"></span><span style="height:85%"></span><span style="height:90%"></span><span style="height:98%"></span>
+        </div>
+      </aside>
+    </main>
+
+    <section>
+      <div class="kicker">Capabilities</div>
+      <div class="grid3">
+        <article class="panel f"><h3>Pipeline Scoring</h3><p>Automatically prioritize deals with weighted confidence models and real-time trend signals.</p></article>
+        <article class="panel f"><h3>Scenario Planning</h3><p>Run best-case/worst-case projections with ready-to-share executive reports.</p></article>
+        <article class="panel f"><h3>Team Alignment</h3><p>Sync marketing, sales, and finance in one decision layer with role-based access.</p></article>
+      </div>
+    </section>
+
+    <footer>Stratos AI — premium Webflow-inspired project template.</footer>
+  </div>
+</body>
+</html>

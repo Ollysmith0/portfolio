@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Cargo — Webflow Style Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#0f1f2d; --panel:#132737; --line:#264153; --text:#eaf4ff; --muted:#9db1c2; --a:#ffb000; --b:#ffd76a; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:Inter,system-ui,sans-serif; color:var(--text); background:linear-gradient(180deg,#0d1b27,#122434); }
+    .wrap{ max-width:1140px; margin:0 auto; padding:24px; }
+    .nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom:42px; }
+    .brand{ font-family:"Barlow Condensed",sans-serif; text-transform:uppercase; letter-spacing:.08em; font-size:1.1rem; }
+    .btn{ text-decoration:none; color:#10202e; background:linear-gradient(135deg,var(--a),var(--b)); padding:10px 15px; border-radius:10px; font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:.06em; }
+    .hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:16px; min-height:68vh; }
+    .left{ background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:30px; }
+    .k{ color:#8da3b6; font-size:11px; text-transform:uppercase; letter-spacing:.2em; margin-bottom:12px; }
+    h1{ font-family:"Barlow Condensed",sans-serif; font-size:clamp(2.8rem,6vw,5.3rem); line-height:.88; letter-spacing:.01em; text-transform:uppercase; }
+    .lead{ margin-top:12px; color:var(--muted); line-height:1.75; max-width:58ch; }
+    .stats{ margin-top:22px; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .stat{ background:#0f202f; border:1px solid var(--line); border-radius:14px; padding:12px; }
+    .stat b{ font:700 1.4rem/1 "Barlow Condensed",sans-serif; color:var(--a); letter-spacing:.03em; }
+    .right{ display:grid; gap:12px; }
+    .card{ background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:18px; }
+    .route{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px dashed rgba(255,255,255,.2); padding:9px 0; color:#d8e8f7; font-size:14px; }
+    section{ margin:70px 0; }
+    .services{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .services .card h3{ font-family:"Barlow Condensed",sans-serif; font-size:1.5rem; text-transform:uppercase; margin-bottom:8px; }
+    .services .card p{ color:var(--muted); line-height:1.65; }
+    footer{ border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:14px; }
+    @media (max-width:920px){ .hero{ grid-template-columns:1fr; min-height:unset;} .stats,.services{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand">Harbor Cargo</div>
+      <a class="btn" href="#">Get Freight Quote</a>
+    </header>
+
+    <main class="hero">
+      <section class="left">
+        <div class="k">Global Logistics System</div>
+        <h1>Reliable shipping for high-volume supply chains.</h1>
+        <p class="lead">Industrial Webflow-style corporate website with bold condensed typography, operational dashboard blocks, and conversion-ready B2B messaging.</p>
+        <div class="stats">
+          <div class="stat"><b>128K</b><div>Containers/year</div></div>
+          <div class="stat"><b>42</b><div>Port partners</div></div>
+          <div class="stat"><b>98.7%</b><div>On-time delivery</div></div>
+        </div>
+      </section>
+      <aside class="right">
+        <article class="card">
+          <div class="k">Live Routes</div>
+          <div class="route"><span>Shanghai → LA</span><span>On Schedule</span></div>
+          <div class="route"><span>Busan → Rotterdam</span><span>+2h</span></div>
+          <div class="route"><span>Singapore → Sydney</span><span>Departed</span></div>
+          <div class="route" style="border-bottom:none;"><span>Dubai → Hamburg</span><span>Docked</span></div>
+        </article>
+        <article class="card">
+          <div class="k">Service Promise</div>
+          <p style="color:var(--muted);line-height:1.7;">Track every shipment, reduce delay risk, and keep procurement teams informed with real-time status and exception alerts.</p>
+        </article>
+      </aside>
+    </main>
+
+    <section class="services">
+      <article class="card"><h3>Ocean Freight</h3><p>FCL/LCL operations with SLA-backed timelines and customs coordination.</p></article>
+      <article class="card"><h3>Land Transport</h3><p>Cross-border trucking with bonded corridors and live vehicle tracking.</p></article>
+      <article class="card"><h3>Warehouse Ops</h3><p>Inventory handling, pallet optimization, and fast outbound dispatch.</p></article>
+    </section>
+
+    <footer>Harbor Cargo — production-ready Webflow-inspired logistics website.</footer>
+  </div>
+</body>
+</html>
