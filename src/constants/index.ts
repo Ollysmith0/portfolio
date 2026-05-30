@@ -65,9 +65,98 @@ const MOBILE_DEMO_BASE_URL = `${import.meta.env.BASE_URL}mobile-demo.html?app=`;
 export const NAV_LINKS = [
   { label: "Home", href: "#hero" },
   { label: "Work", href: "#portfolio" },
+  { label: "Automation", href: "#automation" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ] as const;
+
+// ── N8N Automation Workflows ──────────────────────────────────
+export type N8nWorkflow = {
+  id: string;
+  title: string;
+  category: string;
+  categoryColor: string;
+  description: string;
+  tools: string[];
+  result: string;
+  resultValue: string;
+  templateUrl: string;
+};
+
+export const N8N_WORKFLOWS: N8nWorkflow[] = [
+  {
+    id: "lead-crm",
+    title: "Lead Capture & CRM Automation",
+    category: "Sales",
+    categoryColor: "#818cf8",
+    description:
+      "When a lead fills out the contact form, n8n auto-creates a CRM contact, assigns it to the right sales rep by territory, sends a WhatsApp alert for hot leads, and schedules a 3-step follow-up email sequence — zero manual data entry.",
+    tools: ["HubSpot", "Typeform", "WhatsApp Business", "Gmail"],
+    result: "Lead response time reduced",
+    resultValue: "85%",
+    templateUrl: "https://n8n.io/workflows/",
+  },
+  {
+    id: "order-pipeline",
+    title: "E-commerce Order Fulfillment Pipeline",
+    category: "E-Commerce",
+    categoryColor: "#22d3ee",
+    description:
+      "Every Shopify order triggers n8n to notify the warehouse, generate a shipping label, update inventory in Google Sheets, send an SMS tracking link to the customer, and log the conversion in Google Analytics — all in under 2 minutes.",
+    tools: ["Shopify", "Google Sheets", "Twilio SMS", "Analytics"],
+    result: "Full order cycle automated in",
+    resultValue: "< 2 min",
+    templateUrl: "https://n8n.io/workflows/",
+  },
+  {
+    id: "content-calendar",
+    title: "Multi-Channel Content Publisher",
+    category: "Marketing",
+    categoryColor: "#f97316",
+    description:
+      "Marketing teams write posts once in Notion. n8n reads the content calendar, uses OpenAI to adapt captions for each platform, then simultaneously publishes to Facebook, Instagram, and LinkedIn on schedule with auto-injected hashtags.",
+    tools: ["Notion", "OpenAI", "Facebook", "LinkedIn"],
+    result: "Hours saved per week",
+    resultValue: "15 hrs",
+    templateUrl: "https://n8n.io/workflows/",
+  },
+  {
+    id: "invoice-reconciliation",
+    title: "Invoice & Payment Reconciliation",
+    category: "Finance",
+    categoryColor: "#34d399",
+    description:
+      "n8n extracts invoice data from Gmail attachments using OCR, matches each invoice to its purchase order in the ERP, flags discrepancies for human review in Slack, posts approved entries to Xero, and fires payment reminder emails at day 7, 14, and 30.",
+    tools: ["Gmail", "Mindee OCR", "Xero", "Slack"],
+    result: "Manual data entry eliminated",
+    resultValue: "80%",
+    templateUrl: "https://n8n.io/workflows/",
+  },
+  {
+    id: "employee-onboarding",
+    title: "Employee Onboarding System",
+    category: "HR",
+    categoryColor: "#c084fc",
+    description:
+      "New hire confirmed in the HRIS → n8n creates Google Workspace & Slack accounts, generates a personalised Notion onboarding board, sends a welcome email with first-day schedule, and automatically books 1-on-1 intro meetings with the team.",
+    tools: ["Google Workspace", "Slack", "Notion", "Google Calendar"],
+    result: "Onboarding time cut from 4 hrs to",
+    resultValue: "15 min",
+    templateUrl: "https://n8n.io/workflows/",
+  },
+  {
+    id: "support-triage",
+    title: "AI-Powered Support Triage",
+    category: "Customer Support",
+    categoryColor: "#fb7185",
+    description:
+      "Incoming support emails are classified by GPT-4 (billing / technical / general), routed to the correct Slack channel, auto-replied with the top 3 matching knowledge-base articles, and logged with priority score in the CRM — before a human even reads it.",
+    tools: ["Gmail", "OpenAI GPT-4", "Slack", "HubSpot"],
+    result: "First-response resolution improved",
+    resultValue: "60%",
+    templateUrl: "https://n8n.io/workflows/",
+  },
+];
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/Ollysmith0",
@@ -158,12 +247,15 @@ export type PricingPlan = {
   description: string;
   features: readonly string[];
   popular?: boolean;
+  category: 'mobile' | 'web' | 'n8n';
   spotsLeft?: number;
 };
 
 export const PRICING_PLANS: PricingPlan[] = [
+  // ── Mobile App ──────────────────────────────────────────
   {
     id: "mvp",
+    category: "mobile",
     title: "MVP App",
     price: "From $1,200",
     description: "A focused MVP for one platform — perfect for validating your idea fast.",
@@ -178,6 +270,7 @@ export const PRICING_PLANS: PricingPlan[] = [
   },
   {
     id: "full-app",
+    category: "mobile",
     title: "Full App",
     price: "From $3,500",
     description: "A production-ready app with authentication, API, and a polished UI.",
@@ -193,6 +286,7 @@ export const PRICING_PLANS: PricingPlan[] = [
   },
   {
     id: "custom-scope",
+    category: "mobile",
     title: "Custom Scope",
     price: "Custom quote",
     description: "For complex apps, existing codebase work, or long-term project collaboration.",
@@ -203,6 +297,103 @@ export const PRICING_PLANS: PricingPlan[] = [
       "CI/CD & deployment pipeline",
       "Priority communication",
       "Retainer or fixed-price",
+    ],
+  },
+  // ── Web & Front-End ─────────────────────────────────────
+  {
+    id: "web-landing",
+    category: "web",
+    title: "Landing Page",
+    price: "From $499",
+    description: "A high-converting landing page built with React or Next.js. Fast, SEO-ready, and pixel-perfect.",
+    features: [
+      "1-page responsive design",
+      "React / Next.js",
+      "Framer Motion animations",
+      "SEO meta + sitemap",
+      "Contact form / CTA section",
+      "Deployed & live in 5 days",
+    ],
+  },
+  {
+    id: "web-full",
+    category: "web",
+    title: "Full Website",
+    price: "From $1,500",
+    description: "Multi-page website or marketing site — polished UI, CMS integration, and performance optimized.",
+    features: [
+      "Up to 8 pages",
+      "Next.js + Tailwind CSS",
+      "CMS integration (Sanity / Contentful)",
+      "Framer Motion page transitions",
+      "Blog or portfolio section",
+      "Google Analytics + SEO",
+      "2 revision rounds",
+    ],
+    popular: true,
+  },
+  {
+    id: "web-saas",
+    category: "web",
+    title: "SaaS / Dashboard",
+    price: "From $4,000",
+    description: "Full-featured web app with auth, data tables, charts, and a scalable front-end architecture.",
+    features: [
+      "Auth (NextAuth / Clerk / Supabase)",
+      "Dashboard with charts & tables",
+      "REST / GraphQL API integration",
+      "Role-based access control",
+      "Dark/light mode",
+      "CI/CD + Vercel deployment",
+      "3 revision rounds",
+    ],
+  },
+  // ── n8n Automation ──────────────────────────────────────
+  {
+    id: "n8n-starter",
+    category: "n8n",
+    title: "Starter Workflow",
+    price: "From $299",
+    description: "One focused automation to eliminate a single repetitive task — delivered in 3 days.",
+    features: [
+      "1 automated workflow",
+      "Up to 3 app integrations",
+      "Error handling & retry logic",
+      "Workflow documentation",
+      "1 round of revisions",
+      "Self-hosted or n8n Cloud",
+    ],
+  },
+  {
+    id: "n8n-business",
+    category: "n8n",
+    title: "Business Bundle",
+    price: "From $899",
+    description: "3–5 interconnected automations covering a full business process (e.g. leads → CRM → email → Slack).",
+    features: [
+      "3–5 workflows",
+      "Unlimited app integrations",
+      "Custom webhooks & triggers",
+      "Scheduled + event-driven flows",
+      "Monitoring & alert setup",
+      "Video walkthrough handoff",
+      "2 revision rounds",
+    ],
+    popular: true,
+  },
+  {
+    id: "n8n-audit",
+    category: "n8n",
+    title: "Automation Audit",
+    price: "$149",
+    description: "30-minute deep-dive into your business ops. I map every automation opportunity and deliver a full ROI report.",
+    features: [
+      "30-min strategy call",
+      "Full process audit document",
+      "Automation opportunity map",
+      "Time & cost savings estimate",
+      "Recommended tool stack",
+      "Prioritized implementation roadmap",
     ],
   },
 ];

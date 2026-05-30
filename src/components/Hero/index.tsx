@@ -1,102 +1,185 @@
+import { motion } from 'framer-motion';
 import avatar from '@/assets/avatar.jpg';
 import { SOCIAL_LINKS } from '@/constants';
 
-const TRUST_BADGES = ['WordPress', 'Shopify', 'React', 'Next.js', 'Tailwind'] as const;
+const TECH_STACK = ['React Native', 'TypeScript', 'n8n', 'Next.js', 'Framer Motion'] as const;
 
 const METRICS = [
-  { value: '50+', label: 'stores built' },
-  { value: '98%', label: 'client satisfaction' },
-  { value: '5 minutes', label: 'response time' },
+  { value: '50+', label: 'Projects delivered', color: 'var(--color-accent)' },
+  { value: '20+', label: 'Automations built', color: 'var(--color-n8n)' },
+  { value: '98%', label: 'Client satisfaction', color: 'var(--color-emerald)' },
 ] as const;
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 40 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.35 } },
+};
 
 export default function Hero() {
   return (
     <section id="hero" className="relative px-5 pb-20 pt-28 md:px-10 md:pb-28 md:pt-36">
-      <div className="mx-auto grid max-w-7xl gap-14 xl:grid-cols-[1.1fr_0.9fr] xl:items-center">
-        <div className="flex flex-col gap-7">
-          <span className="section-kicker">Premium Web & E-Commerce Solutions</span>
+      {/* Background grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: 'linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
 
-          <h1 className="font-display text-[clamp(2.8rem,8vw,6.4rem)] leading-[0.92] tracking-[-0.04em] text-[var(--color-text)]">
-            Beautiful stores
+      <div className="mx-auto grid max-w-7xl gap-14 xl:grid-cols-[1.15fr_0.85fr] xl:items-center">
+        {/* Left — content */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col gap-7"
+        >
+          <motion.span variants={fadeUp} className="section-kicker">
+            Full-Stack Developer & Automation Expert
+          </motion.span>
+
+          <motion.h1
+            variants={fadeUp}
+            className="font-display text-[clamp(2.6rem,7.5vw,5.8rem)] font-extrabold leading-[0.9] tracking-[-0.03em] text-[var(--color-text)]"
+          >
+            I build apps
             <br />
-            that sell
-            <span className="block bg-[linear-gradient(120deg,var(--color-accent)_0%,#ffd7a8_55%,var(--color-accent-alt)_100%)] bg-clip-text text-transparent">
-              themselves.
-            </span>
-          </h1>
+            <span className="gradient-text">that work</span>
+            <span className="block">& automations</span>
+            <span className="block text-[var(--color-muted-2)]">that save hours.</span>
+          </motion.h1>
 
-          <p className="max-w-xl text-lg leading-8 text-[var(--color-muted)]">
-            WordPress, Shopify, or fully custom — I build conversion-optimized stores and portfolios with payment integration that sends orders straight to your inbox.
-          </p>
+          <motion.p variants={fadeUp} className="max-w-lg text-base leading-[1.85] text-[var(--color-muted-2)]">
+            React Native apps, polished web experiences, and n8n automation workflows
+            that connect all your tools — built for businesses that want to move faster.
+          </motion.p>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3">
             <a
-              href="#pricing"
-              className="rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(255,122,47,0.35)]"
+              href="#portfolio"
+              className="rounded-full bg-gradient-to-r from-[var(--color-accent-dark)] to-[var(--color-accent)] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_4px_24px_var(--color-accent-glow)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_36px_var(--color-accent-glow)]"
             >
-              View Pricing
+              View My Work
+            </a>
+            <a
+              href="#automation"
+              className="rounded-full border border-[rgba(249,115,22,0.4)] bg-[rgba(249,115,22,0.08)] px-7 py-3.5 text-sm font-semibold text-[var(--color-n8n)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-n8n)] hover:bg-[rgba(249,115,22,0.14)]"
+            >
+              Explore Automation ↓
             </a>
             <a
               href={SOCIAL_LINKS.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
+              className="rounded-full border border-[var(--color-line-strong)] px-7 py-3.5 text-sm font-medium text-[var(--color-muted-2)] transition-all duration-200 hover:border-[var(--color-line-strong)] hover:text-[var(--color-text)]"
             >
-              WhatsApp Us
+              WhatsApp
             </a>
-            <a
-              href="#portfolio"
-              className="rounded-full border border-[var(--color-line)] bg-[rgba(245,239,230,0.04)] px-7 py-3.5 text-sm font-medium text-[var(--color-text)] transition-colors duration-200 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-            >
-              See Portfolio
-            </a>
-          </div>
+          </motion.div>
 
-          <div className="grid gap-3 sm:grid-cols-3">
-            {METRICS.map(({ value, label }) => (
-              <div key={label} className="section-panel rounded-2xl border border-[var(--color-line)] px-5 py-4">
-                <p className="font-display text-3xl tracking-[-0.06em] text-[var(--color-text)]">{value}</p>
-                <p className="mt-1 text-sm text-[var(--color-muted)]">{label}</p>
-              </div>
+          {/* Stats row */}
+          <motion.div variants={fadeUp} className="grid gap-3 sm:grid-cols-3">
+            {METRICS.map(({ value, label, color }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="section-panel rounded-2xl px-5 py-4"
+              >
+                <p className="font-display text-3xl font-extrabold tracking-[-0.04em]" style={{ color }}>
+                  {value}
+                </p>
+                <p className="mt-1 text-xs text-[var(--color-muted)]">{label}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs text-[var(--color-muted)]">Built with:</span>
-            {TRUST_BADGES.map((badge) => (
-              <span
+          {/* Stack badges */}
+          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2.5">
+            <span className="text-xs text-[var(--color-muted)]">Stack:</span>
+            {TECH_STACK.map((badge, i) => (
+              <motion.span
                 key={badge}
-                className="rounded-full border border-[var(--color-line)] bg-[rgba(245,239,230,0.04)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-muted)]"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.7 + i * 0.07 }}
+                className="rounded-full border border-[var(--color-line-strong)] bg-[var(--color-surface)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted-2)]"
               >
                 {badge}
-              </span>
+              </motion.span>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="flex justify-center xl:justify-end">
-          <div className="relative w-full max-w-[30rem]">
-            <div className="absolute inset-[-10%] rounded-full bg-[radial-gradient(circle,rgba(255,122,47,0.12)_0%,transparent_70%)] blur-3xl" />
+        {/* Right — avatar card */}
+        <motion.div
+          variants={fadeRight}
+          initial="hidden"
+          animate="show"
+          className="flex justify-center xl:justify-end"
+        >
+          <div className="relative w-full max-w-[28rem]">
+            {/* Glow blob */}
+            <motion.div
+              className="absolute inset-[-12%] rounded-full blur-3xl"
+              style={{ background: 'radial-gradient(circle,rgba(99,102,241,0.2) 0%,transparent 70%)' }}
+              animate={{ scale: [1, 1.08, 1], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            />
 
-            <div className="section-panel relative overflow-hidden rounded-3xl border border-[var(--color-line)] p-3">
+            <div className="section-panel relative overflow-hidden rounded-3xl p-3">
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                <img src={avatar} alt="Olly Smith" className="h-full w-full object-cover object-[center_18%]" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,rgba(5,5,7,0.7)_100%)]" />
+                <img
+                  src={avatar}
+                  alt="Olly Smith"
+                  className="h-full w-full object-cover object-[center_18%]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% to-[rgba(4,5,13,0.75)]" />
               </div>
 
-              <div className="section-panel absolute inset-x-5 bottom-5 rounded-2xl border border-[rgba(245,239,230,0.12)] p-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--color-accent-alt)]">Services</p>
-                <p className="mt-1.5 text-base font-medium text-[var(--color-text)]">WordPress · Shopify · Portfolio · Landing Page · Custom Stores</p>
+              {/* Floating card */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-x-5 bottom-5 rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[rgba(4,5,13,0.8)] p-4 backdrop-blur-lg"
+              >
+                <div className="flex items-center gap-2">
+                  <motion.div
+                    className="h-2 w-2 rounded-full bg-[var(--color-emerald)]"
+                    style={{ boxShadow: '0 0 8px var(--color-emerald)' }}
+                    animate={{ opacity: [1, 0.4, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-emerald)]">
+                    Available for projects
+                  </p>
+                </div>
+                <p className="mt-2 text-sm font-semibold text-[var(--color-text)]">
+                  Apps · Automation · Web
+                </p>
                 <a
-                  href={`mailto:${SOCIAL_LINKS.email}`}
-                  className="mt-3 inline-block rounded-full bg-[var(--color-accent)] px-5 py-2 text-xs font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
+                  href="#contact"
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[var(--color-accent-dark)] to-[var(--color-accent)] px-5 py-2 text-xs font-semibold text-white"
                 >
-                  Start Your Project →
+                  Start a Project →
                 </a>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

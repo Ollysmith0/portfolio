@@ -86,7 +86,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <p className="pb-5 text-sm leading-7 text-[var(--color-muted)]">{a}</p>
+            <p className="pb-5 text-sm leading-[1.75] text-[var(--color-muted-2)]">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -129,11 +129,11 @@ export default function FAQ() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
           <span className="section-kicker">FAQ</span>
-          <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.04em] text-[var(--color-text)] md:text-6xl">
+          <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-extrabold leading-[0.93] tracking-[-0.03em] text-[var(--color-text)]">
             Frequently asked
-            <span className="block text-[var(--color-accent)]">questions.</span>
+            <span className="block gradient-text">questions.</span>
           </h2>
-          <p className="max-w-xl text-base leading-8 text-[var(--color-muted)]">
+          <p className="max-w-xl text-sm leading-[1.8] text-[var(--color-muted-2)]">
             Everything you need to know before starting your project.
           </p>
         </motion.div>

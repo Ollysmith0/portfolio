@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
+import N8nAutomation from './components/N8nAutomation';
 import Pricing from './components/Pricing';
 import Testimonial from './components/Testimonial';
 import FAQ from './components/FAQ';
@@ -16,9 +17,9 @@ const BlogPost = lazy(() => import('./Pages/Blog/Post'));
 
 function HomePage() {
   useSEO({
-    title: 'Olly Smith Store | Premium Web & E-Commerce Solutions',
+    title: 'Olly Smith | Full-Stack Developer & n8n Automation Expert',
     description:
-      'Premium web development & e-commerce solutions. I build conversion-optimized WordPress, Shopify, and custom stores with payment integration. 50+ stores built with 98% client satisfaction.',
+      'Full-stack developer & n8n automation expert. I build React Native apps, modern web experiences, and business automation workflows that save hours every week.',
     ogUrl: 'https://ollysmith.store/',
     canonical: 'https://ollysmith.store/',
   });
@@ -30,8 +31,9 @@ function HomePage() {
         <Hero />
         <Services />
         <Portfolio />
-        <Pricing />
+        <N8nAutomation />
         <Testimonial />
+        <Pricing />
         <FAQ />
         <Contact />
       </main>

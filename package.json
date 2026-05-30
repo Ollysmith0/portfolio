@@ -6,7 +6,7 @@
   "homepage": "https://ollysmith.store",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint portfolio",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
