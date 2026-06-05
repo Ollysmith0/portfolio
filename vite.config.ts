@@ -5,7 +5,7 @@ import * as path from 'path';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/',
+  base: process.env.VITE_BASE_PATH ?? '/',
   optimizeDeps: {
     exclude: ['@tailwindcss/oxide', 'fsevents'],
     include: [
