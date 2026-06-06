@@ -33,8 +33,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     
     <title>Olly Smith Store | Premium Web & E-Commerce Solutions</title>
-    <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
-    <link rel="apple-touch-icon" href="/portfolio/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Unregister stale service workers -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var r of registrations) { r.unregister(); }
+        });
+      }
+    </script>
     
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
@@ -69,8 +78,8 @@
       gtag('js', new Date());
       gtag('config', 'G-C5JZP4Z6HH');
     </script>
-    <script type="module" crossorigin src="/portfolio/assets/index-lZIrp3du.js"></script>
-    <link rel="stylesheet" crossorigin href="/portfolio/assets/index-CVSTJxPU.css">
+    <script type="module" crossorigin src="/assets/index-IsgB4Uv2.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CVSTJxPU.css">
   </head>
   <body>
     <div id="root"></div>
