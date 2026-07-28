@@ -4,10 +4,9 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
+import Experience from './components/Experience';
 import N8nAutomation from './components/N8nAutomation';
-import Pricing from './components/Pricing';
 import Testimonial from './components/Testimonial';
-import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { useSEO } from './hooks/useSEO';
@@ -17,9 +16,9 @@ const BlogPost = lazy(() => import('./Pages/Blog/Post'));
 
 function HomePage() {
   useSEO({
-    title: 'Olly Smith | Full-Stack Developer & n8n Automation Expert',
+    title: 'Olly Smith | Frontend Developer',
     description:
-      'Full-stack developer & n8n automation expert. I build React Native apps, modern web experiences, and business automation workflows that save hours every week.',
+      'Frontend Developer with 5+ years of experience building React, Next.js, and React Native products at scale. Currently at PropertyGuru Group.',
     ogUrl: 'https://ollysmith.store/',
     canonical: 'https://ollysmith.store/',
   });
@@ -31,10 +30,9 @@ function HomePage() {
         <Hero />
         <Services />
         <Portfolio />
+        <Experience />
         <N8nAutomation />
         <Testimonial />
-        <Pricing />
-        <FAQ />
         <Contact />
       </main>
       <Footer />

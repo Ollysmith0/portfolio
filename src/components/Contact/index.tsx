@@ -6,14 +6,14 @@ const inputClass =
   'w-full rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-text)] outline-none transition-colors placeholder:text-[var(--color-muted)] focus:border-[var(--color-accent)]';
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', service: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`New Inquiry from ${form.name} - ${form.service}`);
+    const subject = encodeURIComponent(`Message from ${form.name}`);
     const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nService: ${form.service}\n\nMessage:\n${form.message}`
+      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
     );
     window.location.href = `mailto:${SOCIAL_LINKS.email}?subject=${subject}&body=${body}`;
     setSent(true);
@@ -22,7 +22,7 @@ export default function Contact() {
 
   const sendViaWhatsApp = () => {
     const message = encodeURIComponent(
-      `Hi Olly! I'm ${form.name}.\n\nService: ${form.service}\nEmail: ${form.email}\n\n${form.message}`
+      `Hi Olly! I'm ${form.name} (${form.email}).\n\n${form.message}`
     );
     window.open(`${SOCIAL_LINKS.whatsapp}?text=${message}`, '_blank');
   };
@@ -36,11 +36,11 @@ export default function Contact() {
             <div>
               <span className="section-kicker">Get in Touch</span>
               <h2 className="mt-4 font-display text-[clamp(2rem,5vw,3.8rem)] font-extrabold leading-[0.93] tracking-[-0.03em] text-[var(--color-text)]">
-                Let's build
-                <span className="gradient-text"> something great.</span>
+                Let's work
+                <span className="gradient-text"> together.</span>
               </h2>
               <p className="mt-4 max-w-sm text-sm leading-[1.8] text-[var(--color-muted-2)]">
-                Fill out the form or reach out directly. I typically respond within a few hours with a detailed proposal.
+                Fill out the form or reach out directly — I typically reply within a few hours.
               </p>
             </div>
 
@@ -107,25 +107,6 @@ export default function Contact() {
                   placeholder="you@email.com"
                 />
               </div>
-            </div>
-
-            <div>
-              <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                Service Needed
-              </label>
-              <select
-                required
-                value={form.service}
-                onChange={(e) => setForm({ ...form, service: e.target.value })}
-                className={inputClass}
-              >
-                <option value="">Select a service…</option>
-                <option value="React Native App">React Native App</option>
-                <option value="Web Development">Web Development</option>
-                <option value="n8n Automation">n8n Automation</option>
-                <option value="UI/UX Design">UI/UX Design</option>
-                <option value="Other">Other</option>
-              </select>
             </div>
 
             <div>

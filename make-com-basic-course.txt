@@ -1,0 +1,298 @@
+================================================================
+   KHOÁ CƠ BẢN | MAKE.COM STARTER
+   "Tự Động Hoá Công Việc Trong 3 Giờ — Không Cần Code"
+================================================================
+
+GIÁ BÁN ĐỀ XUẤT : 0đ (Free) hoặc 199k–299k (Low-ticket)
+MỤC TIÊU THỰC SỰ: Tạo đủ trust + đủ pain để học viên tự nguyện
+                  nâng cấp lên khoá Advanced (3tr–5tr)
+THỜI LƯỢNG       : ~3 giờ (dễ nuốt, dễ hoàn thành)
+FORMAT           : Video pre-recorded, tự học theo tiến độ
+
+----------------------------------------------------------------
+TRIẾT LÝ THIẾT KẾ KHOÁ NÀY
+----------------------------------------------------------------
+Rule #1 : Cho đủ để họ TIN — nhưng cho thiếu để họ MUỐN HƠN
+Rule #2 : Mỗi quick win đi kèm một "ceiling moment" (giới hạn)
+Rule #3 : Câu "Ở khoá Advanced, chúng ta sẽ..." xuất hiện
+          ít nhất 6–8 lần, đúng lúc học viên đang hào hứng nhất
+Rule #4 : Projects ở khoá này hoạt động được — nhưng fragile,
+          không scale được → tạo nhu cầu học tiếp
+================================================================
+
+
+────────────────────────────────────────────────────────────────
+MODULE 1 | TẠI SAO BẠN CẦN KHOÁ HỌC NÀY (NGAY HÔM NAY)
+(~20 phút | Mục tiêu: tạo pain, build urgency)
+────────────────────────────────────────────────────────────────
+
+Bài 1.1 – "Bẫy 3 giờ" — Bạn đang bị ăn cắp thời gian mỗi ngày
+  - Thống kê: nhân viên văn phòng trung bình lãng phí 2.5h/ngày
+    cho các tác vụ lặp lại có thể tự động hoá
+  - Demo LIVE: 1 tác vụ "5 phút" thực ra mất 45 phút/tuần
+  - Tính toán: 45 phút × 52 tuần = 39 giờ/năm = gần 5 ngày làm việc
+
+Bài 1.2 – Make.com là gì và tại sao nó thay đổi cách làm việc
+  - Định nghĩa đơn giản: "LEGO kết nối các app lại với nhau"
+  - Demo 60 giây: scenario chạy thật trước mắt học viên
+  - So sánh Make vs Zapier vs làm tay → Make thắng ở điểm nào
+
+Bài 1.3 – Cam kết và kỳ vọng
+  - Sau khoá này bạn làm được gì (cụ thể, không nói chung chung)
+  - Sau khoá này bạn CHƯA làm được gì (honest = trust)
+  - Setup tài khoản Make.com free (hướng dẫn step-by-step)
+
+[SCRIPT – BÀI 1.1]
+"Tôi muốn hỏi bạn một câu thật lòng: sáng nay bạn có copy
+dữ liệu từ chỗ này sang chỗ khác không? Gửi một email mà nội
+dung gần như giống nhau so với tuần trước? Tạo một báo cáo mà
+bạn biết mình sẽ phải làm lại vào tuần sau?
+
+Những việc đó không phải công việc của bạn. Đó là việc của
+máy tính. Và khoá học này sẽ dạy bạn cách giao nó lại."
+
+[HOOK UPSELL #1 – cuối Module 1]
+"Khoá này sẽ dạy bạn cách tự động hoá những việc đơn giản
+nhất. Nhưng nếu bạn muốn xây dựng hệ thống automation phức
+tạp — thứ mà các agency đang charge khách 20–50 triệu —
+thì đó là nội dung của khoá Advanced. Bây giờ hãy bắt đầu
+từ nền tảng đã."
+
+
+────────────────────────────────────────────────────────────────
+MODULE 2 | LÀM QUEN VỚI MAKE.COM
+(~30 phút | Mục tiêu: orientation, first quick win)
+────────────────────────────────────────────────────────────────
+
+Bài 2.1 – Tour giao diện (không bỏ sót bất kỳ nút nào)
+  - Dashboard: Scenarios, Connections, Templates, Monitoring
+  - Khu vực canvas: nơi bạn xây Scenario
+  - Thanh công cụ trái: tìm kiếm app, thêm module
+
+Bài 2.2 – 7 khái niệm bạn phải thuộc lòng
+  - Scenario   : cái workflow tự động của bạn
+  - Module     : 1 bước trong workflow
+  - Trigger    : thứ khởi động scenario
+  - Action     : thứ scenario làm sau khi trigger
+  - Connection : chìa khoá vào từng app
+  - Bundle     : 1 "gói" dữ liệu chạy qua scenario
+  - Operation  : 1 lần module chạy = 1 operation (= tiền)
+
+Bài 2.3 – Quick Win #1: Scenario đầu tiên trong 10 phút
+  - Trigger: Google Sheets – có row mới
+  - Action : Gmail – gửi email thông báo
+  - Run thử, xem kết quả, cảm nhận "ồ nó chạy thật"
+
+[SCRIPT – BÀI 2.3]
+"Đây là khoảnh khắc quan trọng nhất của khoá học. Không phải
+vì scenario này phức tạp — nó rất đơn giản. Mà vì sau khi
+bạn nhấn Run và thấy email xuất hiện trong inbox, não bạn
+sẽ hiểu rằng Make.com không phải magic — nó là logic. Và
+logic thì học được."
+
+[CEILING MOMENT #1]
+"Scenario này hoạt động tốt — khi data sạch. Nhưng thực tế
+thì sao? Khi có row trống? Khi email sai định dạng? Khi muốn
+xử lý khác nhau cho từng loại khách? Đó là lúc bạn cần
+Filters, Routers, và Error Handling — chúng ta sẽ chạm vào
+phần này ở Module tiếp theo."
+
+
+────────────────────────────────────────────────────────────────
+MODULE 3 | XỬ LÝ DỮ LIỆU CƠ BẢN
+(~40 phút | Mục tiêu: make them feel powerful, then hit the wall)
+────────────────────────────────────────────────────────────────
+
+Bài 3.1 – Mapping dữ liệu giữa các module
+  - Cú pháp {{1.name}}, {{1.email}} — đọc như thế nào
+  - Drag-and-drop mapping trực tiếp trên canvas
+  - Lỗi thường gặp: map sai field, data undefined
+
+Bài 3.2 – Filters: chỉ chạy khi đúng điều kiện
+  - Tại sao cần Filter (tiết kiệm operations + tránh spam)
+  - Thiết lập condition: equals, contains, greater than, regex
+  - Bài tập: chỉ gửi email khi cột Status = "New"
+
+Bài 3.3 – Text Functions cơ bản
+  - trim(), upper(), lower(), replace()
+  - Ghép chuỗi: "Xin chào " + {{1.name}}
+  - formatDate() cho đúng định dạng ngày Việt Nam
+
+Bài 3.4 – Routers: tách luồng xử lý
+  - Router là gì? (ngã ba đường)
+  - Tạo 2 nhánh từ 1 trigger
+  - Bài tập: khách VIP → Slack, khách thường → Email
+
+[CEILING MOMENT #2 — quan trọng nhất khoá này]
+"Bạn vừa xây được scenario có Filter và Router. Cảm giác
+không tệ phải không? Nhưng tôi muốn show bạn thứ này."
+
+[Demo nhanh 2 phút một scenario phức tạp từ khoá Advanced:
+multi-step AI workflow với 15+ modules, sub-scenarios, error
+handling, logging — KHÔNG giải thích, chỉ để họ thấy]
+
+"Đây là thứ học viên khoá Advanced xây được sau 4 tuần.
+Hiện tại bạn chưa cần biết nó hoạt động như thế nào. Nhưng
+sau khoá này, nếu bạn cảm thấy sẵn sàng — tôi sẽ dạy bạn
+từng bước để đến được đây."
+
+
+────────────────────────────────────────────────────────────────
+MODULE 4 | KẾT NỐI CÁC APP PHỔ BIẾN
+(~45 phút | Mục tiêu: breadth of possibilities)
+────────────────────────────────────────────────────────────────
+
+Bài 4.1 – Google Workspace (bộ app ai cũng có)
+  - Google Sheets : Watch rows, Update rows, Search rows
+  - Gmail         : Send email, Watch emails (trigger)
+  - Google Drive  : Upload file, Create folder
+  - Thực hành: form submission → Sheets → Gmail
+
+Bài 4.2 – Messaging Apps
+  - Telegram Bot: gửi tin nhắn, nhận lệnh từ bot
+  - Slack        : post message vào channel
+  - Thực hành: thêm row vào Sheets → ping Telegram
+
+Bài 4.3 – Notion & Airtable
+  - Tạo page/record mới tự động
+  - Update field khi có điều kiện
+  - Thực hành: form → Notion database
+
+Bài 4.4 – Webhooks (giới thiệu, không đi sâu)
+  - Webhook là gì? (giải thích bằng hình ảnh bưu điện)
+  - Tạo Custom Webhook và nhận data thử
+  - **DỪNG Ở ĐÂY** — không dạy advanced webhook use cases
+
+[HOOK UPSELL #2 — sau bài 4.4]
+"Webhooks là một trong những tính năng mạnh nhất của Make —
+và chúng ta chỉ vừa chạm vào bề mặt. Khi kết hợp Webhooks
+với HTTP Module, bạn có thể kết nối với BẤT KỲ app nào trên
+internet — kể cả những app không có trong danh sách 1.500 của
+Make. Đó là nội dung chương đầu của khoá Advanced."
+
+
+────────────────────────────────────────────────────────────────
+MODULE 5 | DỰ ÁN THỰC TẾ #1 — BUILD & DEPLOY
+(~45 phút | Mục tiêu: portfolio piece + confidence)
+────────────────────────────────────────────────────────────────
+
+PROJECT: Lead Auto-Responder
+  Kịch bản : Khách điền Tally form
+             → Lưu vào Google Sheets
+             → Gửi email chào mừng cá nhân hoá
+             → Ping Telegram cho bạn biết có lead mới
+  Độ khó   : Beginner-friendly, hoàn thành trong 45 phút
+  Giá trị  : Thay thế 15–20 phút/lead làm thủ công
+
+Build step-by-step:
+  Step 1: Setup Tally form (5 phút)
+  Step 2: Connect Tally Webhook vào Make (10 phút)
+  Step 3: Add Google Sheets module (5 phút)
+  Step 4: Add Gmail module + cá nhân hoá nội dung (10 phút)
+  Step 5: Add Telegram notification (5 phút)
+  Step 6: Test end-to-end + fix bugs (10 phút)
+
+[SCRIPT – DEPLOY MOMENT]
+"Nhấn nút bật ON. Xong. Từ giờ, mỗi khi có người điền form
+của bạn — dù bạn đang ngủ, đang ăn hay đang nghỉ mát —
+scenario này sẽ chạy tự động. Đây là lần đầu tiên bạn có
+một 'nhân viên' làm việc 24/7 không cần trả lương."
+
+[CEILING MOMENT #3 — quan trọng]
+"Project này hoạt động tốt. Nhưng bạn có nhận ra 3 điểm yếu
+của nó không?
+
+Điểm yếu 1: Nếu Tally gửi data lỗi → scenario crash, bạn
+  không biết cho đến khi khách hàng phàn nàn.
+Điểm yếu 2: Nếu có 100 form submissions cùng lúc → email
+  gửi không đúng thứ tự, data có thể bị duplicate.
+Điểm yếu 3: Không có retry logic — nếu Gmail down 5 phút,
+  email đó mất vĩnh viễn.
+
+Trong môi trường thực tế, những điều này xảy ra thường xuyên.
+Cách xử lý chúng — Error Handling, Queuing, Logging — là
+nội dung cốt lõi của khoá Advanced."
+
+
+────────────────────────────────────────────────────────────────
+MODULE 6 | TỔNG KẾT & BƯỚC TIẾP THEO
+(~20 phút | Mục tiêu: celebrate + pivot to upsell)
+────────────────────────────────────────────────────────────────
+
+Bài 6.1 – Bạn đã làm được gì
+  - Checklist những gì đã nắm vững
+  - "Giờ bạn đã không còn là người dùng make.com. Bạn là
+    người xây trên Make.com. Đó là khác biệt lớn."
+
+Bài 6.2 – Giới hạn của những gì bạn biết (honest talk)
+  Bạn chưa biết:
+  ✗ Xây hệ thống nhiều scenario phối hợp nhau
+  ✗ Kết nối với API không có sẵn trong Make
+  ✗ Xử lý lỗi production-grade
+  ✗ Kết hợp AI để ra quyết định tự động
+  ✗ Scale scenario lên hàng ngàn executions/ngày
+  ✗ Biến automation thành sản phẩm bán cho khách
+
+Bài 6.3 – Lời mời thẳng vào khoá Advanced
+  [Xem phần UPSELL SCRIPT bên dưới]
+
+================================================================
+        UPSELL SCRIPT — MODULE 6, BÀI 6.3
+        (Đây là bài quan trọng nhất của cả khoá)
+================================================================
+
+"Bạn vừa đi qua một hành trình không nhỏ. Từ người chưa biết
+Make.com là gì, giờ bạn đã build được một automation thực sự
+chạy được. Tôi rất tự hào về điều đó.
+
+Nhưng tôi muốn nói thật với bạn một điều:
+
+Những gì bạn học ở khoá này — đó là phần nổi của tảng băng.
+Và đó là điều tốt, vì bây giờ bạn đã có đủ nền tảng để leo
+lên phần còn lại.
+
+Tôi đã làm việc với các doanh nghiệp trả 20–50 triệu cho
+một hệ thống automation. Sự khác biệt giữa thứ họ nhận được
+và thứ bạn vừa build không phải là magic. Đó là:
+
+  → Kiến trúc: biết cách thiết kế hệ thống nhiều scenarios
+               phối hợp mà không bị rối
+  → Resilience: scenario không crash khi data xấu hoặc
+                API bên ngoài có vấn đề
+  → AI Integration: dùng LLM để xử lý ngôn ngữ tự nhiên,
+                    phân tích, ra quyết định tự động
+  → Scalability: chạy ổn định dù 10 hay 10,000 executions
+  → Productization: đóng gói thành sản phẩm bán được
+
+Khoá Advanced không phải khoá học. Đó là workshop thực chiến.
+Bạn sẽ build 5 hệ thống production-ready từ real client briefs.
+Mỗi cái đều là portfolio piece bạn có thể show khách hàng.
+
+Học viên khoá trước đã dùng những thứ đó để:
+  - Nhận freelance project đầu tiên trong 2 tuần sau khoá
+  - Tiết kiệm 15 giờ/tuần cho team của mình
+  - Build internal tool thay thế phần mềm SaaS 2tr/tháng
+
+Nếu bạn đã thấy mình trong những câu chuyện đó — link đăng ký
+khoá Advanced ở ngay bên dưới video này.
+
+Nếu bạn chưa sẵn sàng, không sao cả. Hãy dùng những gì đã
+học, build thêm vài scenario, và khi bạn cảm thấy 'mình muốn
+hơn thế này' — tôi sẽ ở đây."
+
+================================================================
+CHECKLIST ĐỂ HỌC VIÊN TỰ ĐÁNH GIÁ SẴN SÀNG HỌC ADVANCED
+================================================================
+
+Tick ít nhất 3/5 → bạn sẵn sàng:
+
+□ Tôi đã xây ít nhất 2 scenario tự chạy được
+□ Tôi đã từng bị scenario crash và tự debug được
+□ Tôi muốn kết nối Make với AI (ChatGPT, Claude...)
+□ Tôi muốn nhận tiền từ kỹ năng automation này
+□ Tôi cảm thấy scenario hiện tại của mình còn mong manh,
+  chưa đủ tin để dùng thật cho khách hàng
+
+================================================================
+END OF BASIC COURSE
+================================================================

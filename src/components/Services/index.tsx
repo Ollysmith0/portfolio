@@ -60,13 +60,13 @@ export default function Services() {
           <div>
             <span className="section-kicker">What I Do</span>
             <h2 className="mt-4 font-display text-[clamp(2rem,5vw,3.8rem)] font-extrabold leading-[0.93] tracking-[-0.03em] text-[var(--color-text)]">
-              Four specialties,
+              Technologies &amp;
               <br />
-              <span className="gradient-text">one partner.</span>
+              <span className="gradient-text">specializations.</span>
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-[1.8] text-[var(--color-muted-2)] md:text-right">
-            From shipping a mobile app to automating your entire business pipeline — I cover the full stack.
+            Frontend-first developer covering web, mobile, and automation engineering.
           </p>
         </motion.div>
 

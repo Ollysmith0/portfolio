@@ -1,0 +1,370 @@
+================================================================
+         KHOÁ HỌC MAKE.COM - TỪ CƠ BẢN ĐẾN THỰC HÀNH
+         (No-Code Automation Mastery with Make.com)
+================================================================
+
+MỤC TIÊU KHOÁ HỌC:
+  Sau khi hoàn thành, học viên có thể tự xây dựng các luồng
+  automation tự động hoá công việc hàng ngày bằng Make.com
+  mà không cần biết lập trình.
+
+ĐỐI TƯỢNG HỌC VIÊN:
+  - Dân văn phòng muốn tự động hoá công việc lặp đi lặp lại
+  - Freelancer, solopreneur cần tiết kiệm thời gian
+  - Marketer, Sales, HR dùng nhiều tool rời rạc
+  - Người muốn chuyển sang lĩnh vực No-Code / AI Automation
+
+THỜI LƯỢNG ĐỀ XUẤT: 8–10 giờ học (chia thành ~4–5 buổi)
+
+================================================================
+                        CẤU TRÚC KHOÁ HỌC
+================================================================
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 0 | WARM-UP – Tại Sao Automation Lại Quan Trọng?
+(~20 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 0.1 – Câu chuyện mở đầu
+  - Bạn đang lãng phí bao nhiêu giờ mỗi tuần cho việc copy-paste?
+  - Demo nhanh: 1 scenario Make.com thay thế 30 phút làm thủ công
+
+Bài 0.2 – Make.com là gì? Tại sao chọn Make thay vì Zapier?
+  - So sánh nhanh Make vs Zapier vs n8n
+  - Điểm mạnh của Make: visual flow, data transform, giá cả
+
+Bài 0.3 – Roadmap khoá học
+  - Học gì, làm được gì sau mỗi chương
+  - Cách setup môi trường học tập (tài khoản free Make.com)
+
+[SCRIPT GỢI Ý]
+"Bạn có bao giờ phải ngồi copy từng dòng email khách hàng vào
+Google Sheet không? Hay nhớ đăng bài lên mạng xã hội đúng giờ?
+Khoá học này sẽ dạy bạn cách để máy tính làm những việc đó
+thay bạn — mà bạn không cần viết một dòng code nào."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 1 | NỀN TẢNG – Hiểu Make.com Từ Trong Ra Ngoài
+(~45 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 1.1 – Giao diện Make.com
+  - Dashboard, Organizations, Teams
+  - Khu vực Scenarios (trung tâm của mọi thứ)
+  - Connections, Templates, Monitoring
+
+Bài 1.2 – Các khái niệm cốt lõi (BẮT BUỘC NẮM VỮNG)
+  - Scenario       : một luồng tự động hoá (workflow)
+  - Module         : một bước xử lý trong scenario
+  - Trigger        : sự kiện khởi động scenario
+  - Action         : hành động được thực hiện
+  - Connection     : kết nối tới app bên ngoài
+  - Bundle         : gói dữ liệu chạy qua từng module
+  - Operation      : 1 lần module chạy = 1 operation (tính phí)
+
+Bài 1.3 – Vòng đời của một Scenario
+  - Trigger → Filter → Action → Action → ... → Output
+  - Sơ đồ trực quan vòng đời dữ liệu
+  - Khi nào scenario chạy? (Scheduling vs Instant trigger)
+
+[SCRIPT GỢI Ý]
+"Hãy tưởng tượng Scenario là một cái dây chuyền nhà máy.
+Trigger là lúc nguyên liệu đầu vào. Module là mỗi trạm xử lý.
+Và Bundle là sản phẩm chạy qua từng trạm đó. Khi hiểu được
+hình ảnh này, mọi thứ trong Make sẽ rất dễ hiểu."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 2 | THỰC HÀNH ĐẦU TIÊN – Scenario Hello World
+(~60 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 2.1 – Tạo Scenario đầu tiên (tay không)
+  - Trigger: Google Sheets – Watch new rows
+  - Action: Gmail – Send an email
+  - Chạy thử và xem kết quả
+
+Bài 2.2 – Làm việc với dữ liệu động (Dynamic Mapping)
+  - Mapping data từ module trước sang module sau
+  - Hiểu cú pháp {{1.name}}, {{1.email}}
+  - Bẫy thường gặp: mapping sai field, dữ liệu trống
+
+Bài 2.3 – Schedule và Run Scenario
+  - Chạy thủ công vs chạy theo lịch
+  - Thiết lập interval (mỗi 15 phút, mỗi ngày lúc 9h...)
+  - Xem Execution History và debug lỗi cơ bản
+
+Bài 2.4 – Filters (Bộ Lọc)
+  - Tại sao cần Filter?
+  - Thiết lập điều kiện: equals, contains, greater than...
+  - Ví dụ: chỉ gửi email khi cột "Status" = "New"
+
+[SCRIPT GỢI Ý]
+"Bây giờ chúng ta sẽ bắt tay vào làm luôn. Đừng lo nếu bạn
+chưa hiểu hết — cứ làm theo từng bước, mọi thứ sẽ rõ dần.
+Scenario đầu tiên luôn là cái khó nhất. Sau đó thì cái thứ hai
+chỉ mất 1/3 thời gian thôi."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 3 | XỬ LÝ DỮ LIỆU – Trái Tim Của Make.com
+(~75 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 3.1 – Built-in Functions (Hàm xử lý dữ liệu)
+  - Text functions  : toString, trim, upper, lower, replace
+  - Number functions: round, floor, formatNumber
+  - Date functions  : now, formatDate, addDays, dateDifference
+  - Array functions : first, last, length, join, flatten
+
+Bài 3.2 – Routers (Bẽ rẽ luồng xử lý)
+  - Router là gì? Khi nào dùng?
+  - Tạo nhiều nhánh từ một điểm
+  - Kết hợp Router + Filter để xử lý nhiều trường hợp
+
+Bài 3.3 – Iterator & Aggregator
+  - Iterator: tách mảng dữ liệu ra từng phần tử
+  - Aggregator: gộp nhiều bundle lại thành một
+  - Ví dụ thực tế: xử lý danh sách đơn hàng
+
+Bài 3.4 – Variables & Data Store
+  - Set/Get Variable trong scenario
+  - Data Store: "database nhỏ" của Make.com
+  - Ví dụ: lưu trữ trạng thái, đếm số lần chạy
+
+[SCRIPT GỢI Ý]
+"Chương này là phần nhiều người bỏ qua và sau đó tự hỏi
+tại sao scenario của mình không linh hoạt. Hiểu được
+Functions và Router là bạn đã đi được 70% chặng đường."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 4 | KẾT NỐI APP – Tích Hợp Các Công Cụ Thực Tế
+(~90 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 4.1 – Nhóm Apps phổ biến & cách kết nối
+  - Google Workspace  : Sheets, Gmail, Drive, Forms, Calendar
+  - Communication     : Slack, Telegram, Discord
+  - Project Mgmt      : Notion, Trello, Asana, ClickUp
+  - CRM & Sales       : HubSpot, Airtable
+  - E-commerce        : Shopify, WooCommerce
+  - AI                : OpenAI, Anthropic Claude
+
+Bài 4.2 – Webhooks – Trigger linh hoạt nhất
+  - Custom Webhook là gì?
+  - Nhận data từ bất kỳ app nào qua HTTP POST
+  - Thực hành: nhận form submission từ Typeform/Tally
+
+Bài 4.3 – HTTP Module – Kết nối không giới hạn
+  - Khi app không có sẵn trong Make.com
+  - Gọi API bất kỳ bằng HTTP module
+  - Authentication: API Key, Bearer Token, OAuth2
+
+Bài 4.4 – Error Handling
+  - Break, Resume, Rollback, Ignore
+  - Thiết lập thông báo khi scenario bị lỗi
+  - Best practices: luôn có fallback
+
+[SCRIPT GỢI Ý]
+"Make có hơn 1.500 apps tích hợp sẵn. Nhưng điều thực sự
+mạnh là Webhooks và HTTP module — chúng cho phép bạn kết nối
+với bất kỳ thứ gì trên internet, kể cả các API tự viết."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 5 | AI AUTOMATION – Kết Hợp Make + AI
+(~60 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 5.1 – Tích hợp OpenAI / Claude vào scenario
+  - Gọi ChatGPT để phân tích, tóm tắt, phân loại dữ liệu
+  - Ví dụ: tự động trả lời email theo tone thương hiệu
+
+Bài 5.2 – Prompt Engineering trong Make
+  - Dynamic prompt: chèn dữ liệu thực vào prompt
+  - Xử lý response từ AI (parse JSON, extract info)
+
+Bài 5.3 – AI Agent Workflow đơn giản
+  - Make + AI = agent xử lý task phức tạp
+  - Demo: nhận feedback → phân tích sentiment → route xử lý
+
+[SCRIPT GỢI Ý]
+"Đây là phần thú vị nhất. Khi bạn kết hợp Make với AI,
+bạn không chỉ tự động hoá các bước lặp lại nữa — bạn còn
+tự động hoá cả việc ra quyết định. Đó là sức mạnh thực sự."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 6 | DỰ ÁN THỰC TẾ – Áp Dụng Vào Công Việc
+(~90 phút)
+────────────────────────────────────────────────────────────────
+
+PROJECT 1 – Lead Management Automation
+  Kịch bản: Khách fill form → Lưu vào Sheet → Gửi email chào mừng
+            → Tạo task trong Notion → Thông báo Slack cho team
+  Apps dùng: Tally/Typeform + Google Sheets + Gmail + Notion + Slack
+
+PROJECT 2 – Social Media Auto-Post
+  Kịch bản: Thêm bài vào Sheet → AI viết caption → Đăng lên
+            Facebook/Instagram đúng giờ
+  Apps dùng: Google Sheets + OpenAI + Buffer/Meta API
+
+PROJECT 3 – AI-Powered Customer Support
+  Kịch bản: Email đến → AI phân loại → Route đúng người xử lý
+            → Gửi auto-reply → Ghi lịch sử vào Airtable
+  Apps dùng: Gmail + OpenAI + Slack + Airtable
+
+PROJECT 4 – Daily Report Automation
+  Kịch bản: Mỗi sáng 8h → Lấy data từ nhiều nguồn → AI tổng hợp
+            → Gửi báo cáo qua Telegram/Email
+  Apps dùng: Google Analytics + Sheets + OpenAI + Telegram
+
+[SCRIPT GỢI Ý]
+"Bốn dự án này là những gì khách hàng thực tế đang trả tiền
+để có được. Sau khi làm xong cả bốn, bạn đã có portfolio để
+nhận freelance job hoặc tiết kiệm hàng chục giờ mỗi tháng."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 7 | TỐI ƯU & NÂNG CAO – Làm Chủ Hoàn Toàn
+(~45 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 7.1 – Tối ưu Operations (tiết kiệm chi phí)
+  - Giảm số operation không cần thiết
+  - Dùng Filters đúng chỗ để tránh chạy dư
+  - Caching và Lookup Tables
+
+Bài 7.2 – Scenario Templates & Cloning
+  - Tái sử dụng scenario
+  - Chia sẻ template trong team
+
+Bài 7.3 – Monitoring & Alerting
+  - Theo dõi scenario health
+  - Thiết lập cảnh báo khi lỗi
+  - Incomplete executions: cách xử lý
+
+Bài 7.4 – Pricing & Plan nên dùng
+  - Free plan có gì?
+  - Khi nào cần nâng cấp?
+  - Mẹo tối ưu để ở lại free plan lâu nhất
+
+[SCRIPT GỢI Ý]
+"Nhiều người dùng Make mãi không lên được Free plan vì không
+biết tối ưu. Chương này sẽ cho bạn những tips thực chiến
+để scenario chạy nhanh, ổn định và không tốn tiền thừa."
+
+────────────────────────────────────────────────────────────────
+CHƯƠNG 8 | TỔNG KẾT & BƯỚC TIẾP THEO
+(~20 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 8.1 – Recap toàn bộ khoá học
+  - Mind map tổng hợp kiến thức
+  - Checklist "Tôi đã biết làm gì?"
+
+Bài 8.2 – Hướng phát triển tiếp theo
+  - Make.com + n8n: khi nào dùng cái nào?
+  - Kết hợp với AI Agents (LangChain, CrewAI)
+  - Cách kiếm tiền với Make automation (freelance, productize)
+
+Bài 8.3 – Cộng đồng & Tài nguyên
+  - Make.com Community Forum
+  - YouTube channels hay: Make Official, Liam Ottley
+  - Templates library
+
+[SCRIPT GỢI Ý]
+"Xin chúc mừng bạn đã hoàn thành khoá học! Nhưng đây không
+phải điểm kết thúc — đây là điểm bắt đầu. Automation là kỹ
+năng tích luỹ: mỗi scenario bạn xây thêm, bạn lại giỏi hơn.
+Hãy bắt đầu từ một vấn đề nhỏ trong công việc hàng ngày của
+bạn. Đó là cách tốt nhất để học."
+
+================================================================
+                    SUGGESTIONS VỀ CẤU TRÚC
+================================================================
+
+1. ĐỘ DÀI MỖI BÀI
+   Tối ưu: 8–15 phút/bài
+   Lý do: người học online mất tập trung sau 15 phút
+   Tách bài dài thành 2–3 bài ngắn nếu cần
+
+2. TỶ LỆ LÝ THUYẾT / THỰC HÀNH
+   Đề xuất: 30% lý thuyết – 70% demo tay
+   Mỗi khái niệm đều phải có ví dụ chạy được ngay
+
+3. PROGRESSIVE COMPLEXITY (Tăng dần độ khó)
+   Chương 0–1 : Zero to hero, không giả định gì
+   Chương 2–3 : Hands-on, làm được ngay
+   Chương 4–5 : Mở rộng ra real-world apps + AI
+   Chương 6   : Projects thực chiến (portfolio)
+   Chương 7–8 : Power user tips + next steps
+
+4. HOOKS ĐẦU MỖI BÀI (giữ chân học viên)
+   - Bắt đầu bằng "vấn đề thực tế" trước khi dạy giải pháp
+   - Cho xem kết quả cuối trước ("đây là thứ bạn sẽ tự làm được")
+   - Đặt câu hỏi kích thích tư duy
+
+5. CẤU TRÚC MỖI BÀI HỌC (gợi ý)
+   [0:00–0:30] Hook / Vấn đề thực tế
+   [0:30–2:00] Giải thích khái niệm (ngắn gọn)
+   [2:00–X:XX] Demo live trên Make.com
+   [X:XX–End] Recap + bài tập nhỏ / quiz
+
+6. BÀI TẬP SAU MỖI CHƯƠNG
+   Chương 2: Tự xây scenario gửi email khi thêm row vào Sheet
+   Chương 3: Thêm Router, Filter vào scenario đã có
+   Chương 4: Kết nối thêm 1 app mới bằng HTTP module
+   Chương 6: Hoàn thành 1 trong 4 projects và deploy
+
+7. BONUS CONTENT (tăng giá trị khoá học)
+   - Swipe file: 20 Scenario Templates sẵn dùng
+   - Cheat sheet: Functions hay dùng nhất
+   - Checklist: Launch scenario an toàn trước khi bật live
+   - Community: Nhóm Zalo/Discord hỏi đáp
+
+================================================================
+                  SCRIPT MẪU – BÀI GIỚI THIỆU
+================================================================
+
+[INTRO – Bài 0.1]
+
+"Xin chào, tôi là [Tên giảng viên] và đây là khoá học
+Make.com từ cơ bản đến thực hành.
+
+Trước khi bắt đầu, tôi muốn hỏi bạn một câu: Mỗi tuần bạn
+dành bao nhiêu giờ cho những việc như thế này — copy dữ liệu
+từ form sang Google Sheet, gửi email xác nhận cho khách hàng,
+tạo báo cáo thủ công, hay đăng bài lên mạng xã hội?
+
+Nếu câu trả lời là hơn 3 tiếng, thì khoá học này sinh ra
+chính xác cho bạn.
+
+Make.com là một nền tảng no-code automation — nói đơn giản,
+nó cho phép bạn kết nối các ứng dụng với nhau và tạo ra các
+luồng làm việc tự động, mà không cần viết một dòng code nào.
+
+Và trong khoá học này, chúng ta sẽ không chỉ học lý thuyết.
+Chúng ta sẽ cùng nhau xây dựng 4 dự án thực tế — những thứ
+bạn có thể dùng được ngay trong công việc của mình.
+
+Hãy bắt đầu nào!"
+
+[TRANSITION GIỮA CÁC CHƯƠNG]
+
+"Bạn vừa học xong [tên chương]. Tóm lại, bạn đã biết [recap
+1–2 điểm chính]. Ở chương tiếp theo, chúng ta sẽ [preview
+chương sau + nêu lý do tại sao nó quan trọng]. Gặp bạn ở đó."
+
+[OUTRO KHOÁ HỌC]
+
+"Bạn đã đi được một chặng đường rất dài từ khi bắt đầu khoá
+học này. Từ người chưa biết Make.com là gì, bây giờ bạn đã
+có thể tự xây dựng các automation phức tạp, kết nối AI, và
+tự động hoá những phần công việc tẻ nhạt nhất.
+
+Thứ tôi muốn bạn làm ngay hôm nay là chọn một quy trình trong
+công việc — dù nhỏ thôi — và xây một scenario cho nó. Không
+cần hoàn hảo, cứ làm.
+
+Cảm ơn bạn đã tin tưởng và đồng hành. Chúc bạn automation
+thành công!"
+
+================================================================
+END OF DOCUMENT
+================================================================

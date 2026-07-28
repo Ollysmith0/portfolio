@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import avatar from '@/assets/avatar.jpg';
 import { SOCIAL_LINKS } from '@/constants';
 
-const TECH_STACK = ['React Native', 'TypeScript', 'n8n', 'Next.js', 'Framer Motion'] as const;
+const TECH_STACK = ['React', 'TypeScript', 'Next.js', 'React Native', 'Framer Motion'] as const;
 
 const METRICS = [
-  { value: '50+', label: 'Projects delivered', color: 'var(--color-accent)' },
-  { value: '20+', label: 'Automations built', color: 'var(--color-n8n)' },
+  { value: '5+', label: 'Years experience', color: 'var(--color-accent)' },
+  { value: '50+', label: 'Projects shipped', color: 'var(--color-n8n)' },
   { value: '98%', label: 'Client satisfaction', color: 'var(--color-emerald)' },
 ] as const;
 
@@ -46,23 +46,23 @@ export default function Hero() {
           className="flex flex-col gap-7"
         >
           <motion.span variants={fadeUp} className="section-kicker">
-            Full-Stack Developer & Automation Expert
+            Frontend Developer · 5+ Years Experience
           </motion.span>
 
           <motion.h1
             variants={fadeUp}
             className="font-display text-[clamp(2.6rem,7.5vw,5.8rem)] font-extrabold leading-[0.9] tracking-[-0.03em] text-[var(--color-text)]"
           >
-            I build apps
+            Crafting
             <br />
-            <span className="gradient-text">that work</span>
-            <span className="block">& automations</span>
-            <span className="block text-[var(--color-muted-2)]">that save hours.</span>
+            <span className="gradient-text">high-quality</span>
+            <span className="block">web &amp; mobile</span>
+            <span className="block text-[var(--color-muted-2)]">experiences.</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} className="max-w-lg text-base leading-[1.85] text-[var(--color-muted-2)]">
-            React Native apps, polished web experiences, and n8n automation workflows
-            that connect all your tools — built for businesses that want to move faster.
+            Currently at PropertyGuru Group. I build React, Next.js, and React Native products —
+            from fintech dashboards to property portals — with a focus on performance and clean code.
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3">
@@ -73,10 +73,10 @@ export default function Hero() {
               View My Work
             </a>
             <a
-              href="#automation"
-              className="rounded-full border border-[rgba(249,115,22,0.4)] bg-[rgba(249,115,22,0.08)] px-7 py-3.5 text-sm font-semibold text-[var(--color-n8n)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-n8n)] hover:bg-[rgba(249,115,22,0.14)]"
+              href="#experience"
+              className="rounded-full border border-[rgba(129,140,248,0.4)] bg-[rgba(129,140,248,0.08)] px-7 py-3.5 text-sm font-semibold text-[var(--color-accent)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent)] hover:bg-[rgba(129,140,248,0.14)]"
             >
-              Explore Automation ↓
+              My Experience ↓
             </a>
             <a
               href={SOCIAL_LINKS.whatsapp}
@@ -168,7 +168,7 @@ export default function Hero() {
                   </p>
                 </div>
                 <p className="mt-2 text-sm font-semibold text-[var(--color-text)]">
-                  Apps · Automation · Web
+                  Frontend · Mobile · Web3
                 </p>
                 <a
                   href="#contact"

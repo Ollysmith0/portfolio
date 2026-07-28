@@ -65,7 +65,7 @@ const MOBILE_DEMO_BASE_URL = `${import.meta.env.BASE_URL}mobile-demo.html?app=`;
 export const NAV_LINKS = [
   { label: "Home", href: "#hero" },
   { label: "Work", href: "#portfolio" },
-  { label: "Automation", href: "#automation" },
+  { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ] as const;

@@ -1,0 +1,446 @@
+================================================================
+   KHOÁ NÂNG CAO | MAKE.COM ADVANCED BUILDER
+   "Xây Hệ Thống Automation Production-Ready — Bán Được Cho Khách"
+================================================================
+
+GIÁ BÁN ĐỀ XUẤT : 3.500.000đ – 5.000.000đ
+ĐIỀU KIỆN HỌC   : Đã hoàn thành khoá Starter HOẶC đã dùng
+                  Make.com được ít nhất 1 tháng
+THỜI LƯỢNG      : ~12–15 giờ (6–8 tuần học bán tự tốc)
+FORMAT          : Video pre-recorded + 4 buổi Live Q&A/tháng
+                  + Private community (Zalo/Discord)
+COHORT SIZE     : Giới hạn 30 học viên/batch (tạo khan hiếm)
+
+----------------------------------------------------------------
+GIÁ TRỊ CỐT LÕI (Cần nêu rõ trên sales page)
+----------------------------------------------------------------
+✓ 5 Capstone Projects build từ real client briefs
+✓ Templates library: 30+ production-ready scenarios
+✓ Certificate of completion (dùng được trong portfolio)
+✓ Lifetime access + updates khi Make ra tính năng mới
+✓ 4 buổi Live Q&A với giảng viên mỗi tháng trong 2 tháng
+✓ 1-on-1 review scenario của bạn (1 lần, giới hạn 30 phút)
+
+================================================================
+                        CẤU TRÚC KHOÁ HỌC
+================================================================
+
+────────────────────────────────────────────────────────────────
+PHẦN 1 | ADVANCED ARCHITECTURE
+"Từ Scenario Đơn Lẻ Đến Hệ Thống Thực Sự"
+(~2.5 giờ)
+────────────────────────────────────────────────────────────────
+
+Bài 1.1 – Tư duy hệ thống vs tư duy scenario đơn lẻ
+  - Vì sao 1 scenario khổng lồ là anti-pattern?
+  - Nguyên tắc Single Responsibility cho automation
+  - Vẽ sơ đồ kiến trúc trước khi mở Make.com
+
+Bài 1.2 – Sub-scenarios & Scenario Chaining
+  - Gọi scenario từ scenario khác (như function call)
+  - Truyền data giữa scenarios qua JSON payload
+  - Pattern: Orchestrator scenario + Worker scenarios
+  - Thực hành: tách Lead Pipeline thành 4 sub-scenarios
+
+Bài 1.3 – Shared Data Layer
+  - Data Store nâng cao: index, search, batch operations
+  - Dùng Google Sheets / Airtable làm "database" cho hệ thống
+  - Tránh race condition khi nhiều scenarios cùng ghi dữ liệu
+
+Bài 1.4 – Queue Pattern (xử lý khối lượng lớn)
+  - Vấn đề: 500 webhooks đến cùng lúc → crash
+  - Giải pháp: Buffer queue bằng Data Store + Scheduled trigger
+  - Thực hành: build queue system cho email campaign
+
+[SCRIPT – BÀI 1.1]
+"Ở khoá Starter, bạn đã biết build scenario. Hôm nay chúng ta
+sẽ học cách THIẾT KẾ hệ thống. Đây là bước nhảy từ người dùng
+Make thành automation architect — và đó cũng là lý do mức
+lương hay project rate của hai nhóm này khác nhau gấp 3–5 lần."
+
+
+────────────────────────────────────────────────────────────────
+PHẦN 2 | PRODUCTION-GRADE ERROR HANDLING
+"Scenario Của Bạn Phải Sống Sót Được Khi Mọi Thứ Sai"
+(~2 giờ)
+────────────────────────────────────────────────────────────────
+
+Bài 2.1 – Các loại lỗi trong Make.com
+  - Connection errors    : API bên ngoài timeout hoặc down
+  - Data errors          : field trống, sai kiểu, null pointer
+  - Logic errors         : scenario chạy đúng nhưng kết quả sai
+  - Rate limit errors    : gọi API quá nhiều lần/phút
+
+Bài 2.2 – Error Handler Module (Break / Resume / Rollback)
+  - Break   : dừng, log lỗi, không làm gì thêm
+  - Resume  : bỏ qua bundle lỗi, tiếp tục bundle sau
+  - Rollback: hoàn tác tất cả (dùng khi có transaction)
+  - Quyết định dùng cái nào trong tình huống nào
+
+Bài 2.3 – Retry Logic & Exponential Backoff
+  - Tự build retry mechanism trong Make
+  - Exponential backoff: 1s → 2s → 4s → 8s → alert
+  - Dùng Data Store để track retry count
+
+Bài 2.4 – Dead Letter Queue & Alert System
+  - Bundle lỗi không xử lý được → lưu vào "dead letter"
+  - Alert đa kênh: Telegram + Email khi có lỗi critical
+  - Dashboard monitoring: Airtable/Notion làm error log
+
+Bài 2.5 – Testing Scenarios Như Pro
+  - Unit test từng module bằng mock data
+  - End-to-end test với production-like data
+  - Checklist trước khi bật scenario live
+
+[SCRIPT – BÀI 2.1]
+"Nếu bạn đang dùng automation cho công việc thực — cho khách
+hàng, cho team, cho business của bạn — thì đây là chương
+quan trọng nhất bạn sẽ học. Vì sớm hay muộn, mọi scenario
+đều sẽ gặp lỗi. Câu hỏi không phải là 'có lỗi không' mà là
+'khi lỗi xảy ra, hệ thống của bạn xử lý như thế nào?'"
+
+
+────────────────────────────────────────────────────────────────
+PHẦN 3 | ADVANCED DATA & INTEGRATIONS
+"Kết Nối Và Xử Lý Dữ Liệu Ở Cấp Độ Chuyên Nghiệp"
+(~2.5 giờ)
+────────────────────────────────────────────────────────────────
+
+Bài 3.1 – HTTP Module Mastery
+  - REST API: GET, POST, PUT, PATCH, DELETE
+  - Authentication nâng cao: OAuth2 flow, JWT, HMAC signing
+  - Xử lý pagination: tự động lặp qua nhiều trang kết quả
+  - Rate limiting: throttle request đúng cách
+
+Bài 3.2 – Webhook Security & Validation
+  - Xác thực webhook signature (tránh giả mạo request)
+  - IP whitelist qua Make filter
+  - Idempotency: tránh xử lý duplicate events
+  - Thực hành: secure Stripe webhook end-to-end
+
+Bài 3.3 – Advanced Data Transformation
+  - JSONata expressions cho complex data manipulation
+  - Regex trong Make: extract, validate, replace
+  - Array methods nâng cao: map, filter, reduce trong Make context
+  - Xử lý nested JSON sâu nhiều tầng
+
+Bài 3.4 – Working With Files
+  - Download → Process → Upload file pipeline
+  - Parse CSV, Excel, JSON files tự động
+  - Generate PDF/document từ template + data
+  - Xử lý images qua external API (resize, convert...)
+
+Bài 3.5 – Custom Apps với Make SDK (giới thiệu)
+  - Khi nào cần build custom app?
+  - Cấu trúc Make app cơ bản
+  - Deploy và test custom connector
+
+[SCRIPT – BÀI 3.1]
+"HTTP Module là vũ khí bí mật của Make power users. Với module
+này, Make không còn bị giới hạn trong 1.500 apps nữa — bạn
+có thể kết nối với BẤT KỲ thứ gì có API. Và hầu hết mọi
+phần mềm hiện đại đều có API."
+
+
+────────────────────────────────────────────────────────────────
+PHẦN 4 | AI-POWERED AUTOMATION
+"Từ Tự Động Hoá Quy Trình Đến Tự Động Hoá Ra Quyết Định"
+(~2.5 giờ)
+────────────────────────────────────────────────────────────────
+
+Bài 4.1 – LLM Integration Architecture
+  - OpenAI, Claude, Gemini: kết nối qua HTTP module
+  - Khi nào dùng LLM trong automation? (đừng over-engineer)
+  - Latency, cost và cách tối ưu
+
+Bài 4.2 – Prompt Engineering Cho Automation Context
+  - System prompt vs User prompt trong automation
+  - Dynamic prompts: inject data thực vào prompt
+  - Few-shot examples để tăng consistency
+  - Structured output: ép AI trả về JSON có schema cố định
+
+Bài 4.3 – AI Decision Trees
+  - Dùng AI phân loại → Router xử lý theo từng case
+  - Sentiment analysis → escalation logic
+  - Intent detection → route đến đúng action
+  - Thực hành: AI-powered support ticket triage
+
+Bài 4.4 – AI Content Pipeline
+  - Input: brief/yêu cầu ngắn
+  - AI viết nháp → AI review → AI format
+  - Human-in-the-loop: pause và chờ approval trước khi publish
+  - Thực hành: automated content creation với brand guidelines
+
+Bài 4.5 – Agentic Workflows (advanced)
+  - Multi-step AI reasoning trong Make
+  - Tool calling pattern: AI quyết định → trigger action → AI tiếp tục
+  - Giới hạn và rủi ro của agentic automation
+  - Guardrails: làm sao kiểm soát AI không làm sai
+
+[SCRIPT – BÀI 4.5]
+"Đây là biên giới cuối cùng của Make.com hiện tại. Agentic
+workflow không phải là tương lai — nó đang xảy ra ngay bây
+giờ. Và những người biết build nó đang là nhóm hiếm nhất
+và được trả cao nhất trong lĩnh vực no-code."
+
+
+────────────────────────────────────────────────────────────────
+PHẦN 5 | PERFORMANCE, SCALE & COST OPTIMIZATION
+"Scenario Chạy Tốt Cho 10 Người Và Chạy Tốt Cho 10.000 Người
+Là Hai Câu Chuyện Khác Nhau"
+(~1.5 giờ)
+────────────────────────────────────────────────────────────────
+
+Bài 5.1 – Operations Audit
+  - Đọc Execution History như pro
+  - Identify bottlenecks và waste
+  - Reduce operations mà không mất functionality
+
+Bài 5.2 – Caching Strategies
+  - Cache API responses tránh gọi lại nhiều lần
+  - Lookup Table pattern với Data Store
+  - TTL (Time-to-live) cho cached data
+
+Bài 5.3 – Parallel Processing
+  - Khi nào nên dùng parallel execution?
+  - Fan-out pattern: 1 trigger → nhiều branches chạy song song
+  - Aggregator để merge kết quả
+
+Bài 5.4 – Make Pricing Deep Dive
+  - Tính toán operations cost cho production scenario
+  - Plan comparison: Core vs Pro vs Teams
+  - Kỹ thuật giảm 40–60% operations mà không giảm chức năng
+  - Break-even analysis: khi nào nên tự host n8n thay vì Make?
+
+
+────────────────────────────────────────────────────────────────
+PHẦN 6 | 5 CAPSTONE PROJECTS — PRODUCTION-READY
+"Build Thứ Bạn Có Thể Đem Đi Bán Ngay"
+(~4 giờ — phần quan trọng nhất)
+────────────────────────────────────────────────────────────────
+
+[Mỗi project được giao như real client brief, có requirement
+document, acceptance criteria, và peer review session]
+
+────────────────────────────────────────────────
+CAPSTONE 1 | B2B Lead Intelligence System
+Độ phức tạp: ★★★☆☆
+────────────────────────────────────────────────
+Brief: "Chúng tôi nhận 50–100 leads/ngày từ nhiều nguồn. Cần
+hệ thống tự động enrich data, score lead, và route đến đúng
+sales rep trong vòng 5 phút."
+
+Bạn sẽ build:
+  - Multi-source ingestion: Typeform + LinkedIn + manual CSV
+  - Lead enrichment: gọi Clearbit/Hunter API lấy thêm info
+  - AI scoring: GPT phân tích lead quality → 1–10 score
+  - Smart routing: score cao → senior rep + Slack urgent
+                   score thấp → email nurture sequence
+  - CRM sync: tạo deal trong HubSpot với full context
+  - Dashboard: Airtable view cho sales manager
+
+Apps: Typeform, Google Sheets, OpenAI, HubSpot, Slack, Airtable
+Kỹ năng: HTTP Module, AI decision, multi-source aggregation
+
+────────────────────────────────────────────────
+CAPSTONE 2 | Omnichannel Customer Support Bot
+Độ phức tạp: ★★★★☆
+────────────────────────────────────────────────
+Brief: "Khách hàng liên hệ qua Email, Messenger, và Zalo.
+Cần AI xử lý tự động 70% câu hỏi thường gặp, escalate 30%
+còn lại đến đúng agent, và log tất cả vào CRM."
+
+Bạn sẽ build:
+  - Unified inbox: kéo messages từ 3 kênh về 1 nơi
+  - AI intent classifier: FAQ vs Complex vs Complaint vs Refund
+  - Knowledge base lookup: tìm câu trả lời trong Notion KB
+  - Auto-reply với human-like response
+  - Escalation logic với context đầy đủ cho agent
+  - SLA tracking: ticket quá 2h chưa xử lý → alert manager
+  - Full conversation history trong Airtable
+
+Apps: Gmail, Messenger API, HTTP (Zalo), OpenAI, Notion, Airtable
+Kỹ thuật: Webhook security, idempotency, agentic reasoning
+
+────────────────────────────────────────────────
+CAPSTONE 3 | E-commerce Operations Hub
+Độ phức tạp: ★★★★☆
+────────────────────────────────────────────────
+Brief: "Shop Shopify 500 đơn/ngày. Cần tự động hoá toàn bộ
+post-purchase: xác nhận đơn, cập nhật kho, thông báo vận
+chuyển, review request, và báo cáo ngày."
+
+Bạn sẽ build:
+  - Order trigger → multi-branch processing
+  - Inventory check + alert khi sắp hết hàng
+  - Auto-generate invoice PDF → email khách
+  - Shipping status polling + customer notification
+  - 3 ngày sau giao → auto gửi review request
+  - Daily revenue report → Telegram lúc 8h sáng
+  - Fraud detection: đơn bất thường → flag manual review
+
+Apps: Shopify, Google Sheets, Gmail, Telegram, PDF.co
+Kỹ thuật: Scheduled polling, file generation, queue pattern
+
+────────────────────────────────────────────────
+CAPSTONE 4 | AI Content Factory
+Độ phức tạp: ★★★★☆
+────────────────────────────────────────────────
+Brief: "Agency content cần produce 50 posts/tuần cho 10 clients.
+Mỗi client có brand voice riêng. Cần hệ thống từ brief → draft
+→ review → schedule → publish, với minimal human touch."
+
+Bạn sẽ build:
+  - Content brief intake (Notion form)
+  - AI writer với per-client system prompts
+  - AI editor: check tone, fact, brand consistency
+  - Human approval gate: pause → Slack notification → resume
+  - Auto-resize content cho từng platform
+  - Buffer/social media scheduling
+  - Performance tracking: engagement data → weekly report
+
+Apps: Notion, OpenAI, Slack, Buffer, Google Sheets
+Kỹ thuật: Human-in-the-loop, multi-agent AI, content pipeline
+
+────────────────────────────────────────────────
+CAPSTONE 5 | Freelance Project: Build For Real Client
+Độ phức tạp: ★★★★★
+────────────────────────────────────────────────
+Brief: Học viên tự chọn 1 trong 2 options:
+
+  Option A – Giảng viên cung cấp real client brief (ẩn danh)
+             từ dự án đã làm thực tế. Học viên build và so
+             sánh với solution của giảng viên.
+
+  Option B – Học viên tự mang brief của mình (từ công việc
+             thực hoặc khách hàng thực), giảng viên review
+             architecture và give feedback.
+
+Submission: Video demo 5 phút + Architecture diagram
+Peer Review: Học viên khác review và cho feedback
+
+[SCRIPT – GIỚI THIỆU PHẦN 6]
+"Những gì bạn build trong phần này không phải bài tập.
+Chúng là sản phẩm. Tôi muốn bạn đưa chúng vào portfolio,
+show chúng cho khách hàng tiềm năng, và tự hỏi: tôi có thể
+charge bao nhiêu để build thứ này cho ai đó?
+
+Câu trả lời, nếu bạn build đúng cách, là 5 triệu đến 20 triệu
+cho mỗi project. Đó là ROI của khoá học này."
+
+
+────────────────────────────────────────────────────────────────
+PHẦN 7 | PRODUCTIZE & MONETIZE
+"Biến Kỹ Năng Thành Thu Nhập"
+(~1.5 giờ)
+────────────────────────────────────────────────────────────────
+
+Bài 7.1 – Định giá Automation Services
+  - Đừng charge theo giờ → charge theo giá trị
+  - Framework định giá: (thời gian tiết kiệm × lương/giờ) × 0.2
+  - Discovery call script: hỏi gì để biết charge bao nhiêu
+  - Proposal template: cách present automation project
+
+Bài 7.2 – Automation as a Product (Micro-SaaS)
+  - Đóng gói scenario thành "sản phẩm" bán subscription
+  - Platform: Gumroad, Whop, hoặc tự build bằng Make
+  - Pricing model: one-time vs monthly vs usage-based
+  - Case study: "Automation bundle" bán 500k/tháng × 50 khách
+
+Bài 7.3 – Xây Danh Sách Khách Hàng Đầu Tiên
+  - Target audience: SME, agency, solo founder
+  - Cold outreach script cho automation service
+  - Case study: 3 học viên đã kiếm được từ kỹ năng này
+
+Bài 7.4 – Maintain & Upsell Clients
+  - Retainer model: maintain + improve scenarios mỗi tháng
+  - Upsell từ 1 automation → full automation stack
+  - SLA và contract cơ bản cho automation projects
+
+[SCRIPT – BÀI 7.1]
+"Đây là phần mà nhiều khóa học automation bỏ qua — nhưng tôi
+nghĩ đó là sai lầm lớn. Kỹ năng mà không đem lại thu nhập
+hoặc kết quả đo được thì không phải kỹ năng — đó là hobby.
+
+Tôi muốn automation của bạn là kỹ năng, không phải hobby."
+
+
+────────────────────────────────────────────────────────────────
+PHẦN 8 | GRADUATION & COMMUNITY
+(~30 phút)
+────────────────────────────────────────────────────────────────
+
+Bài 8.1 – Advanced Checklist: Bạn Đã Là Pro Khi Nào?
+  □ Có thể vẽ architecture diagram trước khi build
+  □ Scenario của bạn tự recover khi gặp lỗi
+  □ Đã build ít nhất 3 capstone projects hoàn chỉnh
+  □ Có thể tích hợp AI vào automation pipeline
+  □ Biết cách tính giá và present dự án automation
+  □ Đã nhận hoặc có khách hàng tiềm năng cho dịch vụ
+
+Bài 8.2 – Ecosystem Tiếp Theo
+  - n8n: khi nào rời Make để self-host?
+  - Zapier Central & AI Agents trend 2025–2026
+  - Kết hợp Make + LangChain/CrewAI cho advanced AI workflows
+  - Theo dõi ai: Make blog, community, influencers đáng follow
+
+Bài 8.3 – Alumni Network
+  - Private Discord/Zalo cho alumni
+  - Monthly virtual meetup
+  - Job board: cơ hội freelance được share trong cộng đồng
+  - Showcase: portfolio của học viên cũ → inspiration + proof
+
+================================================================
+          PRICING & PACKAGING OPTIONS
+================================================================
+
+OPTION A – SELF-STUDY (3.500.000đ)
+  ✓ Tất cả video (12–15 giờ)
+  ✓ Templates library (30+ scenarios)
+  ✓ 5 Capstone project briefs
+  ✓ Lifetime access
+  ✗ Không có Live Q&A
+  ✗ Không có 1-on-1 review
+
+OPTION B – COHORT (5.000.000đ)  ← GIÁ ĐỀ XUẤT CHÍNH
+  ✓ Tất cả của Option A
+  ✓ 4 buổi Live Q&A trong 2 tháng
+  ✓ 1 lần 1-on-1 scenario review (30 phút)
+  ✓ Peer review cho Capstone 5
+  ✓ Access cộng đồng Alumni vĩnh viễn
+  ✓ Certificate of completion
+
+OPTION C – VIP / DONE-WITH-YOU (12.000.000đ)
+  ✓ Tất cả của Option B
+  ✓ 3 buổi 1-on-1 coaching (60 phút/buổi)
+  ✓ Giảng viên review và feedback tất cả 5 capstones
+  ✓ Intro email đến network khách hàng của giảng viên
+  ✓ Dành cho ai muốn đi nhanh nhất và có mentor trực tiếp
+
+EARLY BIRD (batch đầu): Giảm 30% → 2.450.000 / 3.500.000 / 8.400.000
+Điều kiện: đăng ký trước ngày [X], thanh toán đủ
+Số lượng: 10 suất early bird/batch
+
+================================================================
+          OBJECTION HANDLING (cho sales page / DM)
+================================================================
+
+"Tôi chưa học khoá Starter"
+→ Khoá Advanced yêu cầu biết cơ bản Make.com. Làm bài test
+  miễn phí tại [link] — nếu pass, bạn enroll được.
+
+"Giá cao quá"
+→ 1 freelance project automation trung bình charge 5–15 triệu.
+  Khoá học trả lại chi phí sau dự án đầu tiên. Còn lại là lãi.
+
+"Tôi sợ học xong không dùng được"
+→ Capstone projects là thứ bạn build thật. Nếu sau khoá bạn
+  không có ít nhất 1 scenario đang chạy thật — hoàn tiền 100%.
+
+"Tôi không có thời gian"
+→ Self-study, tự set pace. Hầu hết học viên hoàn thành trong
+  6–8 tuần học 1–2 giờ/ngày. Lifetime access nếu cần thêm.
+
+================================================================
+END OF ADVANCED COURSE
+================================================================
